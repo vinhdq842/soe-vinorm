@@ -1,6 +1,6 @@
 import re
 from abc import ABC, abstractmethod
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set, Tuple, Union
 
 import numpy as np
 from onnxruntime import GraphOptimizationLevel, InferenceSession, SessionOptions
@@ -16,23 +16,33 @@ from soe_vinorm.constants import (
     SEQUENCE_PHONES_EN_MAPPING,
     SEQUENCE_PHONES_VI_MAPPING,
 )
-from soe_vinorm.utils import get_data_path
+from soe_vinorm.utils import (
+    get_data_path,
+    load_abbreviation_dict,
+    load_vietnamese_syllables,
+)
 
 
 class NSWExpander(ABC):
-    """Abstract base class for NSW (Non-Standard Word) expanders."""
+    """
+    Abstract base class for NSW (Non-Standard Word) expanders.
+    """
 
     @abstractmethod
     def expand(self, words: List[str], tags: List[str]) -> str:
         """Expand a list of words based on their tags."""
-        pass
+        ...
 
 
 class RuleBasedNSWExpander(NSWExpander):
-    """NSW expander using rule-based approach."""
+    """
+    NSW expander using rule-based approach.
+    """
 
     class NumberExpander:
-        """Handles expansion of numbers, digits, and numeric patterns."""
+        """
+        Handles expansion of numbers, digits, and numeric patterns.
+        """
 
         def expand_digit(self, digit: str) -> str:
             """Expand a single digit to its spoken form."""
@@ -51,7 +61,7 @@ class RuleBasedNSWExpander(NSWExpander):
                     sign = {"+": "cộng", "-": "trừ"}[number[0]]
                     number = number[1:]
 
-                # Clean the number
+                # Remove separators and unhandlable chars
                 number = number.replace(".", "")
                 while len(number) > 1 and number[0] == "0" and number[1].isnumeric():
                     number = number[1:]
@@ -60,7 +70,7 @@ class RuleBasedNSWExpander(NSWExpander):
                 # Handle decimal part
                 decimal_part = ""
                 if "," in number:
-                    decimal_part = "phẩy " + self.expand_digit(number.split(",")[-1])
+                    decimal_part = f"phẩy {self.expand_digit(number.split(',')[-1])}"
                     number = "".join(number.split(",")[:-1])
 
                 # Split into chunks of 3 digits
@@ -75,7 +85,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 result = " ".join(result_parts)
 
-                # Apply Vietnamese number rules
+                # Apply Vietnamese number pronunciation rules
                 result = self._apply_vietnamese_rules(result)
 
                 return (sign + " " + result + " " + decimal_part).strip()
@@ -97,22 +107,21 @@ class RuleBasedNSWExpander(NSWExpander):
 
             result = ""
             position = len(chunk) - 1
-
             while position >= 0:
                 if (
                     position == len(chunk) - 1
                     and chunk[position] == "0"
                     and len(chunk) > 1
                 ):
-                    pass  # Skip trailing zeros
+                    ...  # Skip trailing zeros
                 elif position == len(chunk) - 2 and chunk[position] in ["1", "0"]:
                     if position == 0 and chunk[position] == "0":
-                        pass  # Skip leading zeros
+                        ...  # Skip leading zeros
                     elif chunk[position] == "1":
-                        result = "mười" + (
-                            " " + NUMBER_MAPPING[chunk[position + 1]]
+                        result = (
+                            f"mười {NUMBER_MAPPING[chunk[position + 1]]}"
                             if chunk[position + 1] != "0"
-                            else ""
+                            else "mười"
                         )
                     else:
                         result = (
@@ -130,12 +139,10 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 position -= 1
 
-            unit = (
-                NUMBER_UNIT_TRIPLE[unit_index]
-                if unit_index < len(NUMBER_UNIT_TRIPLE)
-                else ""
-            )
-            return " ".join([result.strip(), unit]).strip()
+            if unit_index >= len(NUMBER_UNIT_TRIPLE):
+                raise IndexError("unit_index is too large")
+
+            return " ".join([result.strip(), NUMBER_UNIT_TRIPLE[unit_index]]).strip()
 
         def _apply_vietnamese_rules(self, text: str) -> str:
             """Apply Vietnamese number pronunciation rules."""
@@ -184,8 +191,9 @@ class RuleBasedNSWExpander(NSWExpander):
     class TimeDateExpander:
         """Handles expansion of time and date patterns."""
 
-        def __init__(self, number_expander):
+        def __init__(self, number_expander, sequence_expander):
             self._number_expander = number_expander
+            self._sequence_expander = sequence_expander
 
         def expand_time(self, time_str: str) -> str:
             """Expand time patterns to spoken form."""
@@ -233,7 +241,7 @@ class RuleBasedNSWExpander(NSWExpander):
                 t1, t2 = re.split(r"\s*-\s*", time_str)[:2]
                 return f"{self.expand_time(t1)} đến {self.expand_time(t2)}"
 
-            return self.expand_sequence(time_str)
+            return self._sequence_expander.expand_sequence(time_str)
 
         def expand_day(self, day_str: str) -> str:
             """Expand day patterns to spoken form."""
@@ -260,7 +268,7 @@ class RuleBasedNSWExpander(NSWExpander):
                 d1, d2 = re.split(r"\s*-\s*", day_str)[:2]
                 return f"{self.expand_day(d1)} đến ngày {self.expand_day(d2)}"
 
-            return self.expand_sequence(day_str)
+            return self._sequence_expander.expand_sequence(day_str)
 
         def expand_date(self, date_str: str) -> str:
             """Expand date patterns to spoken form."""
@@ -297,7 +305,7 @@ class RuleBasedNSWExpander(NSWExpander):
                 d1, d2 = re.split(r"\s*-\s*", date_str)[:2]
                 return f"{self.expand_date(d1)} đến ngày {self.expand_date(d2)}"
 
-            return self.expand_sequence(date_str)
+            return self._sequence_expander.expand_sequence(date_str)
 
         def expand_month(self, month_str: str) -> str:
             """Expand month patterns to spoken form."""
@@ -325,18 +333,13 @@ class RuleBasedNSWExpander(NSWExpander):
                 p1, p2 = re.split(r"\s*-\s*", month_str)[:2]
                 return f"{self.expand_month(p1)} đến tháng {self.expand_month(p2)}"
 
-            return self.expand_sequence(month_str)
-
-        def expand_sequence(self, sequence: str) -> str:
-            """Expand sequence patterns."""
-            # This method should be implemented or delegated to SequenceExpander
-            return sequence
+            return self._sequence_expander.expand_sequence(month_str)
 
     class SequenceExpander:
         """Handles expansion of sequences."""
 
-        def __init__(self):
-            self._number_expander = RuleBasedNSWExpander.NumberExpander()
+        def __init__(self, number_expander):
+            self._number_expander = number_expander
 
         def expand_sequence(self, sequence: str, english: bool = False) -> str:
             """Expand sequence patterns."""
@@ -349,15 +352,12 @@ class RuleBasedNSWExpander(NSWExpander):
             result = []
             for char in sequence:
                 if char in (
-                    SEQUENCE_PHONES_EN_MAPPING
-                    if english
-                    else SEQUENCE_PHONES_VI_MAPPING
-                ):
-                    mapping = (
+                    mapping := (
                         SEQUENCE_PHONES_EN_MAPPING
                         if english
                         else SEQUENCE_PHONES_VI_MAPPING
                     )
+                ):
                     result.append(mapping[char])
                 elif char.isnumeric():
                     result.append(NUMBER_MAPPING[char])
@@ -371,11 +371,13 @@ class RuleBasedNSWExpander(NSWExpander):
     class AbbreviationExpander:
         """Handles expansion of abbreviations using language models."""
 
-        def __init__(self, abbr_dict: Dict[str, List[str]]):
+        def __init__(
+            self, abbr_dict: Dict[str, List[str]], number_expander, sequence_expander
+        ):
             self._abbr_dict = abbr_dict
-            self._number_expander = RuleBasedNSWExpander.NumberExpander()
-            self._sequence_expander = RuleBasedNSWExpander.SequenceExpander()
-            self._window_size = 10
+            self._number_expander = number_expander
+            self._sequence_expander = sequence_expander
+            self._window_size = 8
 
             # Initialize ONNX model
             session_options = SessionOptions()
@@ -459,22 +461,19 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def _prepare_abbr_input(self, sentence: str) -> Tuple[np.ndarray, np.ndarray]:
             """Prepare input for the abbreviation language model."""
-            encoding = self._abbr_tokenizer.encode(
+            input_ids = self._abbr_tokenizer.encode(
                 sentence,
                 truncation=True,
-                max_length=128,
-                padding=True,
-                return_tensors=False,
+                max_length=32,
+                padding="max_length",
+                return_tensors="np",
             )
+            seq_len = input_ids.shape[1]
+            repeat_input = np.tile(input_ids, (seq_len - 2, 1)).astype(dtype=np.int64)
 
-            tensor_input = np.array([encoding.ids], dtype=np.int64)
-            seq_len = tensor_input.shape[-1]
-            repeat_input = np.tile(tensor_input, (seq_len - 2, 1))
-
-            mask = np.eye(seq_len - 1, dtype=np.int64)[:-2]
+            mask = np.eye(seq_len, seq_len, k=1, dtype=np.int64)[:-2]
             mask[repeat_input == 1] = 0
-
-            mask_token_id = self._abbr_tokenizer.token_to_id("[MASK]") or 103
+            mask_token_id = self._abbr_tokenizer.mask_token_id
             masked_input = np.where(mask == 1, mask_token_id, repeat_input)
             labels = np.where(masked_input != mask_token_id, -100, repeat_input)
 
@@ -493,9 +492,6 @@ class RuleBasedNSWExpander(NSWExpander):
             labels_flat = labels.reshape(-1)
 
             valid_mask = labels_flat != -100
-            if not np.any(valid_mask):
-                return 0.0
-
             logits_valid = logits_flat[valid_mask]
             labels_valid = labels_flat[valid_mask]
 
@@ -522,12 +518,12 @@ class RuleBasedNSWExpander(NSWExpander):
             return " ".join(text.split()[: self._window_size])
 
     class ForeignWordExpander:
-        """Handles expansion of foreign words using transliteration."""
+        """Handles expansion of foreign words."""
 
-        def __init__(self, vn_dict: Set[str]):
+        def __init__(self, vn_dict: Set[str], number_expander, sequence_expander):
             self._vn_dict = vn_dict
-            self._number_expander = RuleBasedNSWExpander.NumberExpander()
-            self._sequence_expander = RuleBasedNSWExpander.SequenceExpander()
+            self._number_expander = number_expander
+            self._sequence_expander = sequence_expander
 
         def expand_foreign_word(self, word: str) -> str:
             """Expand foreign word."""
@@ -541,12 +537,11 @@ class RuleBasedNSWExpander(NSWExpander):
                 if len(word) > 1:
                     return word
                 else:
-                    return self._sequence_expander.expand_sequence(word)
+                    return self._sequence_expander.expand_sequence(word, english=True)
             elif word.isnumeric():
                 return self._number_expander.expand_number(word)
             return self._sequence_expander.expand_sequence(word, english=True)
 
-    # Additional expander classes for specific patterns
     class QuarterExpander:
         """Handles expansion of quarter notation."""
 
@@ -557,7 +552,7 @@ class RuleBasedNSWExpander(NSWExpander):
             """Expand quarter notation (e.g., I/2023)."""
             roman, year = quarter.split("/")[:2]
             return (
-                f"{self._number_expander.expand_number(self._number_expander._roman_to_int(roman))} "
+                f"{self._number_expander.expand_roma(roman)} "
                 f"năm {self._number_expander.expand_number(year)}"
             )
 
@@ -705,7 +700,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return self._sequence_expander.expand_sequence(unit)
 
     class UrlExpander:
-        """Handles expansion of URLs using lexicon-based maximum matching."""
+        """Handles expansion of URLs using lexicon-based maximum matching (https://arxiv.org/abs/2209.02971)."""
 
         def __init__(self, sequence_expander, nosign_dict):
             self._sequence_expander = sequence_expander
@@ -725,9 +720,6 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 for window_size in range(max_window, min_window - 1, -1):
                     end_idx = start_idx + window_size - 1
-                    if end_idx >= len(tokens):
-                        continue
-
                     candidate = tokens[start_idx : end_idx + 1]
                     candidate_str = "".join(candidate)
 
@@ -753,21 +745,32 @@ class RuleBasedNSWExpander(NSWExpander):
 
             return " ".join(result)
 
-    def __init__(self, vn_dict: List[str], abbr_dict: Dict[str, List[str]]):
-        """Initialize the rule-based NSW expander."""
-        self._vn_dict = set(vn_dict)
-        self._abbr_dict = abbr_dict
+    def __init__(
+        self,
+        vn_dict: Union[List[str], None] = None,
+        abbr_dict: Union[Dict[str, List[str]], None] = None,
+    ):
+        """Initialize the rule-based NSW expander.
+        Args:
+            vn_dict: A list of Vietnamese words. If None, the default Vietnamese dictionary will be used.
+            abbr_dict: A dictionary of abbreviations and their expansions. If None, the default abbreviation dictionary will be used.
+        """
+        self._vn_dict = set(vn_dict or load_vietnamese_syllables())
+        self._abbr_dict = abbr_dict or load_abbreviation_dict()
         self._nosign_dict = set(map(unidecode, self._vn_dict))
         self._no_norm_list = [".", ",", "...", "-"]
 
-        # Initialize expanders
         self._number_expander = self.NumberExpander()
-        self._time_date_expander = self.TimeDateExpander(self._number_expander)
-        self._sequence_expander = self.SequenceExpander()
-        self._abbr_expander = self.AbbreviationExpander(abbr_dict)
-        self._foreign_expander = self.ForeignWordExpander(self._vn_dict)
-
-        # Initialize specialized expanders
+        self._sequence_expander = self.SequenceExpander(self._number_expander)
+        self._time_date_expander = self.TimeDateExpander(
+            self._number_expander, self._sequence_expander
+        )
+        self._abbr_expander = self.AbbreviationExpander(
+            self._abbr_dict, self._number_expander, self._sequence_expander
+        )
+        self._foreign_expander = self.ForeignWordExpander(
+            self._vn_dict, self._number_expander, self._sequence_expander
+        )
         self._quarter_expander = self.QuarterExpander(self._number_expander)
         self._version_expander = self.VersionExpander(
             self._number_expander, self._sequence_expander
@@ -790,7 +793,6 @@ class RuleBasedNSWExpander(NSWExpander):
             self._sequence_expander, self._nosign_dict
         )
 
-        # Expansion mapping
         self._expanders = {
             "LSEQ": self._sequence_expander.expand_sequence,
             "MEA": self._measure_expander.expand_measure,
@@ -823,7 +825,7 @@ class RuleBasedNSWExpander(NSWExpander):
         i = 0
         while i < len(words):
             if tags[i] == "O":
-                # Handle non-NSW words
+                # Normal words
                 word = words[i]
                 if (
                     word.lower() in self._vn_dict and len(word) > 1
@@ -836,7 +838,7 @@ class RuleBasedNSWExpander(NSWExpander):
                     )
                 i += 1
             else:
-                # Handle NSW words
+                # Non-standard words
                 current_group.append(words[i])
                 tag_type = tags[i][2:]  # Remove B- or I- prefix
                 i += 1
@@ -857,8 +859,8 @@ class RuleBasedNSWExpander(NSWExpander):
                     results.append(
                         self._abbr_expander.expand_abbreviation(
                             " ".join(current_group),
-                            self._get_left_context(" ".join(results)),
-                            self._get_right_context(" ".join(words[i:])),
+                            " ".join(results),
+                            " ".join(words[i:]),
                         )
                     )
                 else:
@@ -867,11 +869,3 @@ class RuleBasedNSWExpander(NSWExpander):
                 current_group = []
 
         return " ".join(results)
-
-    def _get_left_context(self, text: str) -> str:
-        """Get left context window."""
-        return " ".join(text.split()[-self._abbr_expander._window_size :])
-
-    def _get_right_context(self, text: str) -> str:
-        """Get right context window."""
-        return " ".join(text.split()[: self._abbr_expander._window_size])

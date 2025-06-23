@@ -1,7 +1,7 @@
 [project]
 name = "soe-vinorm"
 version = "0.1.0"
-description = "A text normalization tool for Vietnamese"
+description = "An effective text normalization tool for Vietnamese"
 authors = [{name = "Vinh Dang", email = "quangvinh0842@gmail.com"}]
 requires-python = ">=3.8.16"
 readme = "README.md"
@@ -10,12 +10,13 @@ license-files = ['LICENSE']
 dependencies = [
     "onnxruntime>=1.16.0,<1.17.0",
     "sklearn-crfsuite>=0.5.0",
-    "transformers>=4.46.3",
+    "transformers>=4.26.1",
     "unidecode>=1.3.0",
 ]
 
 [dependency-groups]
 dev = [
+    "ipykernel>=6.29.5",
     "pre-commit>=3.5.0",
     "pytest>=8.3.5",
 ]

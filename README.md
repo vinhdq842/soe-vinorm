@@ -1,0 +1,1 @@
+# Soe Vinorm - An effective Vietnamese Text Normalization tool

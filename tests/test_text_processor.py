@@ -67,11 +67,9 @@ class TestTextPreprocessor:
         """Test error handling."""
         preprocessor = TextPreprocessor(vn_dict=vn_dict)
 
-        # Should handle None input gracefully
         with pytest.raises(TypeError):
             preprocessor(None)
 
-        # Should handle non-string input gracefully
         with pytest.raises(TypeError):
             preprocessor(123)
 

@@ -1,7 +1,7 @@
 import pickle
 import re
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Set, Union
 
 from sklearn_crfsuite import CRF
 
@@ -35,17 +35,11 @@ class NSWDetector(ABC):
 class CRFNSWDetector(NSWDetector):
     """
     NSW detector using Conditional Random Fields (CRF) model.
-
-    This detector uses a trained CRF model to classify tokens as different types
-    of non-standard words like abbreviations, dates, times, numbers, etc.
     """
 
     class _FeatureExtractor:
         """
-        Private feature extractor for CRF NSW detection.
-
-        This class handles the extraction of various linguistic and pattern-based
-        features that help identify non-standard words.
+        Feature extractor for CRF NSW detection.
         """
 
         def __init__(self, vn_dict: Set[str], abbr_dict: Set[str]):
@@ -180,12 +174,12 @@ class CRFNSWDetector(NSWDetector):
         def _is_time_pattern(self, token: str) -> bool:
             """Check if token matches time patterns."""
             patterns = [
-                r"^([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9][:mp][0-5]?[0-9]$",  # HH:MM:SS
-                r"^([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9]$",  # HH:MM
-                r"^([01]?[0-9]|2[0-3])[hg]$",  # HHh
-                r"^([01]?[0-9]|2[0-3])\s*[-/]\*([01]?[0-9]|2[0-3])[hg]$",  # HH-HHh
-                r"^([01]?[0-9]|2[0-3])[hg]\s*-\s*([01]?[0-9]|2[0-3])[hg]$",  # HHh-HHh
-                r"^([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9]\s*-\s*([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9]$",  # HH:MM-HH:MM
+                r"^([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9][:mp][0-5]?[0-9]$",  # HH[:hg]MM[:mp]SS
+                r"^([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9]$",  # HH[:hg]MM
+                r"^([01]?[0-9]|2[0-3])[hg]$",  # HH[hg]
+                r"^([01]?[0-9]|2[0-3])\s*[-/]\s*([01]?[0-9]|2[0-3])[hg]$",  # HH [-/] HH[hg]
+                r"^([01]?[0-9]|2[0-3])[hg]\s*-\s*([01]?[0-9]|2[0-3])[hg]$",  # HH[hg] [-] HH[hg]
+                r"^([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9]\s*-\s*([01]?[0-9]|2[0-3])[:hg][0-5]?[0-9]$",  # HH[:hg]MM [-] HH[:hg]MM
             ]
             return any(re.match(pattern, token) for pattern in patterns)
 
@@ -193,9 +187,9 @@ class CRFNSWDetector(NSWDetector):
             """Check if token matches day patterns."""
             token = token.replace(".", "/")
             patterns = [
-                r"^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[0-2])$",  # DD/MM
-                r"^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])$",  # DD-DD/MM
-                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])$",  # DD/MM-DD/MM
+                r"^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[0-2])$",  # DD[/-]MM
+                r"^(0?[1-9]|[12][0-9]|3[01])\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])$",  # DD [-] DD[/]MM
+                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])$",  # DD[/]MM [-] DD[/]MM
             ]
             return any(re.match(pattern, token) for pattern in patterns)
 
@@ -203,11 +197,11 @@ class CRFNSWDetector(NSWDetector):
             """Check if token matches date patterns."""
             token = token.replace(".", "/")
             patterns = [
-                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD/MM/YYYY
-                r"^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[0-2])-[1-9]\d{2,3}$",  # DD-MM-YYYY
-                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD/MM-DD/MM/YYYY
-                r"^(0?[1-9]|[12][0-9]|3[01])\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD-DD/MM/YYYY
-                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD/MM/YYYY-DD/MM/YYYY
+                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD[/]MM[/]YYYY
+                r"^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[0-2])-[1-9]\d{2,3}$",  # DD[-]MM[-]YYYY
+                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD[/]MM [-] DD[/]MM[/]YYYY
+                r"^(0?[1-9]|[12][0-9]|3[01])\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD [-] DD[/]MM[/]YYYY
+                r"^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}\s*-\s*(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # DD[/]MM[/]YYYY [-] DD[/]MM[/]YYYY
             ]
             return any(re.match(pattern, token) for pattern in patterns)
 
@@ -215,19 +209,26 @@ class CRFNSWDetector(NSWDetector):
             """Check if token matches month patterns."""
             token = token.replace(".", "/")
             patterns = [
-                r"^(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # MM/YYYY
-                r"^(0?[1-9]|1[0-2])-[1-9]\d{2,3}$",  # MM-YYYY
-                r"^(0?[1-9]|1[0-2])\s*\-\s*(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # MM-MM/YYYY
-                r"^(0?[1-9]|1[0-2])/[1-9]\d{2,3}\s*\-\s*(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # MM/YYYY-MM/YYYY
+                r"^(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # MM[/]YYYY
+                r"^(0?[1-9]|1[0-2])-[1-9]\d{2,3}$",  # MM[-]YYYY
+                r"^(0?[1-9]|1[0-2])\s*-\s*(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # MM [-] MM[/]YYYY
+                r"^(0?[1-9]|1[0-2])/[1-9]\d{2,3}\s*-\s*(0?[1-9]|1[0-2])/[1-9]\d{2,3}$",  # MM[/]YYYY [-] MM[/]YYYY
             ]
             return any(re.match(pattern, token) for pattern in patterns)
 
-    def __init__(self, model_path: str = None):
+    def __init__(
+        self,
+        model_path: Union[str, None] = None,
+        vn_dict: Union[List[str], None] = None,
+        abbr_dict: Union[Dict[str, List[str]], None] = None,
+    ):
         """
         Initialize the CRF NSW detector.
 
         Args:
             model_path: Path to the CRF model file. If None, uses default path.
+            vn_dict: List of Vietnamese words for dictionary lookup. If None, uses default Vietnamese syllables.
+            abbr_dict: Dictionary of abbreviations and their expansions. If None, uses default abbreviations.
         """
         super().__init__()
 
@@ -237,11 +238,8 @@ class CRFNSWDetector(NSWDetector):
         with open(model_path, "rb") as f:
             self._crf: CRF = pickle.load(f)
 
-        # Load dictionaries
-        self._vn_dict = set(load_vietnamese_syllables())
-        self._abbr_dict = set(load_abbreviation_dict())
-
-        # Initialize feature extractor
+        self._vn_dict = set(vn_dict or load_vietnamese_syllables())
+        self._abbr_dict = set(abbr_dict or load_abbreviation_dict())
         self._feature_extractor = self._FeatureExtractor(self._vn_dict, self._abbr_dict)
 
     def detect(self, tokenized_text: List[str]) -> List[str]:
@@ -254,8 +252,13 @@ class CRFNSWDetector(NSWDetector):
         Returns:
             List of labels for each token
         """
+        if not isinstance(tokenized_text, list) or not all(
+            isinstance(token, str) for token in tokenized_text
+        ):
+            raise TypeError("tokenized_text must be a list of strings")
+
         features = [self._feature_extractor.extract_features(tokenized_text)]
-        return self._crf.predict(features)[0]
+        return self._crf.predict(features)[0].tolist()
 
     def batch_detect(self, tokenized_texts: List[List[str]]) -> List[List[str]]:
         """
@@ -267,10 +270,16 @@ class CRFNSWDetector(NSWDetector):
         Returns:
             List of label lists for each text
         """
+        if not isinstance(tokenized_texts, list) or not all(
+            isinstance(text, list) and all(isinstance(token, str) for token in text)
+            for text in tokenized_texts
+        ):
+            raise TypeError("tokenized_texts must be a list of lists of strings")
+
         features = [
             self._feature_extractor.extract_features(text) for text in tokenized_texts
         ]
-        return self._crf.predict(features)
+        return self._crf.predict(features).tolist()
 
     def get_labels(self) -> List[str]:
         """
@@ -283,8 +292,8 @@ class CRFNSWDetector(NSWDetector):
         base_labels = [
             "LABB",  # abbreviation
             "LSEQ",  # sequence
-            "LWRD",  # word
-            "MEA",  # measure
+            "LWRD",  # foreign word
+            "MEA",  # measurement
             "MONEY",  # money
             "NDAT",  # date
             "NDIG",  # digit
@@ -292,7 +301,7 @@ class CRFNSWDetector(NSWDetector):
             "NMON",  # month
             "NNUM",  # number
             "NPER",  # percentage
-            "NQUA",  # quantity
+            "NQUA",  # quarter
             "NRNG",  # range
             "NSCR",  # score
             "NTIM",  # time

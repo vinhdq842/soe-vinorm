@@ -10,7 +10,7 @@ from soe_vinorm.utils import load_vietnamese_syllables
 
 class TextProcessor(ABC):
     """
-    Base class for text processors.
+    Abstract base class for text processors.
     """
 
     @abstractmethod
@@ -55,6 +55,9 @@ class TextPreprocessor(TextProcessor):
 
     def __call__(self, text: str) -> str:
         """Process the input text."""
+        if not isinstance(text, str):
+            raise TypeError("text must be a string")
+
         # Step 1: Unicode normalization
         text = self._normalize_unicode(text)
 

@@ -1,10 +1,10 @@
 import re
 from abc import ABC, abstractmethod
-from typing import Dict, List, Tuple, Set, Optional
+from typing import Dict, List, Set, Tuple
 
 import numpy as np
 from onnxruntime import GraphOptimizationLevel, InferenceSession, SessionOptions
-from tokenizers import Tokenizer
+from transformers import AutoTokenizer
 from unidecode import unidecode
 
 from soe_vinorm.constants import (
@@ -21,7 +21,7 @@ from soe_vinorm.utils import get_data_path
 
 class NSWExpander(ABC):
     """Abstract base class for NSW (Non-Standard Word) expanders."""
-    
+
     @abstractmethod
     def expand(self, words: List[str], tags: List[str]) -> str:
         """Expand a list of words based on their tags."""
@@ -85,9 +85,9 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def _split_into_chunks(self, number: str) -> List[str]:
             """Split number into chunks of 3 digits."""
-            chunks = [number[i:i + 3] for i in range(len(number) - 3, -1, -3)][::-1]
+            chunks = [number[i : i + 3] for i in range(len(number) - 3, -1, -3)][::-1]
             if len(number) % 3:
-                chunks = [number[:len(number) % 3]] + chunks
+                chunks = [number[: len(number) % 3]] + chunks
             return chunks
 
         def _speak_out_chunk(self, chunk: str, unit_index: int) -> str:
@@ -99,7 +99,11 @@ class RuleBasedNSWExpander(NSWExpander):
             position = len(chunk) - 1
 
             while position >= 0:
-                if (position == len(chunk) - 1 and chunk[position] == "0" and len(chunk) > 1):
+                if (
+                    position == len(chunk) - 1
+                    and chunk[position] == "0"
+                    and len(chunk) > 1
+                ):
                     pass  # Skip trailing zeros
                 elif position == len(chunk) - 2 and chunk[position] in ["1", "0"]:
                     if position == 0 and chunk[position] == "0":
@@ -126,17 +130,22 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 position -= 1
 
-            unit = NUMBER_UNIT_TRIPLE[unit_index] if unit_index < len(NUMBER_UNIT_TRIPLE) else ""
+            unit = (
+                NUMBER_UNIT_TRIPLE[unit_index]
+                if unit_index < len(NUMBER_UNIT_TRIPLE)
+                else ""
+            )
             return " ".join([result.strip(), unit]).strip()
 
         def _apply_vietnamese_rules(self, text: str) -> str:
             """Apply Vietnamese number pronunciation rules."""
-            return (text
-                    .replace("mười năm", "mười lăm")
-                    .replace("mươi năm", "mươi lăm")
-                    .replace("mươi bốn", "mươi tư")
-                    .replace("mươi một", "mươi mốt")
-                    .replace("linh bốn", "linh tư"))
+            return (
+                text.replace("mười năm", "mười lăm")
+                .replace("mươi năm", "mươi lăm")
+                .replace("mươi bốn", "mươi tư")
+                .replace("mươi một", "mươi mốt")
+                .replace("linh bốn", "linh tư")
+            )
 
         def expand_roma(self, roma: str) -> str:
             """Expand a Roman numeral to its spoken form."""
@@ -150,12 +159,22 @@ class RuleBasedNSWExpander(NSWExpander):
             subtract = 0
 
             roman_values = {
-                'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000
+                "I": 1,
+                "V": 5,
+                "X": 10,
+                "L": 50,
+                "C": 100,
+                "D": 500,
+                "M": 1000,
             }
-            subtract_pairs = {'I': ['V', 'X'], 'X': ['L', 'C'], 'C': ['D', 'M']}
+            subtract_pairs = {"I": ["V", "X"], "X": ["L", "C"], "C": ["D", "M"]}
 
             for i, char in enumerate(roman):
-                if char in subtract_pairs and i + 1 < len(roman) and roman[i + 1] in subtract_pairs[char]:
+                if (
+                    char in subtract_pairs
+                    and i + 1 < len(roman)
+                    and roman[i + 1] in subtract_pairs[char]
+                ):
                     subtract += roman_values[char]
                     continue
                 number += roman_values[char]
@@ -272,7 +291,9 @@ class RuleBasedNSWExpander(NSWExpander):
                     f"{self.expand_date(d2)}"
                 )
             # DD[/]MM[/]YYYY [-] DD[/]MM[/]YYYY
-            elif re.match(r"^\d{1,2}/\d{1,2}/\d{2,4}\s*-\s*\d{1,2}/\d{1,2}/\d{2,4}$", date_str):
+            elif re.match(
+                r"^\d{1,2}/\d{1,2}/\d{2,4}\s*-\s*\d{1,2}/\d{1,2}/\d{2,4}$", date_str
+            ):
                 d1, d2 = re.split(r"\s*-\s*", date_str)[:2]
                 return f"{self.expand_date(d1)} đến ngày {self.expand_date(d2)}"
 
@@ -327,8 +348,16 @@ class RuleBasedNSWExpander(NSWExpander):
 
             result = []
             for char in sequence:
-                if char in (SEQUENCE_PHONES_EN_MAPPING if english else SEQUENCE_PHONES_VI_MAPPING):
-                    mapping = SEQUENCE_PHONES_EN_MAPPING if english else SEQUENCE_PHONES_VI_MAPPING
+                if char in (
+                    SEQUENCE_PHONES_EN_MAPPING
+                    if english
+                    else SEQUENCE_PHONES_VI_MAPPING
+                ):
+                    mapping = (
+                        SEQUENCE_PHONES_EN_MAPPING
+                        if english
+                        else SEQUENCE_PHONES_VI_MAPPING
+                    )
                     result.append(mapping[char])
                 elif char.isnumeric():
                     result.append(NUMBER_MAPPING[char])
@@ -350,23 +379,32 @@ class RuleBasedNSWExpander(NSWExpander):
 
             # Initialize ONNX model
             session_options = SessionOptions()
-            session_options.graph_optimization_level = GraphOptimizationLevel.ORT_ENABLE_ALL
+            session_options.graph_optimization_level = (
+                GraphOptimizationLevel.ORT_ENABLE_ALL
+            )
             self._abbr_model = InferenceSession(
-                get_data_path() / "models" / "abbreviation_expander" / "bert.opt.infer.quant.onnx",
+                get_data_path()
+                / "models"
+                / "abbreviation_expander"
+                / "bert.opt.infer.quant.onnx",
                 session_options,
                 providers=["CPUExecutionProvider"],
             )
-            self._abbr_tokenizer = Tokenizer.from_file(
-                get_data_path() / "models" / "abbreviation_expander" / "tokenizer.json"
+            self._abbr_tokenizer = AutoTokenizer.from_pretrained(
+                get_data_path() / "models" / "abbreviation_expander"
             )
 
-        def expand_abbreviation(self, abbr: str, left_context: str, right_context: str) -> str:
+        def expand_abbreviation(
+            self, abbr: str, left_context: str, right_context: str
+        ) -> str:
             """Expand an abbreviation using context."""
             abbr = re.sub(r"\s*-\s*", "", abbr)
             parts = list(filter(len, re.split(r"\.+|\s+", abbr)))
 
             if "".join(parts) in self._abbr_dict and len(parts) > 1:
-                return self.expand_abbreviation("".join(parts), left_context, right_context)
+                return self.expand_abbreviation(
+                    "".join(parts), left_context, right_context
+                )
 
             if len(parts) > 1:
                 result = []
@@ -377,8 +415,12 @@ class RuleBasedNSWExpander(NSWExpander):
                         result.append(
                             self.expand_abbreviation(
                                 part.replace(".", ""),
-                                self._get_left_context(" ".join([left_context, " ".join(result)])),
-                                self._get_right_context(" ".join([" ".join(parts[i + 1:]), right_context])),
+                                self._get_left_context(
+                                    " ".join([left_context, " ".join(result)])
+                                ),
+                                self._get_right_context(
+                                    " ".join([" ".join(parts[i + 1 :]), right_context])
+                                ),
                             )
                         )
                 return " ".join(result)
@@ -403,7 +445,9 @@ class RuleBasedNSWExpander(NSWExpander):
                     # Use language model to choose best expansion
                     candidates = [
                         (
-                            self._calculate_perplexity(" ".join([left_context, candidate, right_context])),
+                            self._calculate_perplexity(
+                                " ".join([left_context, candidate, right_context])
+                            ),
                             candidate,
                         )
                         for candidate in self._abbr_dict[abbr]
@@ -440,7 +484,7 @@ class RuleBasedNSWExpander(NSWExpander):
             """Calculate perplexity of a sentence using the language model."""
             sentence = sentence.lower() if lower else sentence
             masked_input, labels = self._prepare_abbr_input(sentence)
-            
+
             ort_inputs = {self._abbr_model.get_inputs()[0].name: masked_input}
             logits = self._abbr_model.run(None, ort_inputs)[0]
 
@@ -471,11 +515,11 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def _get_left_context(self, text: str) -> str:
             """Get left context window."""
-            return " ".join(text.split()[-self._window_size:])
+            return " ".join(text.split()[-self._window_size :])
 
         def _get_right_context(self, text: str) -> str:
             """Get right context window."""
-            return " ".join(text.split()[:self._window_size])
+            return " ".join(text.split()[: self._window_size])
 
     class ForeignWordExpander:
         """Handles expansion of foreign words using transliteration."""
@@ -528,7 +572,8 @@ class RuleBasedNSWExpander(NSWExpander):
             """Expand version numbers."""
             if re.match(r"^\d(\.\d+)*$", version):
                 return " chấm ".join(
-                    self._number_expander.expand_number(num) for num in version.split(".")
+                    self._number_expander.expand_number(num)
+                    for num in version.split(".")
                 )
             return self._sequence_expander.expand_sequence(version)
 
@@ -643,7 +688,9 @@ class RuleBasedNSWExpander(NSWExpander):
             # number unit
             elif re.match(r"^[0-9.,]+[^0-9.,][^.,]*$", measure):
                 n, u = re.search(r"^([0-9.,]+)([^0-9.,][^.,]*)$", measure).groups()[:2]
-                return f"{self._number_expander.expand_number(n)} {self.expand_measure(u)}"
+                return (
+                    f"{self._number_expander.expand_number(n)} {self.expand_measure(u)}"
+                )
 
             return self._expand_unit(measure)
 
@@ -680,22 +727,29 @@ class RuleBasedNSWExpander(NSWExpander):
                     end_idx = start_idx + window_size - 1
                     if end_idx >= len(tokens):
                         continue
-                        
-                    candidate = tokens[start_idx:end_idx + 1]
+
+                    candidate = tokens[start_idx : end_idx + 1]
                     candidate_str = "".join(candidate)
 
-                    if (candidate_str.lower() in self._nosign_dict and len(candidate_str) > 1):
+                    if (
+                        candidate_str.lower() in self._nosign_dict
+                        and len(candidate_str) > 1
+                    ):
                         result.append(candidate_str)
                         start_idx = end_idx + 1
                         found = True
                         break
 
                 if not found:
-                    result.append(self._sequence_expander.expand_sequence(tokens[start_idx]))
+                    result.append(
+                        self._sequence_expander.expand_sequence(tokens[start_idx])
+                    )
                     start_idx += 1
 
             if start_idx < len(tokens):
-                result.append(self._sequence_expander.expand_sequence(tokens[start_idx]))
+                result.append(
+                    self._sequence_expander.expand_sequence(tokens[start_idx])
+                )
 
             return " ".join(result)
 
@@ -715,14 +769,26 @@ class RuleBasedNSWExpander(NSWExpander):
 
         # Initialize specialized expanders
         self._quarter_expander = self.QuarterExpander(self._number_expander)
-        self._version_expander = self.VersionExpander(self._number_expander, self._sequence_expander)
+        self._version_expander = self.VersionExpander(
+            self._number_expander, self._sequence_expander
+        )
         self._fraction_expander = self.FractionExpander(self._number_expander)
         self._money_expander = self.MoneyExpander(self._number_expander)
-        self._score_expander = self.ScoreExpander(self._number_expander, self._sequence_expander)
-        self._range_expander = self.RangeExpander(self._number_expander, self._sequence_expander)
-        self._percent_expander = self.PercentExpander(self._number_expander, self._sequence_expander)
-        self._measure_expander = self.MeasureExpander(self._number_expander, self._sequence_expander, self._vn_dict)
-        self._url_expander = self.UrlExpander(self._sequence_expander, self._nosign_dict)
+        self._score_expander = self.ScoreExpander(
+            self._number_expander, self._sequence_expander
+        )
+        self._range_expander = self.RangeExpander(
+            self._number_expander, self._sequence_expander
+        )
+        self._percent_expander = self.PercentExpander(
+            self._number_expander, self._sequence_expander
+        )
+        self._measure_expander = self.MeasureExpander(
+            self._number_expander, self._sequence_expander, self._vn_dict
+        )
+        self._url_expander = self.UrlExpander(
+            self._sequence_expander, self._nosign_dict
+        )
 
         # Expansion mapping
         self._expanders = {
@@ -759,7 +825,9 @@ class RuleBasedNSWExpander(NSWExpander):
             if tags[i] == "O":
                 # Handle non-NSW words
                 word = words[i]
-                if (word.lower() in self._vn_dict and len(word) > 1) or word in self._no_norm_list:
+                if (
+                    word.lower() in self._vn_dict and len(word) > 1
+                ) or word in self._no_norm_list:
                     results.append(word)
                 else:
                     results.extend(
@@ -802,8 +870,8 @@ class RuleBasedNSWExpander(NSWExpander):
 
     def _get_left_context(self, text: str) -> str:
         """Get left context window."""
-        return " ".join(text.split()[-self._abbr_expander._window_size:])
+        return " ".join(text.split()[-self._abbr_expander._window_size :])
 
     def _get_right_context(self, text: str) -> str:
         """Get right context window."""
-        return " ".join(text.split()[:self._abbr_expander._window_size])
+        return " ".join(text.split()[: self._abbr_expander._window_size])

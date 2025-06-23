@@ -1,7 +1,7 @@
 import pickle
 import re
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Set
+from typing import Any, Dict, List, Set
 
 from sklearn_crfsuite import CRF
 
@@ -35,7 +35,7 @@ class NSWDetector(ABC):
 class CRFNSWDetector(NSWDetector):
     """
     NSW detector using Conditional Random Fields (CRF) model.
-    
+
     This detector uses a trained CRF model to classify tokens as different types
     of non-standard words like abbreviations, dates, times, numbers, etc.
     """
@@ -43,7 +43,7 @@ class CRFNSWDetector(NSWDetector):
     class _FeatureExtractor:
         """
         Private feature extractor for CRF NSW detection.
-        
+
         This class handles the extraction of various linguistic and pattern-based
         features that help identify non-standard words.
         """
@@ -51,7 +51,7 @@ class CRFNSWDetector(NSWDetector):
         def __init__(self, vn_dict: Set[str], abbr_dict: Set[str]):
             """
             Initialize the feature extractor.
-            
+
             Args:
                 vn_dict: Set of Vietnamese words for dictionary lookup
                 abbr_dict: Set of abbreviations for abbreviation lookup
@@ -62,15 +62,15 @@ class CRFNSWDetector(NSWDetector):
         def extract_features(self, tokenized_text: List[str]) -> List[Dict[str, Any]]:
             """
             Extract features for all tokens in the text.
-            
+
             Args:
                 tokenized_text: List of tokens to extract features from
-                
+
             Returns:
                 List of feature dictionaries for each token
             """
             return [
-                self._extract_token_features(tokenized_text, i) 
+                self._extract_token_features(tokenized_text, i)
                 for i in range(len(tokenized_text))
             ]
 
@@ -79,16 +79,16 @@ class CRFNSWDetector(NSWDetector):
         ) -> Dict[str, Any]:
             """
             Extract features for a single token.
-            
+
             Args:
                 tokenized_text: List of all tokens
                 index: Index of the current token
-                
+
             Returns:
                 Dictionary of features for the token
             """
             token = tokenized_text[index]
-            
+
             features = {
                 # Basic token information
                 "wi": token,
@@ -98,7 +98,6 @@ class CRFNSWDetector(NSWDetector):
                 "is_complete_capital": int(token.upper() == token),
                 "is_alphanumeric": int(self._is_alphanumeric(token)),
                 "is_numeric": int(token.isdigit()),
-                
                 # Context features
                 "prev_word": "" if index == 0 else tokenized_text[index - 1],
                 "next_word": ""
@@ -108,7 +107,6 @@ class CRFNSWDetector(NSWDetector):
                 "next_word_2": ""
                 if index > len(tokenized_text) - 3
                 else tokenized_text[index + 2],
-                
                 # Morphological features
                 "prefix_1": token[0],
                 "prefix_2": token[:2],
@@ -118,15 +116,12 @@ class CRFNSWDetector(NSWDetector):
                 "suffix_2": token[-2:],
                 "suffix_3": token[-3:],
                 "suffix_4": token[-4:],
-                
                 # Word shape features
                 "ws": self._get_word_shape(token),
                 "short_ws": self._get_short_word_shape(token),
-                
                 # Dictionary lookup features
                 "is_in_dict": int(token.lower() in self._vn_dict),
                 "is_in_abbr_dict": int(token in self._abbr_dict),
-                
                 # Special character features
                 "word_has_hyphen": int("-" in token),
                 "word_has_tilde": int("~" in token),
@@ -134,21 +129,21 @@ class CRFNSWDetector(NSWDetector):
                 "word_has_comma": int("," in token),
                 "word_has_colon": int(":" in token),
                 "word_has_dot": int("." in token),
-                
                 # Pattern features
-                "word_has_ws_xxslashxxxx": int(bool(re.match(r"^\d{1,2}\/\d{4}$", token))),
+                "word_has_ws_xxslashxxxx": int(
+                    bool(re.match(r"^\d{1,2}\/\d{4}$", token))
+                ),
                 "word_has_romanslashxxxx": int(
                     bool(re.match(r"^[IVXLCDM]+[/.-]\d{4}$", token))
                 ),
                 "word_contain_only_roman": int(bool(re.match(r"^[IVXLCDM]+$", token))),
-                
                 # Time and date pattern features
                 "word_has_time_shape": int(self._is_time_pattern(token)),
                 "word_has_day_shape": int(self._is_day_pattern(token)),
                 "word_has_date_shape": int(self._is_date_pattern(token)),
                 "word_has_month_shape": int(self._is_month_pattern(token)),
             }
-            
+
             return features
 
         def _is_alphanumeric(self, token: str) -> bool:
@@ -177,7 +172,7 @@ class CRFNSWDetector(NSWDetector):
                     shape = "d"
                 else:
                     shape = char
-                
+
                 if not shapes or shapes[-1] != shape:
                     shapes.append(shape)
             return "".join(shapes)
@@ -230,32 +225,32 @@ class CRFNSWDetector(NSWDetector):
     def __init__(self, model_path: str = None):
         """
         Initialize the CRF NSW detector.
-        
+
         Args:
             model_path: Path to the CRF model file. If None, uses default path.
         """
         super().__init__()
-        
+
         if model_path is None:
             model_path = get_data_path() / "models" / "nsw_detector" / "crf.pkl"
-        
+
         with open(model_path, "rb") as f:
             self._crf: CRF = pickle.load(f)
-        
+
         # Load dictionaries
         self._vn_dict = set(load_vietnamese_syllables())
         self._abbr_dict = set(load_abbreviation_dict())
-        
+
         # Initialize feature extractor
         self._feature_extractor = self._FeatureExtractor(self._vn_dict, self._abbr_dict)
 
     def detect(self, tokenized_text: List[str]) -> List[str]:
         """
         Detect NSW labels for a single tokenized text.
-        
+
         Args:
             tokenized_text: List of tokens to classify
-            
+
         Returns:
             List of labels for each token
         """
@@ -265,10 +260,10 @@ class CRFNSWDetector(NSWDetector):
     def batch_detect(self, tokenized_texts: List[List[str]]) -> List[List[str]]:
         """
         Detect NSW labels for multiple tokenized texts.
-        
+
         Args:
             tokenized_texts: List of tokenized texts to classify
-            
+
         Returns:
             List of label lists for each text
         """
@@ -280,7 +275,7 @@ class CRFNSWDetector(NSWDetector):
     def get_labels(self) -> List[str]:
         """
         Get the list of possible labels for the CRF model.
-        
+
         Returns:
             List of BIO-style labels
         """

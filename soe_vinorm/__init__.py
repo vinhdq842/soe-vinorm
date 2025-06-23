@@ -10,31 +10,26 @@ __email__ = "quangvinh0842@gmail.com"
 
 # Main normalizer classes
 from .normalizer import (
-    Normalizer,
-    VietnameseNormalizer,
-    normalize_text,
     batch_normalize_texts,
+    normalize_text,
 )
+from .nsw_detector import CRFNSWDetector, NSWDetector
+from .nsw_expander import NSWExpander, RuleBasedNSWExpander
 
 # Individual components
-from .text_processor import TextPreprocessor, TextPostprocessor
-from .nsw_detector import NSWDetector, CRFNSWDetector
-from .nsw_expander import NSWExpander, RuleBasedNSWExpander
+from .text_processor import TextPostprocessor, TextPreprocessor
 
 # Utility functions
 from .utils import (
     get_data_path,
-    load_vietnamese_syllables,
     load_abbreviation_dict,
+    load_vietnamese_syllables,
 )
 
 __all__ = [
     # Main normalizer
-    "Normalizer",
-    "VietnameseNormalizer",
     "normalize_text",
     "batch_normalize_texts",
-    
     # Individual components
     "TextPreprocessor",
     "TextPostprocessor",
@@ -42,7 +37,6 @@ __all__ = [
     "CRFNSWDetector",
     "NSWExpander",
     "RuleBasedNSWExpander",
-    
     # Utilities
     "get_data_path",
     "load_vietnamese_syllables",

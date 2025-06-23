@@ -54,9 +54,7 @@ class TextPreprocessor(TextProcessor):
         self._vn_dict = set(vn_dict) if vn_dict else set(load_vietnamese_syllables())
 
     def __call__(self, text: str) -> str:
-        """
-        Process the input text.
-        """
+        """Process the input text."""
         # Step 1: Unicode normalization
         text = self._normalize_unicode(text)
 
@@ -160,8 +158,8 @@ class TextPreprocessor(TextProcessor):
 
     def _classify_and_process_token(self, token: str) -> List[str]:
         """Classify and process a token based on its type."""
-        # Check if it's a numeric pattern
-        if self._is_numeric_pattern(token):
+        # Check if it's a numeric or range pattern
+        if self._is_numeric_or_range_pattern(token):
             return [token]
 
         # Check if it's a URL
@@ -179,8 +177,8 @@ class TextPreprocessor(TextProcessor):
         # Default case: shape num-punct-not num
         return self._process_default_case(token)
 
-    def _is_numeric_pattern(self, token: str) -> bool:
-        """Check if token matches numeric patterns."""
+    def _is_numeric_or_range_pattern(self, token: str) -> bool:
+        """Check if token matches numeric or range patterns."""
         return re.match(self._NUMERIC_PATTERN, token) or re.match(
             self._RANGE_PATTERN, token
         )
@@ -190,7 +188,7 @@ class TextPreprocessor(TextProcessor):
         return bool(re.match(self._URL_PATTERN, token))
 
     def _is_vietnamese_concatenated_with_capital_first(self, token: str) -> bool:
-        """Check if token is Vietnamese concatenated syllables."""
+        """Check if token is Vietnamese concatenated syllables with each's first letter is capital."""
         return (
             re.search(self._VIETNAMESE_CAPITAL_PATTERN, token)
             and "-" not in token
@@ -216,7 +214,7 @@ class TextPreprocessor(TextProcessor):
     def _process_vietnamese_concatenated_with_capital_first(
         self, token: str
     ) -> List[str]:
-        """Process Vietnamese concatenated syllables with capital first."""
+        """Process Vietnamese concatenated syllables with each's first letter is capital."""
         parts = self._try_separating(token)[1]
         if len(parts) > 1:
             result = []

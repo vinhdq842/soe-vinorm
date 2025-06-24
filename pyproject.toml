@@ -1,6 +1,6 @@
 [project]
 name = "soe-vinorm"
-version = "0.1.0"
+version = "0.1.1"
 description = "An effective text normalization tool for Vietnamese"
 authors = [{name = "Vinh Dang", email = "quangvinh0842@gmail.com"}]
 requires-python = ">=3.8.16"

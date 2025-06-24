@@ -2,6 +2,8 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Dict, List
 
+from huggingface_hub import snapshot_download
+
 
 def get_data_path() -> Path:
     """Get the path to the data directory."""
@@ -45,3 +47,28 @@ def load_abbreviation_dict() -> Dict[str, List[str]]:
                 abbreviations[abbrev].extend(expansion.split(","))
 
     return abbreviations
+
+
+HF_MODEL_REPO_ID = "vinhdq842/soe-vinorm"
+
+
+@lru_cache(maxsize=1)
+def get_model_weights_path(cache_dir=None) -> Path:
+    """Download and return the local path to the model weights from Hugging Face Hub."""
+    if cache_dir is None:
+        cache_dir = Path.home() / ".cache" / "soe_vinorm"
+
+    local_dir = Path(
+        snapshot_download(
+            repo_id=HF_MODEL_REPO_ID,
+            cache_dir=str(cache_dir),
+            allow_patterns=["abbreviation_expander/*", "nsw_detector/*"],
+        )
+    )
+
+    if not local_dir.is_dir():
+        raise FileNotFoundError(
+            f"Error downloading model weights from Hugging Face Hub: {HF_MODEL_REPO_ID}"
+        )
+
+    return local_dir

@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Set, Union
 from sklearn_crfsuite import CRF
 
 from soe_vinorm.utils import (
-    get_data_path,
+    get_model_weights_path,
     load_abbreviation_dict,
     load_vietnamese_syllables,
 )
@@ -233,7 +233,7 @@ class CRFNSWDetector(NSWDetector):
         super().__init__()
 
         if model_path is None:
-            model_path = get_data_path() / "models" / "nsw_detector" / "crf.pkl"
+            model_path = get_model_weights_path() / "nsw_detector" / "crf.pkl"
 
         with open(model_path, "rb") as f:
             self._crf: CRF = pickle.load(f)

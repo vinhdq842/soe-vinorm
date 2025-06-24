@@ -8,6 +8,7 @@ readme = "README.md"
 license = "MIT"
 license-files = ['LICENSE']
 dependencies = [
+    "huggingface-hub>=0.33.0",
     "onnxruntime>=1.16.0,<1.17.0",
     "sklearn-crfsuite>=0.5.0",
     "transformers>=4.26.1",

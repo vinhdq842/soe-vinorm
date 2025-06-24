@@ -17,7 +17,7 @@ from soe_vinorm.constants import (
     SEQUENCE_PHONES_VI_MAPPING,
 )
 from soe_vinorm.utils import (
-    get_data_path,
+    get_model_weights_path,
     load_abbreviation_dict,
     load_vietnamese_syllables,
 )
@@ -379,22 +379,17 @@ class RuleBasedNSWExpander(NSWExpander):
             self._sequence_expander = sequence_expander
             self._window_size = 8
 
-            # Initialize ONNX model
+            model_path = get_model_weights_path() / "abbreviation_expander"
             session_options = SessionOptions()
             session_options.graph_optimization_level = (
                 GraphOptimizationLevel.ORT_ENABLE_ALL
             )
             self._abbr_model = InferenceSession(
-                get_data_path()
-                / "models"
-                / "abbreviation_expander"
-                / "bert.opt.infer.quant.onnx",
+                model_path / "bert.opt.infer.quant.onnx",
                 session_options,
                 providers=["CPUExecutionProvider"],
             )
-            self._abbr_tokenizer = AutoTokenizer.from_pretrained(
-                get_data_path() / "models" / "abbreviation_expander"
-            )
+            self._abbr_tokenizer = AutoTokenizer.from_pretrained(model_path)
 
         def expand_abbreviation(
             self, abbr: str, left_context: str, right_context: str
@@ -532,15 +527,10 @@ class RuleBasedNSWExpander(NSWExpander):
             )
 
         def _expand_one_word(self, word: str) -> str:
-            """Expand a single word."""
-            if word.lower() in self._vn_dict:
-                if len(word) > 1:
-                    return word
-                else:
-                    return self._sequence_expander.expand_sequence(word, english=True)
-            elif word.isnumeric():
+            """Expand numeric word or return unchanged. Need more refined handling later."""
+            if word.isnumeric():
                 return self._number_expander.expand_number(word)
-            return self._sequence_expander.expand_sequence(word, english=True)
+            return word
 
     class QuarterExpander:
         """Handles expansion of quarter notation."""

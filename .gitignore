@@ -9,4 +9,4 @@ wheels/
 # Virtual environments
 .venv
 draft.ipynb
-abbreviation_expander/
+models/

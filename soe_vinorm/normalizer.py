@@ -1,10 +1,5 @@
-"""
-Lightweight Vietnamese text normalizer optimized for performance.
-
-This module provides a streamlined interface for text normalization with minimal overhead.
-"""
-
-import re
+from abc import ABC, abstractmethod
+from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List, Optional
 
 from soe_vinorm.nsw_detector import CRFNSWDetector
@@ -13,11 +8,42 @@ from soe_vinorm.text_processor import TextPreprocessor
 from soe_vinorm.utils import load_abbreviation_dict, load_vietnamese_syllables
 
 
-class VietnameseNormalizer:
+class Normalizer(ABC):
     """
-    Lightweight Vietnamese text normalizer optimized for performance.
+    Abstract base class for text normalizers.
+    """
 
-    This class provides a streamlined normalization pipeline with minimal overhead.
+    @abstractmethod
+    def normalize(self, text: str) -> str:
+        """
+        Normalize text to spoken form.
+
+        Args:
+            text: Input text to normalize.
+
+        Returns:
+            Normalized text in spoken form.
+        """
+        ...
+
+    @abstractmethod
+    def batch_normalize(self, texts: List[str], n_jobs: int = 1) -> List[str]:
+        """
+        Normalize multiple texts efficiently.
+
+        Args:
+            texts: List of input texts to normalize.
+            n_jobs: Number of jobs to run in parallel.
+
+        Returns:
+            List of normalized texts.
+        """
+        ...
+
+
+class SoeNormalizer(Normalizer):
+    """
+    Effective Vietnamese text normalizer.
     """
 
     def __init__(
@@ -25,44 +51,28 @@ class VietnameseNormalizer:
         vn_dict: Optional[List[str]] = None,
         abbr_dict: Optional[Dict[str, List[str]]] = None,
         nsw_model_path: Optional[str] = None,
-        enable_nsw_detection: bool = True,
-        enable_nsw_expansion: bool = True,
     ):
         """
-        Initialize the lightweight Vietnamese normalizer.
+        Initialize the effective Vietnamese normalizer.
 
         Args:
-            vn_dict: List of Vietnamese words for dictionary lookup.
-            abbr_dict: Dictionary of abbreviations and their expansions.
-            nsw_model_path: Path to NSW detection model.
-            enable_nsw_detection: Whether to enable NSW detection.
-            enable_nsw_expansion: Whether to enable NSW expansion.
+            vn_dict: List of Vietnamese words for dictionary lookup. If None, use default Vietnamese dictionary.
+            abbr_dict: Dictionary of abbreviations and their expansions. If None, use default abbreviation dictionary.
+            nsw_model_path: Path to NSW detection model. If None, use default NSW detection model.
         """
-        # Convert to sets for faster lookups
-        self._vn_dict = set(vn_dict) if vn_dict else set(load_vietnamese_syllables())
+        self._vn_dict = vn_dict or load_vietnamese_syllables()
         self._abbr_dict = abbr_dict or load_abbreviation_dict()
 
-        # Initialize components only if needed
-        self._preprocessor = TextPreprocessor(list(self._vn_dict))
-        self._nsw_detector = None
-        self._nsw_expander = None
-
-        if enable_nsw_detection:
-            self._nsw_detector = CRFNSWDetector(
-                model_path=nsw_model_path,
-                vn_dict=list(self._vn_dict),
-                abbr_dict=self._abbr_dict,
-            )
-
-        if enable_nsw_expansion:
-            self._nsw_expander = RuleBasedNSWExpander(
-                vn_dict=list(self._vn_dict),
-                abbr_dict=self._abbr_dict,
-            )
-
-        # Pre-compile regex patterns for performance
-        self._whitespace_pattern = re.compile(r"\s+")
-        self._empty_check = re.compile(r"^\s*$")
+        self._preprocessor = TextPreprocessor(self._vn_dict)
+        self._nsw_detector = CRFNSWDetector(
+            model_path=nsw_model_path,
+            vn_dict=self._vn_dict,
+            abbr_dict=self._abbr_dict,
+        )
+        self._nsw_expander = RuleBasedNSWExpander(
+            vn_dict=self._vn_dict,
+            abbr_dict=self._abbr_dict,
+        )
 
     def normalize(self, text: str) -> str:
         """
@@ -74,99 +84,78 @@ class VietnameseNormalizer:
         Returns:
             Normalized text in spoken form.
         """
-        # Fast empty check
-        if not text or self._empty_check.match(text):
-            return text
+        if not isinstance(text, str):
+            raise TypeError("Input must be a string")
 
-        # Preprocess and tokenize
-        processed_text = self._preprocessor(text)
-        tokens = processed_text.split()
+        tokens = self._preprocessor(text).split()
 
         if not tokens:
-            return text
+            return text.strip()
 
-        # Detect NSW
-        if self._nsw_detector:
-            nsw_tags = self._nsw_detector.detect(tokens)
-        else:
-            nsw_tags = ["O"] * len(tokens)
+        nsw_tags = self._nsw_detector.detect(tokens)
+        expanded_tokens = self._nsw_expander.expand(tokens, nsw_tags)
 
-        # Expand NSW
-        if self._nsw_expander:
-            return self._nsw_expander.expand(tokens, nsw_tags)
-        else:
-            return " ".join(tokens)
+        return " ".join(expanded_tokens)
 
-    def batch_normalize(self, texts: List[str]) -> List[str]:
+    def batch_normalize(self, texts: List[str], n_jobs: int = 1) -> List[str]:
         """
-        Normalize multiple texts efficiently.
+        Normalize multiple texts efficiently (optimization in-progress).
 
         Args:
             texts: List of input texts to normalize.
+            n_jobs: Number of jobs to run in parallel.
 
         Returns:
             List of normalized texts.
         """
-        if not texts:
-            return []
+        if not isinstance(texts, list) or not all(
+            isinstance(text, str) for text in texts
+        ):
+            raise TypeError("Input must be a list of strings")
 
-        # Use list comprehension for better performance
-        return [self.normalize(text) for text in texts]
+        if n_jobs <= 0:
+            raise ValueError("Number of jobs must be greater than 0")
 
-    def normalize_fast(self, text: str) -> str:
-        """
-        Ultra-fast normalization with minimal processing.
+        if n_jobs == 1:
+            return [self.normalize(text) for text in texts]
 
-        Args:
-            text: Input text to normalize.
+        with ThreadPoolExecutor(max_workers=n_jobs) as executor:
+            tokenized_texts = [
+                text.split() for text in executor.map(self._preprocessor, texts)
+            ]
+            nsw_tags = self._nsw_detector.batch_detect(tokenized_texts)
+            expanded_texts = [
+                " ".join(expanded_tokens)
+                for expanded_tokens in executor.map(
+                    self._nsw_expander.expand, tokenized_texts, nsw_tags
+                )
+            ]
 
-        Returns:
-            Normalized text.
-        """
-        if not text or self._empty_check.match(text):
-            return text
-
-        # Skip preprocessing for speed
-        tokens = self._whitespace_pattern.split(text.strip())
-
-        if not tokens:
-            return text
-
-        # Only expand if expander is available
-        if self._nsw_expander:
-            # Use simple O tags for all tokens
-            nsw_tags = ["O"] * len(tokens)
-            return self._nsw_expander.expand(tokens, nsw_tags)
-
-        return " ".join(tokens)
+        return expanded_texts
 
 
-# Performance-optimized convenience functions
 def normalize_text(
     text: str,
     vn_dict: Optional[List[str]] = None,
     abbr_dict: Optional[Dict[str, List[str]]] = None,
-    enable_nsw_detection: bool = True,
-    enable_nsw_expansion: bool = True,
+    nsw_model_path: Optional[str] = None,
 ) -> str:
     """
     Quick normalization function.
 
     Args:
         text: Input text to normalize.
-        vn_dict: Optional Vietnamese dictionary.
-        abbr_dict: Optional abbreviation dictionary.
-        enable_nsw_detection: Whether to enable NSW detection.
-        enable_nsw_expansion: Whether to enable NSW expansion.
+        vn_dict: Optional Vietnamese dictionary. If None, use default Vietnamese dictionary.
+        abbr_dict: Optional abbreviation dictionary. If None, use default abbreviation dictionary.
+        nsw_model_path: Path to NSW detection model. If None, use default NSW detection model.
 
     Returns:
         Normalized text.
     """
-    normalizer = VietnameseNormalizer(
+    normalizer = SoeNormalizer(
         vn_dict=vn_dict,
         abbr_dict=abbr_dict,
-        enable_nsw_detection=enable_nsw_detection,
-        enable_nsw_expansion=enable_nsw_expansion,
+        nsw_model_path=nsw_model_path,
     )
     return normalizer.normalize(text)
 
@@ -175,43 +164,25 @@ def batch_normalize_texts(
     texts: List[str],
     vn_dict: Optional[List[str]] = None,
     abbr_dict: Optional[Dict[str, List[str]]] = None,
-    enable_nsw_detection: bool = True,
-    enable_nsw_expansion: bool = True,
+    nsw_model_path: Optional[str] = None,
+    n_jobs: int = 1,
 ) -> List[str]:
     """
-    Batch normalization function.
+    Batch normalization function (optimization in-progress).
 
     Args:
         texts: List of input texts to normalize.
-        vn_dict: Optional Vietnamese dictionary.
-        abbr_dict: Optional abbreviation dictionary.
-        enable_nsw_detection: Whether to enable NSW detection.
-        enable_nsw_expansion: Whether to enable NSW expansion.
+        vn_dict: Optional Vietnamese dictionary. If None, use default Vietnamese dictionary.
+        abbr_dict: Optional abbreviation dictionary. If None, use default abbreviation dictionary.
+        nsw_model_path: Path to NSW detection model. If None, use default NSW detection model.
+        n_jobs: Number of jobs to run in parallel.
 
     Returns:
         List of normalized texts.
     """
-    normalizer = VietnameseNormalizer(
+    normalizer = SoeNormalizer(
         vn_dict=vn_dict,
         abbr_dict=abbr_dict,
-        enable_nsw_detection=enable_nsw_detection,
-        enable_nsw_expansion=enable_nsw_expansion,
+        nsw_model_path=nsw_model_path,
     )
-    return normalizer.batch_normalize(texts)
-
-
-def normalize_fast(text: str) -> str:
-    """
-    Ultra-fast normalization with minimal overhead.
-
-    Args:
-        text: Input text to normalize.
-
-    Returns:
-        Normalized text.
-    """
-    normalizer = VietnameseNormalizer(
-        enable_nsw_detection=False,
-        enable_nsw_expansion=True,
-    )
-    return normalizer.normalize_fast(text)
+    return normalizer.batch_normalize(texts, n_jobs=n_jobs)

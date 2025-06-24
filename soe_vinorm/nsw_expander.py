@@ -814,7 +814,7 @@ class RuleBasedNSWExpander(NSWExpander):
             "LWRD": self._foreign_expander.expand_foreign_word,
         }
 
-    def expand(self, words: List[str], tags: List[str]) -> str:
+    def expand(self, words: List[str], tags: List[str]) -> List[str]:
         """Expand a list of words based on their tags."""
         if len(words) != len(tags):
             raise ValueError("The length of words and corresponding tags do not match!")
@@ -868,4 +868,4 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 current_group = []
 
-        return " ".join(results)
+        return results

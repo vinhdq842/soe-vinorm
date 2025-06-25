@@ -4,7 +4,7 @@ from typing import Dict, List, Set, Tuple, Union
 
 import numpy as np
 from onnxruntime import GraphOptimizationLevel, InferenceSession, SessionOptions
-from transformers import AutoTokenizer
+from tokenizers import Tokenizer
 from unidecode import unidecode
 
 from soe_vinorm.constants import (
@@ -389,7 +389,13 @@ class RuleBasedNSWExpander(NSWExpander):
                 session_options,
                 providers=["CPUExecutionProvider"],
             )
-            self._abbr_tokenizer = AutoTokenizer.from_pretrained(model_path)
+            self._abbr_tokenizer = Tokenizer.from_file(
+                str(model_path / "tokenizer.json")
+            )
+            self._abbr_tokenizer.enable_padding(
+                pad_id=self._abbr_tokenizer.token_to_id("<pad>"), length=32
+            )
+            self._abbr_tokenizer.enable_truncation(max_length=32)
 
         def expand_abbreviation(
             self, abbr: str, left_context: str, right_context: str
@@ -456,19 +462,15 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def _prepare_abbr_input(self, sentence: str) -> Tuple[np.ndarray, np.ndarray]:
             """Prepare input for the abbreviation language model."""
-            input_ids = self._abbr_tokenizer.encode(
-                sentence,
-                truncation=True,
-                max_length=32,
-                padding="max_length",
-                return_tensors="np",
-            )
+            input_ids = np.array(self._abbr_tokenizer.encode(sentence).ids)[
+                np.newaxis, ...
+            ]
             seq_len = input_ids.shape[1]
             repeat_input = np.tile(input_ids, (seq_len - 2, 1)).astype(dtype=np.int64)
 
             mask = np.eye(seq_len, seq_len, k=1, dtype=np.int64)[:-2]
             mask[repeat_input == 1] = 0
-            mask_token_id = self._abbr_tokenizer.mask_token_id
+            mask_token_id = self._abbr_tokenizer.token_to_id("<mask>")
             masked_input = np.where(mask == 1, mask_token_id, repeat_input)
             labels = np.where(masked_input != mask_token_id, -100, repeat_input)
 

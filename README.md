@@ -17,7 +17,7 @@ uv sync --dev
 ### Option 2: Install from PyPI
 ```bash
 # Install using uv
-uv pip install soe-vinorm
+uv add soe-vinorm
 
 # Or using pip
 pip install soe-vinorm

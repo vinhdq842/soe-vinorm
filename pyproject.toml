@@ -1,9 +1,9 @@
 [project]
 name = "soe-vinorm"
-version = "0.1.1"
+version = "0.1.2"
 description = "An effective text normalization tool for Vietnamese"
 authors = [{name = "Vinh Dang", email = "quangvinh0842@gmail.com"}]
-requires-python = ">=3.8.16"
+requires-python = ">=3.8"
 readme = "README.md"
 license = "MIT"
 license-files = ['LICENSE']
@@ -21,7 +21,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: Vietnamese",
-    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",

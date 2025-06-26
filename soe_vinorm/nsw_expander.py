@@ -29,7 +29,7 @@ class NSWExpander(ABC):
     """
 
     @abstractmethod
-    def expand(self, words: List[str], tags: List[str]) -> str:
+    def expand(self, words: List[str], tags: List[str]) -> List[str]:
         """Expand a list of words based on their tags."""
         ...
 

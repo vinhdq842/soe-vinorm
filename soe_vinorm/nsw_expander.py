@@ -589,8 +589,8 @@ class RuleBasedNSWExpander(NSWExpander):
             unit = re.sub(r"[0-9,.\s]", "", money)
             result = self._number_expander.expand_number(value)
             if unit in MONEY_UNITS_MAPPING:
-                result += " " + MONEY_UNITS_MAPPING[unit]
-            return result
+                result += f" {MONEY_UNITS_MAPPING[unit]}"
+            return result.strip()
 
     class ScoreExpander:
         """Handles expansion of scores."""

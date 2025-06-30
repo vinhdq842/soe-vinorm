@@ -3,6 +3,6 @@ repos:
   rev: v0.12.0
   hooks:
     - id: ruff-check
-      args: ["--extend-select", "I", "--fix", "--exclude", "conftest.py"]
+      args: ["--extend-select", "I", "--fix"]
     - id: ruff-format
       args: ["--exclude", "conftest.py"]

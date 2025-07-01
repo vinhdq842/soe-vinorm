@@ -8,11 +8,12 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-22.04, windows-latest, macos-latest]
         python-version: ["3.8", "3.9", "3.10", "3.11"]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
@@ -21,18 +22,12 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-
-    - name: Install uv
-      run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
     - name: Install dependencies
       run: |
-        uv pip install --system pytest
-        uv pip install --system -e .
+        python -m pip install -e .
+        python -m pip install pytest
 
     - name: Test with pytest
       run: |
-        pytest tests/
+        python -m pytest tests/

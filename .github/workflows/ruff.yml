@@ -1,15 +1,38 @@
 name: Ruff
-on: [ push, pull_request ]
+
+on:
+  push:
+    paths:
+      - 'soe_vinorm/**'
+      - 'tests/**'
+      - '*.py'
+      - 'pyproject.toml'
+      - '.github/workflows/ruff.yml'
+  pull_request:
+    paths:
+      - 'soe_vinorm/**'
+      - 'tests/**'
+      - '*.py'
+      - 'pyproject.toml'
+      - '.github/workflows/ruff.yml'
+
 jobs:
   ruff:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install ruff without running check or format
-        uses: astral-sh/ruff-action@v3
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
-          args: "--version"
+          version: "0.7.19"
+          python-version: "3.11"
 
-      - run: ruff check --extend-select I
-      - run: ruff format --exclude conftest.py
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run ruff check
+        run: uv run ruff check --extend-select I
+
+      - name: Run ruff format check
+        run: uv run ruff format --exclude conftest.py

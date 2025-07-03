@@ -1,33 +1,51 @@
-name: Python Version Tests
+name: Tests
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'soe_vinorm/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - '.github/workflows/tests.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'soe_vinorm/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - '.github/workflows/tests.yml'
 
 jobs:
-  tests:
+  test-core:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-latest]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        include:
+          - os: ubuntu-latest
+            python-version: "3.8"
+          - os: ubuntu-latest
+            python-version: "3.12"
+          - os: windows-latest
+            python-version: "3.11"
+          - os: macos-latest
+            python-version: "3.11"
     runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
       with:
+        version: "0.7.19"
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
-      run: |
-        python -m pip install -e .
-        python -m pip install pytest
+      run: uv sync --dev
 
     - name: Test with pytest
-      run: |
-        python -m pytest tests/
+      run: uv run pytest tests/ -v

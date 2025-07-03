@@ -20,7 +20,7 @@ on:
       - '.github/workflows/tests.yml'
 
 jobs:
-  test-core:
+  tests:
     strategy:
       fail-fast: false
       matrix:

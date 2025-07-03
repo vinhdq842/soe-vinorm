@@ -34,5 +34,5 @@ jobs:
       - name: Run ruff check
         run: uv run ruff check --extend-select I
 
-      - name: Run ruff format check
+      - name: Run ruff format
         run: uv run ruff format --exclude conftest.py

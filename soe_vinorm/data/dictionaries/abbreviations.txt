@@ -6,14 +6,14 @@ ANTQ:an ninh tổ quốc
 antq:an ninh tổ quốc
 ATGT:An toàn Giao thông
 atgt:An toàn Giao thông
-ATM:Máy rút tiền tự động
-atm:Máy rút tiền tự động
+ATM:máy rút tiền tự động
+atm:máy rút tiền tự động
 ATNĐ:áp thấp nhiệt đới
 atnđ:áp thấp nhiệt đới
-ATTT:An toàn Trật tự
-attt:An toàn Trật tự
-ATTTGT:An toàn Trật tự Giao thông
-atttgt:An toàn Trật tự Giao thông
+ATTT:an toàn trật tự
+attt:an toàn trật tự
+ATTTGT:an toàn trật tự giao thông
+atttgt:an toàn trật tự giao thông
 ATVSTP:an toàn vệ sinh thực phẩm
 atvstp:an toàn vệ sinh thực phẩm
 BBCVT:Bộ Bưu chính Viễn thông
@@ -28,8 +28,8 @@ BCVT:Bưu chính Viễn thông
 bcvt:Bưu chính Viễn thông
 BBT:Ban biên tập
 bbt:Ban biên tập
-BC:Báo cáo,Bán công,Bưu chính
-bc:Báo cáo,Bán công,Bưu chính
+BC:báo cáo,bán công,bưu chính
+bc:báo cáo,bán công,bưu chính
 BCĐ:Ban chỉ đạo
 bcđ:Ban chỉ đạo
 BCĐĐMĐH:Ban chỉ đạo đổi mới đại học
@@ -54,8 +54,8 @@ BCHTW:Ban chỉ huy trung ương
 bchtw:Ban chỉ huy trung ương
 BĐS:bất động sản
 bđs:bất động sản
-BĐVN:Bóng đá Việt Nam
-bđvn:Bóng đá Việt Nam
+BĐVN:bóng đá Việt Nam
+bđvn:bóng đá Việt Nam
 BĐH:Ban điều hành
 bđh:Ban điều hành
 BGD:Bộ Giáo dục
@@ -66,44 +66,44 @@ BGH:Ban giám hiệu
 bgh:Ban giám hiệu
 BGK:Ban giám khảo
 bgk:Ban giám khảo
-BH:Bảo hiểm,bảo hành
-bh:Bảo hiểm,bảo hành
+BH:bảo hiểm,bảo hành
+bh:bảo hiểm,bảo hành
 BHĐC:bán hàng đa cấp
 bhđc:bán hàng đa cấp
 BHL:Ban huấn luyện
 bhl:Ban huấn luyện
-BHXH:Bảo hiểm xã hội
-bhxh:Bảo hiểm xã hội
-BHTN:Bảo hiểm thất nghiệp
-bhtn:Bảo hiểm thất nghiệp
-BHYT:Bảo hiểm y tế
-bhyt:Bảo hiểm y tế
+BHXH:bảo hiểm xã hội
+bhxh:bảo hiểm xã hội
+BHTN:bảo hiểm thất nghiệp
+bhtn:bảo hiểm thất nghiệp
+BHYT:bảo hiểm y tế
+bhyt:bảo hiểm y tế
 BK:Bách khoa
 bk:Bách khoa
 BKHCN:bộ khoa học công nghệ
 bkhcn:bộ khoa học công nghệ
-BKS:biển kiểm soát,Ban Kiểm soát
-bks:biển kiểm soát,Ban Kiểm soát
+BKS:biển kiểm soát,Ban kiểm soát
+bks:biển kiểm soát,Ban kiểm soát
 BLHS:Bộ luật Hình sự
 blhs:Bộ luật Hình sự
-BLDS:Bộ luật dân sự
-blds:Bộ luật dân sự
+BLDS:Bộ luật Dân sự
+blds:Bộ luật Dân sự
 BLV:bình luận viên
 blv:bình luận viên
 BLX:bằng lái xe
 blx:bằng lái xe
-BP:Biên phòng
-bp:Biên phòng
-BQL:Ban quản lý
-bql:Ban quản lý
-BQP:bộ Quốc phòng
-bqp:bộ Quốc phòng
+BP:biên phòng
+bp:biên phòng
+BQL:ban quản lý
+bql:ban quản lý
+BQP:Bộ Quốc phòng
+bqp:Bộ Quốc phòng
 BQLDA:Ban Quản lý dự án
 bqlda:Ban Quản lý dự án
 BS:bác sĩ,biển số
 bs:bác sĩ,biển số
-BSC:Công ty Chứng khoán Ngân hàng Đầu tư và Phát triển Việt Nam
-bsc:Công ty Chứng khoán Ngân hàng Đầu tư và Phát triển Việt Nam
+BSC:công ty Chứng khoán Ngân hàng Đầu tư và Phát triển Việt Nam
+bsc:công ty Chứng khoán Ngân hàng Đầu tư và Phát triển Việt Nam
 BST:bộ sưu tập
 bst:bộ sưu tập
 BT:bảo trì,bộ trưởng
@@ -114,36 +114,36 @@ BTC:Ban tổ chức
 btc:Ban tổ chức
 BTS:Ban tuyển sinh
 bts:Ban tuyển sinh
-BTV:Biên tập viên
-btv:Biên tập viên
-BTVH:Bổ túc Văn hóa
-btvh:Bổ túc Văn hóa
-BV:Bệnh viện
-bv:Bệnh viện
+BTV:biên tập viên
+btv:biên tập viên
+BTVH:bổ túc văn hóa
+btvh:bổ túc văn hóa
+BV:bệnh viện
+bv:bệnh viện
 BVMT:bảo vệ môi trường
 bvmt:bảo vệ môi trường
-BVĐK:Bệnh viện Đa khoa
-bvđk:Bệnh viện Đa khoa
-BVTV:Bảo vệ thực vật
-bvtv:Bảo vệ thực vật
-BX:Bến xe
-bx:Bến xe
-BXL:Bộ xử lý
-bxl:Bộ xử lý
-CAHN:Công an Hà Nội
-cahn:Công an Hà Nội
-CAND:Công an Nhân dân
-cand:Công an Nhân dân
+BVĐK:bệnh viện Đa khoa
+bvđk:bệnh viện Đa khoa
+BVTV:bảo vệ thực vật
+bvtv:bảo vệ thực vật
+BX:bến xe
+bx:bến xe
+BXL:bộ xử lý
+bxl:bộ xử lý
+CAHN:công an Hà Nội
+cahn:công an Hà Nội
+CAND:công an Nhân dân
+cand:công an Nhân dân
 CATP:Công an Thành phố
 catp:Công an Thành phố
-CB:Cơ bản,Chế biến,Cán bộ
-cb:Cơ bản,Chế biến,Cán bộ
+CB:cơ bản,chế biến,cán bộ
+cb:cơ bản,chế biến,cán bộ
 CBYT:cán bộ y tế
 cbyt:cán bộ y tế
 CBCC:cán bộ công chức
 cbcc:cán bộ công chức
-CBCNV:Cán bộ công nhân viên
-cbcnv:Cán bộ công nhân viên
+CBCNV:cán bộ công nhân viên
+cbcnv:cán bộ công nhân viên
 CBQLGD:cán bộ quản lý giáo dục
 cbqlgd:cán bộ quản lý giáo dục
 CCB:Cựu chiến binh
@@ -152,8 +152,8 @@ CCCD:Căn cước công dân
 cccd:Căn cước công dân
 CCHC:cải cách hành chính
 cchc:cải cách hành chính
-CĐ:Cao đẳng,Công điện
-cđ:Cao đẳng,Công điện
+CĐ:Cao đẳng,công điện
+cđ:Cao đẳng,công điện
 CĐDC:chất độc da cam
 cđdc:chất độc da cam
 CĐSP:Cao đẳng Sư phạm
@@ -172,42 +172,42 @@ CHXNCN:Cộng hòa Xã hội Chủ nghĩa
 chxncn:Cộng hòa Xã hội Chủ nghĩa
 CHXHCNVN:Cộng hòa Xã hội Chủ nghĩa Việt Nam
 chxhcnvn:Cộng hòa Xã hội Chủ nghĩa Việt Nam
-CK:Chứng khoán
-ck:Chứng khoán
-CLB:Câu lạc bộ
-clb:Câu lạc bộ
+CK:chứng khoán
+ck:chứng khoán
+CLB:câu lạc bộ
+clb:câu lạc bộ
 CMND:Chứng minh nhân dân
 cmnd:Chứng minh nhân dân
 CMT:Chứng minh thư
 cmt:Chứng minh thư
-CN:Công nhân,Công nghệ,Công nghiệp
-cn:Công nhân,Công nghệ,Công nghiệp
+CN:công nhân,công nghệ,công nghiệp
+cn:công nhân,công nghệ,công nghiệp
 CNCN:Chi nhánh Cấp nước
 cncn:Chi nhánh Cấp nước
-CNH:Công nghiệp hóa
-cnh:Công nghiệp hóa
+CNH:công nghiệp hóa
+cnh:công nghiệp hóa
 CNKT:công nhân kỹ thuật
 cnkt:công nhân kỹ thuật
 CNQSDĐ:chứng nhận quyền sử dụng đất
 cnqsdđ:chứng nhận quyền sử dụng đất
-CNSH:Công nghệ sinh học
-cnsh:Công nghệ sinh học
+CNSH:công nghệ sinh học
+cnsh:công nghệ sinh học
 CNTN:cử nhân tài năng
 cntn:cử nhân tài năng
-CNTT:Công nghệ thông tin
-cntt:Công nghệ thông tin
-CNV:Công nhân viên
-cnv:Công nhân viên
-CNVC:Công nhân viên chức
-cnvc:Công nhân viên chức
+CNTT:công nghệ thông tin
+cntt:công nghệ thông tin
+CNV:công nhân viên
+cnv:công nhân viên
+CNVC:công nhân viên chức
+cnvc:công nhân viên chức
 COPD:bệnh phổi tắc nghẽn mãn tính
 copd:bệnh phổi tắc nghẽn mãn tính
-CP:cổ phiếu,Cổ phần,Chính phủ
-cp:cổ phiếu,Cổ phần,Chính phủ
-CPH:Cổ phần hóa
-cph:Cổ phần hóa
-CPSXTM:cổ phần Xây dựng sản xuất thương mại
-cpsxtm:cổ phần Xây dựng sản xuất thương mại
+CP:cổ phiếu,cổ phần,Chính phủ
+cp:cổ phiếu,cổ phần,Chính phủ
+CPH:cổ phần hóa
+cph:cổ phần hóa
+CPSXTM:cổ phần xây dựng sản xuất thương mại
+cpsxtm:cổ phần xây dựng sản xuất thương mại
 CPTD:cổ phiếu tự do
 cptd:cổ phiếu tự do
 CPXD:cấp phép xây dựng
@@ -218,8 +218,8 @@ CSCĐ:cảnh sát cơ động
 cscđ:cảnh sát cơ động
 CSDC:cảnh sát dã chiến
 csdc:cảnh sát dã chiến
-CSDL:Cơ sở Dữ liệu
-csdl:Cơ sở Dữ liệu
+CSDL:cơ sở dữ liệu
+csdl:cơ sở dữ liệu
 CSĐN:cảnh sát đặc nhiệm
 csđn:cảnh sát đặc nhiệm
 CSĐT:cơ sở đào tạo,Cảnh sát điều tra
@@ -230,20 +230,20 @@ CSĐTTP:Cảnh sát Điều tra tội phạm
 csđttp:Cảnh sát Điều tra tội phạm
 CSĐTTPMT:Cảnh sát điều tra tội phạm ma túy
 csđttpmt:Cảnh sát điều tra tội phạm ma túy
-CSG:Cảng Sài Gòn
-csg:Cảng Sài Gòn
+CSG:cảng Sài Gòn
+csg:cảng Sài Gòn
 CSGT:Cảnh sát giao thông
 csgt:Cảnh sát giao thông
 CSHS:Cảnh sát Hình sự
 cshs:Cảnh sát Hình sự
-CSKH:Chăm sóc khách hàng
-cskh:Chăm sóc khách hàng
-CSKT:Cảnh sát kinh tế
-cskt:Cảnh sát kinh tế
+CSKH:chăm sóc khách hàng
+cskh:chăm sóc khách hàng
+CSKT:Cảnh sát Kinh tế
+cskt:Cảnh sát Kinh tế
 CSKV:Cảnh sát khu vực
 cskv:Cảnh sát khu vực
-CSPCTPMT:Cục cảnh sát phòng chống tội phạm ma túy
-cspctpmt:Cục cảnh sát phòng chống tội phạm ma túy
+CSPCTPMT:Cục Cảnh sát phòng chống tội phạm ma túy
+cspctpmt:Cục Cảnh sát phòng chống tội phạm ma túy
 CSPK:công suất phản kháng
 cspk:công suất phản kháng
 CSQLHC:Cảnh sát Quản lý hành chính
@@ -252,68 +252,64 @@ CSSD:Đảng Xã hội Dân chủ cánh tả
 cssd:Đảng Xã hội Dân chủ cánh tả
 CSSX:cơ sở sản xuất
 cssx:cơ sở sản xuất
-CSVC:Cơ sở vật chất
-csvc:Cơ sở vật chất
+CSVC:cơ sở vật chất
+csvc:cơ sở vật chất
 CSVN:Cộng sản Việt Nam
 csvn:Cộng sản Việt Nam
 CSXH:chính sách xã hội
 csxh:chính sách xã hội
-CT:Chính trị,Công ty,Chỉ thị
-ct:Chính trị,Công ty,Chỉ thị
-CTCC:Công trình Công cộng
-ctcc:Công trình Công cộng
+CT:chính trị,công ty,chỉ thị
+ct:chính trị,công ty,chỉ thị
+CTCC:công trình công cộng
+ctcc:công trình công cộng
 CTCH:chấn thương chỉnh hình
 ctch:chấn thương chỉnh hình
 CTCK:công ty chứng khoán
 ctck:công ty chứng khoán
-CTCLQG:Chương trình chống lao quốc gia
-ctclqg:Chương trình chống lao quốc gia
-CTCN:Công ty Cấp nước
-ctcn:Công ty Cấp nước
-CTCP:Công ty Cổ phần
-ctcp:Công ty Cổ phần
+CTCLQG:chương trình chống lao quốc gia
+ctclqg:chương trình chống lao quốc gia
+CTCN:công ty cấp nước
+ctcn:công ty cấp nước
+CTCP:công ty cổ phần
+ctcp:công ty cổ phần
 CTĐ:Chữ thập đỏ
 ctđ:Chữ thập đỏ
-CTĐL:Công ty Điện lực
-ctđl:Công ty Điện lực
+CTĐL:công ty điện lực
+ctđl:công ty điện lực
 CTN:chuyển tiền nhanh
 ctn:chuyển tiền nhanh
-CTSN:Chấn thương sọ não
-ctsn:Chấn thương sọ não
+CTSN:chấn thương sọ não
+ctsn:chấn thương sọ não
 CTTC:cho thuê tài chính
 cttc:cho thuê tài chính
 CTTH:chương trình truyền hình
 ctth:chương trình truyền hình
-CTTNHH:Công ty Trách nhiệm Hữu hạn
-cttnhh:Công ty Trách nhiệm Hữu hạn
+CTTNHH:công ty Trách nhiệm Hữu hạn
+cttnhh:công ty Trách nhiệm Hữu hạn
 CTTT:chương trình tiên tiến
 cttt:chương trình tiên tiến
 CTV:cộng tác viên
 ctv:cộng tác viên
-CTXH:Công tác xã hội
-ctxh:Công tác xã hội
-CV:Chuyên viên
-cv:Chuyên viên
-CVPM:Công viên phần mềm
-cvpm:Công viên phần mềm
-CX:Cư xá
-cx:Cư xá
+CTXH:công tác xã hội
+ctxh:công tác xã hội
+CV:chuyên viên
+cv:chuyên viên
 DAGTĐT:dự án giao thông đô thị
 dagtđt:dự án giao thông đô thị
 ĐATP:Đông Á - Thép Pomina
 đatp:Đông Á - Thép Pomina
-ĐB:Đại biểu,Đồng bằng
-đb:Đại biểu,Đồng bằng
+ĐB:đại biểu,đồng bằng
+đb:đại biểu,đồng bằng
 ĐBDT:đồng bào dân tộc
 đbdt:đồng bào dân tộc
 ĐBP:Điện Biên Phủ
 đbp:Điện Biên Phủ
-ĐBQH:Đại biểu quốc hội
-đbqh:Đại biểu quốc hội
+ĐBQH:đại biểu Quốc hội
+đbqh:đại biểu Quốc hội
 ĐBSCL:Đồng bằng sông Cửu Long
 đbscl:Đồng bằng sông Cửu Long
-ĐBTN:Đại biểu thanh niên
-đbtn:Đại biểu thanh niên
+ĐBTN:đại biểu thanh niên
+đbtn:đại biểu thanh niên
 ĐBTSXB:đánh bắt thủy sản xa bờ
 đbtsxb:đánh bắt thủy sản xa bờ
 ĐC:đồng chí,điều chế,địa chỉ
@@ -322,18 +318,18 @@ dagtđt:dự án giao thông đô thị
 đcnn:độ chia nhỏ nhất
 DCCH:Dân chủ Cộng hòa
 dcch:Dân chủ Cộng hòa
-ĐCS:Đảng cộng sản
-đcs:Đảng cộng sản
-ĐCSTQ:Đảng cộng sản Trung Quốc
-đcstq:Đảng cộng sản Trung Quốc
-ĐCSVN:Đảng cộng sản Việt Nam
-đcsvn:Đảng cộng sản Việt Nam
-DD:Dinh dưỡng,Dân dụng
-dd:Dinh dưỡng,Dân dụng
-ĐD:Đại diện
-đd:Đại diện
-ĐĐ:Động đất,đất đai
-đđ:Động đất,đất đai
+ĐCS:Đảng Cộng sản
+đcs:Đảng Cộng sản
+ĐCSTQ:Đảng Cộng sản Trung Quốc
+đcstq:Đảng Cộng sản Trung Quốc
+ĐCSVN:Đảng Cộng sản Việt Nam
+đcsvn:Đảng Cộng sản Việt Nam
+DD:dinh dưỡng,dân dụng
+dd:dinh dưỡng,dân dụng
+ĐD:đại diện
+đd:đại diện
+ĐĐ:động đất,đất đai
+đđ:động đất,đất đai
 DDVN:Duyên Dáng Việt Nam
 ddvn:Duyên Dáng Việt Nam
 ĐH:Đại học,Đại hội
@@ -356,8 +352,6 @@ ddvn:Duyên Dáng Việt Nam
 đhcn:đại học Công nghệ
 ĐHCT:Đại học Cần Thơ
 đhct:Đại học Cần Thơ
-ĐHĐCQT:Đại học đẳng cấp quốc tế
-đhđcqt:Đại học đẳng cấp quốc tế
 ĐHĐD:Đại học Đông Dương
 đhđd:Đại học Đông Dương
 ĐHDL:Đại học Dân lập
@@ -368,14 +362,12 @@ ddvn:Duyên Dáng Việt Nam
 đhgtvt:Đại học Giao thông Vận tải
 ĐHHB:Đại học Hồng Bàng
 đhhb:Đại học Hồng Bàng
-ĐHHVN:Đại học Hàng hải Việt Nam
-đhhvn:Đại học Hàng hải Việt Nam
 ĐHKH:Đại học Khoa học
 đhkh:Đại học Khoa học
-ĐHKHTN:Đại học Khoa học tự nhiên
-đhkhtn:Đại học Khoa học tự nhiên
-ĐHKHTNHN:Đại học Khoa học tự nhiên Hà nội
-đhkhtnhn:Đại học Khoa học tự nhiên Hà nội
+ĐHKHTN:Đại học Khoa học Tự nhiên
+đhkhtn:Đại học Khoa học Tự nhiên
+ĐHKHTNHN:Đại học Khoa học Tự nhiên Hà nội
+đhkhtnhn:Đại học Khoa học Tự nhiên Hà nội
 ĐHKHXH:Đại học Khoa học Xã hội
 đhkhxh:Đại học Khoa học Xã hội
 ĐHKT:Đại học Kỹ thuật
@@ -386,8 +378,8 @@ dhktcn:Đại học Kỹ thuật Công nghệ
 đhktcn:Đại học Kỹ thuật Công nghệ
 ĐHKTQD:Đại học Kinh tế Quốc dân
 đhktqd:Đại học Kinh tế Quốc dân
-ĐHN:đồng hồ nước,Điện hạt nhân
-đhn:đồng hồ nước,Điện hạt nhân
+ĐHN:đồng hồ nước,điện hạt nhân
+đhn:đồng hồ nước,điện hạt nhân
 ĐHNT:Đại học Nha Trang
 đhnt:Đại học Nha Trang
 ĐHQG:Đại học Quốc gia
@@ -398,46 +390,46 @@ DHS:du học sinh
 dhs:du học sinh
 ĐHSP:Đại học Sư phạm
 đhsp:Đại học Sư phạm
-ĐK:Đăng ký
-đk:Đăng ký
+ĐK:đăng ký
+đk:đăng ký
 ĐKDT:đăng ký dự thi
 đkdt:đăng ký dự thi
 ĐKĐT:điện kế điện tử
 đkđt:điện kế điện tử
-ĐKHK:Đăng ký hộ khẩu
-đkhk:Đăng ký hộ khẩu
-ĐKKD:Đăng ký kinh doanh
-đkkd:Đăng ký kinh doanh
+ĐKHK:đăng ký hộ khẩu
+đkhk:đăng ký hộ khẩu
+ĐKKD:đăng ký kinh doanh
+đkkd:đăng ký kinh doanh
 ĐKKH:đăng ký kết hôn
 đkkh:đăng ký kết hôn
-ĐKVĐ:Đương kim vô địch
-đkvđ:Đương kim vô địch
-ĐKVN:Điền kinh Việt Nam
-đkvn:Điền kinh Việt Nam
+ĐKVĐ:đương kim vô địch
+đkvđ:đương kim vô địch
+ĐKVN:điền kinh Việt Nam
+đkvn:điền kinh Việt Nam
 ĐKXT:đăng ký xét tuyển
 đkxt:đăng ký xét tuyển
-DL:Du lịch
-dl:Du lịch
+DL:du lịch
+dl:du lịch
 ĐL:đo lường
 đl:đo lường
 ĐLTP:điện kế điện tử
 đltp:điện kế điện tử
 ĐMN:Đá Mỹ Nghệ
 đmn:Đá Mỹ Nghệ
-DN:Doanh nghiệp
-dn:Doanh nghiệp
-ĐN:Đồng nai,Đà nẵng
-đn:Đồng nai,Đà nẵng
-ĐNA:Đông nam á
-đna:Đông nam á
+DN:doanh nghiệp
+dn:doanh nghiệp
+ĐN:Đồng Nai,Đà Nẵng
+đn:Đồng Nai,Đà Nẵng
+ĐNA:Đông Nam Á
+đna:Đông Nam Á
 ĐNÁ:Đông Nam Á
 đná:Đông Nam Á
-DNNN:Doanh nghiệp nhà nước
-dnnn:Doanh nghiệp nhà nước
-DNT:Doanh nghiệp trẻ
-dnt:Doanh nghiệp trẻ
-DNTN:Doanh nghiệp Tư nhân
-dntn:Doanh nghiệp Tư nhân
+DNNN:doanh nghiệp Nhà nước
+dnnn:doanh nghiệp Nhà nước
+DNT:doanh nghiệp trẻ
+dnt:doanh nghiệp trẻ
+DNTN:doanh nghiệp Tư nhân
+dntn:doanh nghiệp Tư nhân
 DNVN:doanh nghiệp Việt Nam
 dnvn:doanh nghiệp Việt Nam
 DNVVN:doanh nghiệp vừa và nhỏ
@@ -460,72 +452,72 @@ dt:dự tuyển
 đtb:điểm trung bình
 ĐTĐ:đái tháo đường
 đtđ:đái tháo đường
-ĐTDĐ:Điện thoại di động
-đtdđ:Điện thoại di động
+ĐTDĐ:điện thoại di động
+đtdđ:điện thoại di động
 DTHT:dạy thêm học thêm
 dtht:dạy thêm học thêm
-ĐTHVN:Đài truyền hình Việt Nam
-đthvn:Đài truyền hình Việt Nam
-ĐTLA:Đồng tính luyến ái
-đtla:Đồng tính luyến ái
+ĐTHVN:đài truyền hình Việt Nam
+đthvn:đài truyền hình Việt Nam
+ĐTLA:đồng tính luyến ái
+đtla:đồng tính luyến ái
 ĐTLT:đào tạo liên thông
 đtlt:đào tạo liên thông
 ĐTNN:đầu tư nước ngoài
 đtnn:đầu tư nước ngoài
-DTQG:Đội tuyển quốc gia
-dtqg:Đội tuyển quốc gia
-ĐTQG:Đội tuyển quốc gia
-đtqg:Đội tuyển quốc gia
-ĐTTX:Đào tạo từ xa
-đttx:Đào tạo từ xa
-ĐTTXQM:Đào tạo từ xa Qua mạng
-đttxqm:Đào tạo từ xa Qua mạng
+DTQG:đội tuyển quốc gia
+dtqg:đội tuyển quốc gia
+ĐTQG:đội tuyển quốc gia
+đtqg:đội tuyển quốc gia
+ĐTTX:đào tạo từ xa
+đttx:đào tạo từ xa
+ĐTTXQM:đào tạo từ xa qua mạng
+đttxqm:đào tạo từ xa qua mạng
 ĐTV:điều tra viên
 đtv:điều tra viên
 ĐTVHD:động thực vật hoang dã
 đtvhd:động thực vật hoang dã
-ĐTVN:Đội tuyển Việt Nam
-đtvn:Đội tuyển Việt Nam
+ĐTVN:đội tuyển Việt Nam
+đtvn:đội tuyển Việt Nam
 ĐTXDCB:đầu tư xây dựng cơ bả
 đtxdcb:đầu tư xây dựng cơ bả
-DV:Dịch vụ,Diễn viên
-dv:Dịch vụ,Diễn viên
+DV:dịch vụ,diễn viên
+dv:dịch vụ,diễn viên
 ĐV:đơn vị,đoàn viên
 đv:đơn vị,đoàn viên
-ĐVHT:Đơn vị học trình
-đvht:Đơn vị học trình
+ĐVHT:đơn vị học trình
+đvht:đơn vị học trình
 DVTMCM:dịch vụ thương mại Cà Mau
 dvtmcm:dịch vụ thương mại Cà Mau
 ĐVTN:đoàn viên thanh niên
 đvtn:đoàn viên thanh niên
-DVTT:Dịch vụ trực tuyến,dịch vụ thông tin
-dvtt:Dịch vụ trực tuyến,dịch vụ thông tin
-ĐVTTN:Đoàn viên thanh thiếu nhi
-đvttn:Đoàn viên thanh thiếu nhi
+DVTT:dịch vụ trực tuyến,dịch vụ thông tin
+dvtt:dịch vụ trực tuyến,dịch vụ thông tin
+ĐVTTN:đoàn viên thanh thiếu nhi
+đvttn:đoàn viên thanh thiếu nhi
 ĐVƯT:đoàn viên ưu tú
 đvưt:đoàn viên ưu tú
 DVVL:dịch vụ việc làm
 dvvl:dịch vụ việc làm
 GCMND:giấy chứng minh nhân dân
 gcmnd:giấy chứng minh nhân dân
-GCN:Giấy chứng nhận
-gcn:Giấy chứng nhận
-GCNĐKKD:Giấy chứng nhận đăng ký kinh doanh
-gcnđkkd:Giấy chứng nhận đăng ký kinh doanh
+GCN:giấy chứng nhận
+gcn:giấy chứng nhận
+GCNĐKKD:giấy chứng nhận đăng ký kinh doanh
+gcnđkkd:giấy chứng nhận đăng ký kinh doanh
 GCNKQT:giấy chứng nhận kết quả thi
 gcnkqt:giấy chứng nhận kết quả thi
 GCNQSD:giấy chứng nhận quyền sử dụng
 gcnqsd:giấy chứng nhận quyền sử dụng
-GCNQSDĐ:Giấy chứng nhận quyền sử dụng đất
-gcnqsdđ:Giấy chứng nhận quyền sử dụng đất
-GCNQSDĐƠ:Giấy chứng nhận quyền sử dụng đất ở
-gcnqsdđơ:Giấy chứng nhận quyền sử dụng đất ở
-GCNQSH:Giấy chứng nhận quyền sở hữu
-gcnqsh:Giấy chứng nhận quyền sở hữu
-GCNQSHN:Giấy chứng nhận quyền sở hữu nhà
-gcnqshn:Giấy chứng nhận quyền sở hữu nhà
-GCNQSHNƠ:Giấy chứng nhận quyền sở hữu nhà ở
-gcnqshnơ:Giấy chứng nhận quyền sở hữu nhà ở
+GCNQSDĐ:giấy chứng nhận quyền sử dụng đất
+gcnqsdđ:giấy chứng nhận quyền sử dụng đất
+GCNQSDĐƠ:giấy chứng nhận quyền sử dụng đất ở
+gcnqsdđơ:giấy chứng nhận quyền sử dụng đất ở
+GCNQSH:giấy chứng nhận quyền sở hữu
+gcnqsh:giấy chứng nhận quyền sở hữu
+GCNQSHN:giấy chứng nhận quyền sở hữu nhà
+gcnqshn:giấy chứng nhận quyền sở hữu nhà
+GCNQSHNƠ:giấy chứng nhận quyền sở hữu nhà ở
+gcnqshnơ:giấy chứng nhận quyền sở hữu nhà ở
 GCNSK:giấy chứng nhận sức khỏe
 gcnsk:giấy chứng nhận sức khỏe
 GCQ:giấy chủ quyền
@@ -534,8 +526,8 @@ GD:Giáo dục
 gd:Giáo dục
 GĐ:Giám đốc
 gđ:Giám đốc
-GĐNS:Giám đốc nhân sự
-gđns:Giám đốc nhân sự
+GĐNS:giám đốc nhân sự
+gđns:giám đốc nhân sự
 GDĐH:giáo dục dục đại học
 gdđh:giáo dục dục đại học
 GĐĐH:giám đốc điều hành
@@ -550,26 +542,26 @@ GĐT:Gạch Đồng Tâm
 gđt:Gạch Đồng Tâm
 GĐTLA:Gạch Đồng Tâm Long An
 gđtla:Gạch Đồng Tâm Long An
-GDTX:Giáo dục thường xuyên
-gdtx:Giáo dục thường xuyên
+GDTX:giáo dục thường xuyên
+gdtx:giáo dục thường xuyên
 GHPGVN:Giáo hội Phật giáo Việt Nam
 ghpgvn:Giáo hội Phật giáo Việt Nam
 GK:Giáo khoa
 gk:Giáo khoa
 GL:Gia Lai
 gl:Gia Lai
-GP:Giấy phép
-gp:Giấy phép
+GP:giấy phép
+gp:giấy phép
 GPLHĐB:giấy phép lưu hành đặc biệt
 gplhđb:giấy phép lưu hành đặc biệt
-GPLX:Giấy phép lái xe
-gplx:Giấy phép lái xe
+GPLX:giấy phép lái xe
+gplx:giấy phép lái xe
 GPNK:phép nhập khẩu
 gpnk:phép nhập khẩu
 GPTM:giải phẫu thẩm mỹ
 gptm:giải phẫu thẩm mỹ
-GPXD:Giấy phép xây dựng
-gpxd:Giấy phép xây dựng
+GPXD:giấy phép xây dựng
+gpxd:giấy phép xây dựng
 GS:Giáo sư
 gs:Giáo sư
 GSTS:Giáo sư Tiến sỹ
@@ -578,20 +570,20 @@ GSTSKH:Giáo sư Tiến sỹ Khoa học
 gstskh:Giáo sư Tiến sỹ Khoa học
 GSTT:giám sát trọng tài
 gstt:giám sát trọng tài
-GT:Giao thông,Giá trị
-gt:Giao thông,Giá trị
+GT:giao thông,giá trị
+gt:giao thông,giá trị
 GTCC:Giao thông Công chánh
 gtcc:Giao thông Công chánh
-GTGT:Giá trị gia tăng
-gtgt:Giá trị gia tăng
+GTGT:giá trị gia tăng
+gtgt:giá trị gia tăng
 GTMT:giãn tĩnh mạch tinh
 gtmt:giãn tĩnh mạch tinh
 GTVT:Giao thông Vận tải
 gtvt:Giao thông Vận tải
-GV:Giáo viên,Giảng viên
-gv:Giáo viên,Giảng viên
-GVCN:Giáo viên chủ nhiệm
-gvcn:Giáo viên chủ nhiệm
+GV:giáo viên,giảng viên
+gv:giáo viên,giảng viên
+GVCN:giáo viên chủ nhiệm
+gvcn:giáo viên chủ nhiệm
 GVG:giáo viên giỏi
 gvg:giáo viên giỏi
 GVMN:giáo viên miền núi,giáo viên mầm non
@@ -603,32 +595,32 @@ gvtn:giáo viên tình nguyện
 H:huyện
 HTX:Hợp tác xã
 htx:Hợp tác xã
-HTXDVNN:Hợp tác xã dịch vụ nông nghiệp
-htxdvnn:Hợp tác xã dịch vụ nông nghiệp
+HTXDVNN:Hợp tác xã dịch vụ Nông nghiệp
+htxdvnn:Hợp tác xã dịch vụ Nông nghiệp
 HAGL:Hoàng Anh Gia Lai
 hagl:Hoàng Anh Gia Lai
-HB:Học bổng
-hb:Học bổng
+HB:học bổng
+hb:học bổng
 HC:hành chính,huy chương
 hc:hành chính,huy chương
-HCB:Huy chương bạc
-hcb:Huy chương bạc
-HCĐ:Huy chương đồng
-hcđ:Huy chương đồng
+HCB:huy chương bạc
+hcb:huy chương bạc
+HCĐ:huy chương đồng
+hcđ:huy chương đồng
 HCM:Hồ Chí Minh
 hcm:Hồ Chí Minh
 HCTC:học chế tín chỉ
 hctc:học chế tín chỉ
 HCTL:hội chợ triển lăm
 hctl:hội chợ triển lăm
-HCV:Huy chương vàng
-hcv:Huy chương vàng
-HCVL:Hội chợ việc làm
-hcvl:Hội chợ việc làm
-HD:Hướng dẫn
-hd:Hướng dẫn
-HĐ:Hợp đồng,Hội đồng
-hđ:Hợp đồng,Hội đồng
+HCV:huy chương vàng
+hcv:huy chương vàng
+HCVL:hội chợ việc làm
+hcvl:hội chợ việc làm
+HD:hướng dẫn
+hd:hướng dẫn
+HĐ:hợp đồng,hội đồng
+hđ:hợp đồng,hội đồng
 HĐBA:Hội đồng Bảo an Liên Hiệp Quốc
 hđba:Hội đồng Bảo an Liên Hiệp Quốc
 HĐCD:Hội đồng chức danh
@@ -643,20 +635,20 @@ HĐCDGSNN:Hội đồng Chức danh giáo sư nhà nước
 hđcdgsnn:Hội đồng Chức danh giáo sư nhà nước
 HĐCT:hội đồng coi thi
 hđct:hội đồng coi thi
-HĐĐB:Hội đồng Đền bù
-hđđb:Hội đồng Đền bù
+HĐĐB:Hội đồng đền bù
+hđđb:Hội đồng đền bù
 HĐĐG:Hội đồng định giá
 hđđg:Hội đồng định giá
-HĐH:Hệ điều hành
-hđh:Hệ điều hành
+HĐH:hệ điều hành
+hđh:hệ điều hành
 HĐKT:hợp đồng kinh tế
 hđkt:hợp đồng kinh tế
-HĐLĐ:Hợp đồng lao động
-hđlđ:Hợp đồng lao động
-HĐND:Hội đồng nhân dân
-hđnd:Hội đồng nhân dân
-HĐNDTP:Hội đồng nhân dân thành phố
-hđndtp:Hội đồng nhân dân thành phố
+HĐLĐ:hợp đồng lao động
+hđlđ:hợp đồng lao động
+HĐND:Hội đồng Nhân dân
+hđnd:Hội đồng Nhân dân
+HĐNDTP:Hội đồng Nhân dân thành phố
+hđndtp:Hội đồng Nhân dân thành phố
 HĐNT:hội đồng nghệ thuật
 hđnt:hội đồng nghệ thuật
 HĐQT:Hội đồng Quản trị
@@ -671,20 +663,20 @@ HĐTT:Hội đồng Trọng tài
 hđtt:Hội đồng Trọng tài
 HDV:hướng dẫn viên
 hdv:hướng dẫn viên
-HĐXX:Hội đồng xét xử
-hđxx:Hội đồng xét xử
+HĐXX:Hội đồng Xét xử
+hđxx:Hội đồng Xét xử
 HH:Hoa hậu
 hh:Hoa hậu
 HHTG:Hoa hậu Thế giới
 hhtg:Hoa hậu Thế giới
 HHVN:Hoa hậu Việt Nam
 hhvn:Hoa hậu Việt Nam
-HK:Học kỳ
-hk:Học kỳ
+HK:học kỳ
+hk:học kỳ
 HKDD:Hàng không dân dụng
-hkdd:Hàng không dân dụng
-HKDDVN:Hàng không dân dụng Việt Nam
-hkddvn:Hàng không dân dụng Việt Nam
+hkdd:hàng không dân dụng
+HKDDVN:hàng không dân dụng Việt Nam
+hkddvn:hàng không dân dụng Việt Nam
 HKHKT:hội khoa học kỹ thuật
 hkhkt:hội khoa học kỹ thuật
 HKHKTVN:hội khoa học kỹ thuật Việt Nam
@@ -697,14 +689,14 @@ HLBĐ:Hoa Lâm Bình Định
 hlbđ:Hoa Lâm Bình Định
 HLQG:Huấn luyện Quốc gia
 hlqg:Huấn luyện Quốc gia
-HLTTQG:huấn luyện thể thao quốc gia
-hlttqg:huấn luyện thể thao quốc gia
-HLV:Huấn luyện viên
-hlv:Huấn luyện viên
+HLTTQG:Huấn luyện Thể thao Quốc gia
+hlttqg:Huấn luyện Thể thao Quốc gia
+HLV:huấn luyện viên
+hlv:huấn luyện viên
 HMNĐ:hiến máu nhân đạo
 hmnđ:hiến máu nhân đạo
-HN:Hà Nội,Hội nghị
-hn:Hà Nội,Hội nghị
+HN:Hà Nội,hội nghị
+hn:Hà Nội,hội nghị
 HND:Hội nông dân
 hnd:Hội nông dân
 HNGĐ:hôn nhân gia đình
@@ -713,42 +705,42 @@ HNHT:hội nghị hiệp thương
 hnht:hội nghị hiệp thương
 HNV:Hội Nhà văn
 hnv:Hội Nhà văn
-HP:Học phần,Hải phòng
-hp:Học phần,Hải phòng
+HP:học phần,Hải phòng
+hp:học phần,Hải phòng
 HPHN:Hòa Phát Hà Nội
 hphn:Hòa Phát Hà Nội
-HQ:Hàn quốc,Hải quan
-hq:Hàn quốc,Hải quan
+HQ:Hàn Quốc,Hải quan
+hq:Hàn Quốc,Hải quan
 HQĐT:Hải quan điện tử
 hqđt:Hải quan điện tử
-HQHP:Hải quan Hải phòng
-hqhp:Hải quan Hải phòng
-HS:Học sinh
-hs:Học sinh
-HSBC:Học sinh bán công
-hsbc:Học sinh bán công
-HSĐKDT:Hồ sơ đăng ký dự thi
-hsđkdt:Hồ sơ đăng ký dự thi
-HSDPA:Truy nhập gói đường xuống tốc độ cao
-hsdpa:Truy nhập gói đường xuống tốc độ cao
+HQHP:Hải quan Hải Phòng
+hqhp:Hải quan Hải Phòng
+HS:học sinh
+hs:học sinh
+HSBC:học sinh bán công
+hsbc:học sinh bán công
+HSĐKDT:hồ sơ đăng ký dự thi
+hsđkdt:hồ sơ đăng ký dự thi
+HSDPA:truy nhập gói đường xuống tốc độ cao
+hsdpa:truy nhập gói đường xuống tốc độ cao
 HSG:học sinh giỏi
 hsg:học sinh giỏi
-HSGQG:học sinh giỏi Quốc gia
-hsgqg:học sinh giỏi Quốc gia
-HSGQT:học sinh giỏi Quốc tế
-hsgqt:học sinh giỏi Quốc tế
+HSGQG:Học sinh giỏi Quốc gia
+hsgqg:Học sinh giỏi Quốc gia
+HSGQT:Học sinh giỏi Quốc tế
+hsgqt:Học sinh giỏi Quốc tế
 HSPT:học sinh phổ thông
 hspt:học sinh phổ thông
-HSSV:Học sinh sinh viên
-hssv:Học sinh sinh viên
+HSSV:học sinh sinh viên
+hssv:học sinh sinh viên
 HSV:Hội sinh viên
 hsv:Hội sinh viên
 HTCĐ:học tập cộng đồng
 htcđ:học tập cộng đồng
 HUD:Tổng công ty Đầu tư phát triển nhà và đô thị
 hud:Tổng công ty Đầu tư phát triển nhà và đô thị
-HV:Học viên
-hv:Học viên
+HV:học viên
+hv:học viên
 HVANND:Học viện An ninh Nhân dân
 hvannd:Học viện An ninh Nhân dân
 HVBCVT:Học viện Bưu chính Viễn thông
@@ -777,118 +769,118 @@ KCX:Khu chế xuất
 kcx:Khu chế xuất
 KDC:khu dân cư
 kdc:khu dân cư
-KĐCL:Kiểm định chất lượng
-kđcl:Kiểm định chất lượng
-KĐCLGD:Kiểm định chất lượng Giáo dục
-kđclgd:Kiểm định chất lượng Giáo dục
-KDCN:Kiểu dáng công nghiệp
-kdcn:Kiểu dáng công nghiệp
+KĐCL:kiểm định chất lượng
+kđcl:kiểm định chất lượng
+KĐCLGD:kiểm định chất lượng giáo dục
+kđclgd:kiểm định chất lượng giáo dục
+KDCN:kiểu dáng công nghiệp
+kdcn:kiểu dáng công nghiệp
 KDDV:kinh doanh dịch vụ
 kddv:kinh doanh dịch vụ
-KDĐV:Kiểm dịch động vật
-kdđv:Kiểm dịch động vật
+KDĐV:kiểm dịch động vật
+kdđv:kiểm dịch động vật
 KDHĐC:kinh doanh hàng đa cấp
 kdhđc:kinh doanh hàng đa cấp
-KDL:Khu du lịch
-kdl:Khu du lịch
-KDN:Kinh doanh nhà
-kdn:Kinh doanh nhà
-KDNPN:Kinh doanh nhà Phú Nhuận
-kdnpn:Kinh doanh nhà Phú Nhuận
+KDL:khu du lịch
+kdl:khu du lịch
+KDN:kinh doanh nhà
+kdn:kinh doanh nhà
+KDNPN:kinh doanh nhà Phú Nhuận
+kdnpn:kinh doanh nhà Phú Nhuận
 KĐS:Khu đường sông
-kđs:Khu đường sông
-KĐT:Khu đô thị
-kđt:Khu đô thị
-KĐTM:Khu đô thị mới
-kđtm:Khu đô thị mới
-KĐTNTL:Đô thị Nam Thăng Long
-kđtntl:Đô thị Nam Thăng Long
-KH:Kế hoạch,Khoa học
-kh:Kế hoạch,Khoa học
+kđs:khu đường sông
+KĐT:khu đô thị
+kđt:khu đô thị
+KĐTM:khu đô thị mới
+kđtm:khu đô thị mới
+KĐTNTL:đô thị Nam Thăng Long
+kđtntl:đô thị Nam Thăng Long
+KH:kế hoạch,khoa học
+kh:kế hoạch,khoa học
 KHCN:Khoa học Công nghệ
 khcn:Khoa học Công nghệ
 KHĐT:Kế hoạch Đầu tư
 khđt:Kế hoạch Đầu tư
-KHKD:Kế hoạch kinh doanh
-khkd:Kế hoạch kinh doanh
+KHKD:Kế hoạch Kinh doanh
+khkd:Kế hoạch Kinh doanh
 KHKT:Khoa học Kỹ thuật
 khkt:Khoa học Kỹ thuật
 KHKTHN:Khoa học Kỹ thuật Hạt nhân
 khkthn:Khoa học Kỹ thuật Hạt nhân
-KHKTHS:Khoa học kỹ thuật hình sự
-khkths:Khoa học kỹ thuật hình sự
-KHKTNN:Khoa học kỹ thuật Nông nghiệp
-khktnn:Khoa học kỹ thuật Nông nghiệp
-KHKTNNMN:Khoa học kỹ thuật Nông nghiệp miền Nam
-khktnnmn:Khoa học kỹ thuật Nông nghiệp miền Nam
-KHLS:Khoa học lịch sử
-khls:Khoa học lịch sử
+KHKTHS:Khoa học Kỹ thuật Hình sự
+khkths:Khoa học Kỹ thuật Hình sự
+KHKTNN:Khoa học Kỹ thuật Nông nghiệp
+khktnn:Khoa học Kỹ thuật Nông nghiệp
+KHKTNNMN:Khoa học Kỹ thuật Nông nghiệp miền Nam
+khktnnmn:Khoa học Kỹ thuật Nông nghiệp miền Nam
+KHLS:Khoa học Lịch sử
+khls:Khoa học Lịch sử
 KHTN:Khoa học Tự nhiên
 khtn:Khoa học Tự nhiên
 KHXH:Khoa học Xã hội
 khxh:Khoa học Xã hội
-KK:Khuyến khích
-kk:Khuyến khích
+KK:khuyến khích
+kk:khuyến khích
 KKT:khu kinh tế
 kkt:khu kinh tế
 KM:khuyến mại
 km:khuyến mại
-KL:Kết luận
-kl:Kết luận
+KL:kết luận
+kl:kết luận
 KLĐT:kết luận điều tra
 klđt:kết luận điều tra
-KLQG:Kỷ lục quốc gia
-klqg:Kỷ lục quốc gia
-KN:Khuyến nông
-kn:Khuyến nông
+KLQG:Kỷ lục Quốc gia
+klqg:Kỷ lục Quốc gia
+KN:khuyến nông
+kn:khuyến nông
 KNTC:khiếu nại tố cáo
 kntc:khiếu nại tố cáo
 KP:khu phố
 kp:khu phố
-KS:Khách sạn,Kỹ sư
-ks:Khách sạn,Kỹ sư
-KSND:Kiểm sát nhân dân
-ksnd:Kiểm sát nhân dân
+KS:khách sạn,kỹ sư
+ks:khách sạn,kỹ sư
+KSND:Kiểm sát Nhân dân
+ksnd:Kiểm sát Nhân dân
 KSNDTC:Kiểm sát Nhân dân Tối cao
 ksndtc:Kiểm sát Nhân dân Tối cao
 KST:ký sinh trùng
 kst:ký sinh trùng
 KSV:kiểm sát viên
 ksv:kiểm sát viên
-KT:kinh tế,Kỹ thuật
-kt:kinh tế,Kỹ thuật
+KT:kinh tế,kỹ thuật
+kt:kinh tế,kỹ thuật
 KTCT:kinh tế chính trị
 ktct:kinh tế chính trị
 KTM:Khu thương mại
 ktm:Khu thương mại
-KTNN:Kinh tế nhà nước
-ktnn:Kinh tế nhà nước
+KTNN:Kinh tế Nhà nước
+ktnn:Kinh tế Nhà nước
 KTQD:kinh tế quốc dân
 ktqd:kinh tế quốc dân
 KTQDHN:Kinh tế Quốc dân Hà Nội
 ktqdhn:Kinh tế Quốc dân Hà Nội
-KTS:Kiến trúc sư
-kts:Kiến trúc sư
+KTS:kiến trúc sư
+kts:kiến trúc sư
 KTTV:khí tượng thủy văn
 kttv:khí tượng thủy văn
-KTV:Kỹ thuật viên
-ktv:Kỹ thuật viên
-KTX:Ký túc xá
-ktx:Ký túc xá
-KV:Khu vực
-kv:Khu vực
-KV1:Khu vực
-kv1:Khu vực
-KV2:Khu vực 2
-kv2:Khu vực 2
-KV3:Khu vực 3
-kv3:Khu vực 3
-LB:Liên bang
-lb:Liên bang
-LCT:Luật công ty,Luật Cạnh tranh
-lct:Luật công ty,Luật Cạnh tranh
-LĐ:Lao động
-lđ:Lao động
+KTV:kỹ thuật viên
+ktv:kỹ thuật viên
+KTX:ký túc xá
+ktx:ký túc xá
+KV:khu vực
+kv:khu vực
+KV1:khu vực 1
+kv1:khu vực 1
+KV2:khu vực 2
+kv2:khu vực 2
+KV3:khu vực 3
+kv3:khu vực 3
+LB:liên bang
+lb:liên bang
+LCT:luật công ty,luật cạnh tranh
+lct:luật công ty,luật cạnh tranh
+LĐ:lao động
+lđ:lao động
 LĐXS:lao động sản xuất
 lđxs:lao động sản xuất
 LĐBĐ:Liên đoàn bóng đá
@@ -903,14 +895,14 @@ LĐTB:Lao động Thương binh
 lđtb:Lao động Thương binh
 LĐTBXH:Lao động Thương binh Xã hội
 lđtbxh:Lao động Thương binh Xã hội
-LH:Liên hiệp,Liên hoan
-lh:Liên hiệp,Liên hoan
+LH:Liên hiệp,liên hoan
+lh:Liên hiệp,liên hoan
 LHP:Liên hoan phim
 lhp:Liên hoan phim
 LHPN:Liên hiệp Phụ nữ
 lhpn:Liên hiệp Phụ nữ
-LHQ:Liên hợp quốc,Liên Hợp Quốc
-lhq:Liên hợp quốc,Liên Hợp Quốc
+LHQ:Liên Hợp Quốc
+lhq:Liên Hợp Quốc
 LHS:lưu học sinh
 lhs:lưu học sinh
 LHTN:Liên hiệp Thanh niên
@@ -919,60 +911,60 @@ LHTNVN:Hội Liên hiệp Thanh niên Việt Nam
 lhtnvn:Hội Liên hiệp Thanh niên Việt Nam
 LL:lực lượng
 ll:lực lượng
-LLLĐ:Lực lượng lao động
-lllđ:Lực lượng lao động
-LS:Luật sư
-ls:Luật sư
+LLLĐ:lực lượng lao động
+lllđ:lực lượng lao động
+LS:luật sư
+ls:luật sư
 LSQ:Lãnh sự quán
 lsq:Lãnh sự quán
 LTQĐTD:lây truyền qua đường tình dục
 ltqđtd:lây truyền qua đường tình dục
 MBH:mũ bảo hiểm
 mbh:mũ bảo hiểm
-MHX:Mùa hè xanh
-mhx:Mùa hè xanh
-MS:Mã số
-ms:Mã số
-MT:Môi trường,Mặt trận
-mt:Môi trường,Mặt trận
+MHX:Mùa Hè Xanh
+mhx:Mùa Hè Xanh
+MS:mã số
+ms:mã số
+MT:môi trường,mặt trận
+mt:môi trường,mặt trận
 MTĐT:Máy tính điện tử
 mtđt:Máy tính điện tử
 MTDTGPMNVN:Mặt trận dân tộc giải phóng miền nam Việt Nam
 mtdtgpmnvn:Mặt trận dân tộc giải phóng miền nam Việt Nam
-MTTQ:Mặt trận tổ quốc
-mttq:Mặt trận tổ quốc
-MTTQVN:Mặt trận tổ quốc Việt Nam
-mttqvn:Mặt trận tổ quốc Việt Nam
-MTXT:Máy tính xách tay
-mtxt:Máy tính xách tay
-NC:Nghiên cứu
-nc:Nghiên cứu
+MTTQ:Mặt trận Tổ quốc
+mttq:Mặt trận Tổ quốc
+MTTQVN:Mặt trận Tổ quốc Việt Nam
+mttqvn:Mặt trận Tổ quốc Việt Nam
+MTXT:máy tính xách tay
+mtxt:máy tính xách tay
+NC:nghiên cứu
+nc:nghiên cứu
 NCC:nhà cung cấp
 ncc:nhà cung cấp
 NCKH:nghiên cứu khoa học
 nckh:nghiên cứu khoa học
 NCL:ngoài công lập
 ncl:ngoài công lập
-NCS:Nghiên cứu sinh
-ncs:Nghiên cứu sinh
-NCTO:Hội đồng Các Tổ chức Dệt may Quốc gia Mỹ
-ncto:Hội đồng Các Tổ chức Dệt may Quốc gia Mỹ
-NCTT:Nghiên cứu thị trường
-nctt:Nghiên cứu thị trường
-ND:Nhân dân
-nd:Nhân dân
+NCS:nghiên cứu sinh
+ncs:nghiên cứu sinh
+NCTO:hội đồng các tổ chức dệt may quốc gia Mỹ
+ncto:hội đồng các tổ chức dệt may quốc gia Mỹ
+NCTT:nghiên cứu thị trường
+nctt:nghiên cứu thị trường
+ND:nhân dân
+nd:nhân dân
 NĐ:Nghị định
 nđ:Nghị định
 NDC:Trung tâm dữ liệu Viễn thám Quốc gia
 ndc:Trung tâm dữ liệu Viễn thám Quốc gia
 NDT:Nhân dân tệ
 ndt:Nhân dân tệ
-NĐT:Nhà đầu tư
-nđt:Nhà đầu tư
+NĐT:nhà đầu tư
+nđt:nhà đầu tư
 NĐVN:người đẹp Việt Nam
 nđvn:người đẹp Việt Nam
-NH:Ngân hàng
-nh:Ngân hàng
+NH:ngân hàng
+nh:ngân hàng
 NHCSXH:Ngân hàng Chính sách xã hội
 nhcsxh:Ngân hàng Chính sách xã hội
 NHCTCN:Ngân hàng Công thương Chi nhánh
@@ -991,8 +983,8 @@ NHĐTPT:Ngân hàng Đầu tư phát triển
 nhđtpt:Ngân hàng Đầu tư phát triển
 NHK:Đài truyền hình quốc gia Nhật Bản
 nhk:Đài truyền hình quốc gia Nhật Bản
-NHNN:Ngân hàng nhà nước
-nhnn:Ngân hàng nhà nước
+NHNN:Ngân hàng Nhà nước
+nhnn:Ngân hàng Nhà nước
 NHNNo:Ngân hàng Nông nghiệp và Phát triển Nông thôn
 nhnno:Ngân hàng Nông nghiệp và Phát triển Nông thôn
 NHNNPTNT:Ngân hàng Nông nghiệp và Phát triển Nông thôn
@@ -1003,8 +995,8 @@ NHNoVN:Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam
 nhnovn:Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam
 NHNT:Ngân hàng Ngoại thương
 nhnt:Ngân hàng Ngoại thương
-NHRC:Ủy ban Nhân quyền quốc gia
-nhrc:Ủy ban Nhân quyền quốc gia
+NHRC:Ủy ban Nhân quyền Quốc gia
+nhrc:Ủy ban Nhân quyền Quốc gia
 NHTM:Ngân hàng Thương mại
 nhtm:Ngân hàng Thương mại
 NHTMCP:ngân hàng thương mại cổ phần
@@ -1021,18 +1013,18 @@ NHTƯ:Ngân hàng Trung ương
 nhtư:Ngân hàng Trung ương
 NHTW:Ngân hàng Trung ương
 nhtw:Ngân hàng Trung ương
-NK:Nhập khẩu
-nk:Nhập khẩu
+NK:nhập khẩu
+nk:nhập khẩu
 NKBV:nhiễm khuẩn bệnh viện
 nkbv:nhiễm khuẩn bệnh viện
 NKKN:Nam Kỳ Khởi Nghĩa
 nkkn:Nam Kỳ Khởi Nghĩa
-NKNV:Năng khiếu Nghiệp vụ
-nknv:Năng khiếu Nghiệp vụ
+NKNV:năng khiếu nghiệp vụ
+nknv:năng khiếu nghiệp vụ
 NKT:người khuyết tật
 nkt:người khuyết tật
-NL:Năng lượng
-nl:Năng lượng
+NL:năng lượng
+nl:năng lượng
 NLĐ:Người lao động
 nlđ:Người lao động
 NLMT:năng lượng mặt trời
@@ -1045,44 +1037,44 @@ NMĐ:nhà máy điện
 nmđ:nhà máy điện
 NN:Nhà nước
 nn:Nhà nước
-NNCĐDC:Nạn nhân chất độc da cam
-nncđdc:Nạn nhân chất độc da cam
-NNPTNT:Nông nghiệp và Phát triển nông thôn
-nnptnt:Nông nghiệp và Phát triển nông thôn
+NNCĐDC:nạn nhân chất độc da cam
+nncđdc:nạn nhân chất độc da cam
+NNPTNT:Nông nghiệp và Phát triển Nông thôn
+nnptnt:Nông nghiệp và Phát triển Nông thôn
 NPP:Nhà phân phối
 npp:Nhà phân phối
 NQ:Nghị quyết
 nq:Nghị quyết
 NQD:ngoài quốc doanh
 nqd:ngoài quốc doanh
-NS:Nghệ sỹ
-ns:Nghệ sỹ
-NSND:Nghệ sỹ nhân dân
-nsnd:Nghệ sỹ nhân dân
+NS:nghệ sỹ
+ns:nghệ sỹ
+NSND:nghệ sỹ nhân dân
+nsnd:nghệ sỹ nhân dân
 NSƯT:Nghệ sỹ ưu tú
 nsưt:Nghệ sỹ ưu tú
 NSNN:ngân sách nhà nước
 nsnn:ngân sách nhà nước
 NST:nhiễm sắc thể
 nst:nhiễm sắc thể
-NTBD:Nghệ thuật biểu diễn
-ntbd:Nghệ thuật biểu diễn
+NTBD:nghệ thuật biểu diễn
+ntbd:nghệ thuật biểu diễn
 NTD:người tiêu dùng,Nhà tuyển dụng
 ntd:người tiêu dùng,Nhà tuyển dụng
 NTK:nhà thiết kế
 ntk:nhà thiết kế
-NV:Nhân viên,Nguyện vọng
-nv:Nhân viên,Nguyện vọng
-NV1:Nguyện vọng
-nv1:Nguyện vọng
-NV2:Nguyện vọng 2
-nv2:Nguyện vọng 2
-NV3:Nguyện vọng 3
-nv3:Nguyện vọng 3
-NVH:Nhà văn hóa
-nvh:Nhà văn hóa
-NVHTN:Nhà Văn hóa Thanh niên
-nvhtn:Nhà Văn hóa Thanh niên
+NV:nhân viên,nguyện vọng
+nv:nhân viên,nguyện vọng
+NV1:nguyện vọng 1
+nv1:nguyện vọng 1
+NV2:nguyện vọng 2
+nv2:nguyện vọng 2
+NV3:nguyện vọng 3
+nv3:nguyện vọng 3
+NVH:nhà văn hóa
+nvh:nhà văn hóa
+NVHTN:nhà văn hóa Thanh niên
+nvhtn:nhà văn hóa Thanh niên
 NXB:Nhà xuất bản
 nxb:Nhà xuất bản
 NXBGD:Nhà xuất bản Giáo dục
@@ -1109,10 +1101,10 @@ PCBLTKCN:phòng chống bão lụt và tìm kiếm cứu nạn
 pcbltkcn:phòng chống bão lụt và tìm kiếm cứu nạn
 PCBTH:phổ cập bậc trung học
 pcbth:phổ cập bậc trung học
-PCC:Phòng công chứng
-pcc:Phòng công chứng
-PCCC:Phòng cháy chửa cháy
-pccc:Phòng cháy chửa cháy
+PCC:phòng công chứng
+pcc:phòng công chứng
+PCCC:phòng cháy chữa cháy
+pccc:phòng cháy chữa cháy
 PCGD:phổ cập giáo dục
 pcgd:phổ cập giáo dục
 PCGDBTH:phổ cập giáo dục bậc trung học
@@ -1135,12 +1127,12 @@ PCTH:phổ cập tiểu học
 pcth:phổ cập tiểu học
 PCTHCS:phổ cập trung học cơ sở
 pcthcs:phổ cập trung học cơ sở
-PCTN:Phòng chống tệ nạn
-pctn:Phòng chống tệ nạn
-PCTNXH:Phòng chống tệ nạn xã hội
-pctnxh:Phòng chống tệ nạn xã hội
-PCTPCNC:Phòng chống tội phạm công nghệ cao
-pctpcnc:Phòng chống tội phạm công nghệ cao
+PCTN:phòng chống tệ nạn
+pctn:phòng chống tệ nạn
+PCTNXH:phòng chống tệ nạn xã hội
+pctnxh:phòng chống tệ nạn xã hội
+PCTPCNC:phòng chống tội phạm công nghệ cao
+pctpcnc:phòng chống tội phạm công nghệ cao
 PGĐ:Phó giám đốc
 pgđ:Phó giám đốc
 PGHH:Phật giáo Hòa Hảo
@@ -1149,39 +1141,39 @@ PGS:Phó Giáo sư
 pgs:Phó Giáo sư
 PHHS:phụ huynh học sinh
 phhs:phụ huynh học sinh
-PL:Pháp luật
-pl:Pháp luật
+PL:pháp luật
+pl:pháp luật
 PM:phần mềm
 pm:phần mềm
-PMU:Ban quản lý dự án
-pmu:Ban quản lý dự án
-PN:Phụ nữ
-pn:Phụ nữ
+PMU:ban quản lý dự án
+pmu:ban quản lý dự án
+PN:phụ nữ
+pn:phụ nữ
 PP:phương pháp
 pp:phương pháp
-PS:Phóng sự
-ps:Phóng sự
-PT:Phát thanh
-PTCS:Phổ thông cơ sở
-ptcs:Phổ thông cơ sở
+PS:phóng sự
+ps:phóng sự
+PT:phát thanh
+PTCS:phổ thông cơ sở
+ptcs:phổ thông cơ sở
 PTN:phòng thí nghiệm
 ptn:phòng thí nghiệm
 PTNT:Phát triển Nông thôn
 ptnt:Phát triển Nông thôn
 PTSC:Công ty Dịch vụ Kỹ thuật dầu khí
 ptsc:Công ty Dịch vụ Kỹ thuật dầu khí
-PTT:Phó thủ tướng
-ptt:Phó thủ tướng
-PTTH:Phổ thông trung học
-ptth:Phổ thông trung học
-PTTM:Phẫu thuật thẩm mỹ
-pttm:Phẫu thuật thẩm mỹ
-PTTT:Phát triển trẻ thơ
-pttt:Phát triển trẻ thơ
-PTV:Phát thanh viên
-ptv:Phát thanh viên
-PV:Phỏng vấn,Phóng viên
-pv:Phỏng vấn,Phóng viên
+PTT:Phó Thủ tướng
+ptt:Phó Thủ tướng
+PTTH:Phổ thông Trung học
+ptth:Phổ thông Trung học
+PTTM:phẫu thuật thẩm mỹ
+pttm:phẫu thuật thẩm mỹ
+PTTT:phát triển trẻ thơ
+pttt:phát triển trẻ thơ
+PTV:phát thanh viên
+ptv:phát thanh viên
+PV:phỏng vấn,phóng viên
+pv:phỏng vấn,phóng viên
 PY:Phú Yên
 Q:quận
 QBLTD:Quỹ bảo lãnh tín dụng
@@ -1198,16 +1190,16 @@ QCKDTXD:Quy chế kinh doanh thép xây dựng
 qckdtxd:Quy chế kinh doanh thép xây dựng
 QCKT:quy chuẩn kĩ thuật
 qckt:quy chuẩn kĩ thuật
-QĐ:quy định,Quyết định
-qđ:quy định,Quyết định
-QĐND:Quân đội nhân dân
-qđnd:Quân đội nhân dân
+QĐ:quy định,quyết định
+qđ:quy định,quyết định
+QĐND:Quân đội Nhân dân
+qđnd:Quân đội Nhân dân
 QG:Quốc gia
 qg:Quốc gia
 QH:Quốc hội
 qh:Quốc hội
-QHTD:Quan hệ tình dục
-qhtd:Quan hệ tình dục
+QHTD:quan hệ tình dục
+qhtd:quan hệ tình dục
 QK:Quân khu
 qk:Quân khu
 QL:quốc lộ,quản lý
@@ -1234,8 +1226,8 @@ RLCD:rối loạn cương dương
 rlcd:rối loạn cương dương
 SARS:Hội chứng hô hấp cấp tính nặng
 sars:Hội chứng hô hấp cấp tính nặng
-SBD:Số báo danh
-sbd:Số báo danh
+SBD:số báo danh
+sbd:số báo danh
 SBS:Công ty Chứng khoán Ngân hàng Sài Gòn Thương Tín
 sbs:Công ty Chứng khoán Ngân hàng Sài Gòn Thương Tín
 SD:sử dụng
@@ -1256,26 +1248,26 @@ SĐT:số điện thoại
 sđt:số điện thoại
 SG:Sài Gòn
 sg:Sài Gòn
-SGD:Sở giáo dục
-sgd:Sở giáo dục
+SGD:Sở Giáo dục
+sgd:Sở Giáo dục
 SGGP:Sài gòn giải phóng
 sggp:Sài gòn giải phóng
-SGK:Sách giáo khoa
-sgk:Sách giáo khoa
+SGK:sách giáo khoa
+sgk:sách giáo khoa
 SGTT:Sài Gòn Tiếp Thị
 sgtt:Sài Gòn Tiếp Thị
 SGTVT:Sở Giao thông Vận tải
 sgtvt:Sở Giao thông Vận tải
-SH:Sinh hoạt
-sh:Sinh hoạt
-SHNN:Sở hữu nhà nước
-shnn:Sở hữu nhà nước
+SH:sinh hoạt
+sh:sinh hoạt
+SHNN:sở hữu nhà nước
+shnn:sở hữu nhà nước
 SHTD:sinh hoạt tình dục
 shtd:sinh hoạt tình dục
 SHTT:sở hữu trí tuệ
 shtt:sở hữu trí tuệ
-SK:Sân khấu
-sk:Sân khấu
+SK:sân khấu
+sk:sân khấu
 SKHCN:Sở Khoa học Công nghệ
 skhcn:Sở Khoa học Công nghệ
 SKHCNMT:Sở Khoa học Công nghệ và Môi trường
@@ -1292,38 +1284,38 @@ SN:sinh năm,sinh ngày
 sn:sinh năm,sinh ngày
 SNN:sở Nông nghiệp
 snn:sở Nông nghiệp
-SP:Sư phạm,Sản phẩm
-sp:Sư phạm,Sản phẩm
-SPKT:Sư phạm kỹ thuật
-spkt:Sư phạm kỹ thuật
-SS:Sĩ số
-ss:Sĩ số
+SP:Sư phạm,sản phẩm
+sp:Sư phạm,sản phẩm
+SPKT:Sư phạm Kỹ thuật
+spkt:Sư phạm Kỹ thuật
+SS:sĩ số
+ss:sĩ số
 STT:số thứ tự
 stt:số thứ tự
-SV:Sinh viên
-sv:Sinh viên
-SVĐ:Sân vận động
-svđ:Sân vận động
+SV:sinh viên
+sv:sinh viên
+SVĐ:sân vận động
+svđ:sân vận động
 SVĐV:Sao Vàng Đất Việt
 svđv:Sao Vàng Đất Việt
-SVHS:Sinh viên học sinh
-svhs:Sinh viên học sinh
-SVNCKH:Sinh viên nghiên cứu khoa học
-svnckh:Sinh viên nghiên cứu khoa học
-SVTN:Sinh viên tình nguyện
-svtn:Sinh viên tình nguyện
-SVVN:Sinh viên Việt Nam
-svvn:Sinh viên Việt Nam
-SX:Sản xuất
-sx:Sản xuất
+SVHS:sinh viên học sinh
+svhs:sinh viên học sinh
+SVNCKH:sinh viên nghiên cứu khoa học
+svnckh:sinh viên nghiên cứu khoa học
+SVTN:sinh viên tình nguyện
+svtn:sinh viên tình nguyện
+SVVN:sinh viên Việt Nam
+svvn:sinh viên Việt Nam
+SX:sản xuất
+sx:sản xuất
 SXH:sốt xuất huyết
 sxh:sốt xuất huyết
 SYLL:Sơ yếu lý lịch
 syll:Sơ yếu lý lịch
 TACN:thức ăn chăn nuôi
 tacn:thức ăn chăn nuôi
-TAND:Tòa án nhân dân
-tand:Tòa án nhân dân
+TAND:Tòa án Nhân dân
+tand:Tòa án Nhân dân
 TANDTC:Tòa án Nhân dân Tối cao
 tandtc:Tòa án Nhân dân Tối cao
 TBD:Thái Bình Dương
@@ -1332,18 +1324,18 @@ TBKTSG:Thời báo kinh tế Sài Gòn
 tbktsg:Thời báo kinh tế Sài Gòn
 TBKTVN:Thời báo Kinh tế Việt Nam
 tbktvn:Thời báo Kinh tế Việt Nam
-TBMMN:Tai biến mạch máu não
-tbmmn:Tai biến mạch máu não
-TBT:Tổng biên tập
-tbt:Tổng biên tập
+TBMMN:tai biến mạch máu não
+tbmmn:tai biến mạch máu não
+TBT:tổng biên tập
+tbt:tổng biên tập
 TBTT:thuê bao trả trước
 tbtt:thuê bao trả trước
 TBXH:Thương binh Xã hội
 tbxh:Thương binh Xã hội
-TC:Tổng cộng,Thông cáo,Tài chính,Tiêu chuẩn
-tc:Tổng cộng,Thông cáo,Tài chính,Tiêu chuẩn
-TCBVNTD:Tiêu chuẩn và bảo vệ người tiêu dùng
-tcbvntd:Tiêu chuẩn và bảo vệ người tiêu dùng
+TC:tổng cộng,Thông cáo,tài chính,tiêu chuẩn
+tc:tổng cộng,Thông cáo,tài chính,tiêu chuẩn
+TCBVNTD:tiêu chuẩn và bảo vệ người tiêu dùng
+tcbvntd:tiêu chuẩn và bảo vệ người tiêu dùng
 TCCN:trung cấp chuyên nghiệp
 tccn:trung cấp chuyên nghiệp
 TCCS:tổ chức cơ sở,Tạp chí Cộng sản
@@ -1352,8 +1344,8 @@ TCDL:Tổng cục Du lịch
 tcdl:Tổng cục Du lịch
 TCHL:tuyệt chủng hàng loạt
 tchl:tuyệt chủng hàng loạt
-TCHQ:Tổng cục hải quan
-tchq:Tổng cục hải quan
+TCHQ:Tổng cục Hải quan
+tchq:Tổng cục Hải quan
 TCKH:trái cây không hạt,Tạp chí Khoa học,Tài chính - Kế hoạch
 tckh:trái cây không hạt,Tạp chí Khoa học,Tài chính - Kế hoạch
 TCKT:Tài chính - Kế toán
@@ -1364,12 +1356,12 @@ TCMR:tiêm chủng mở rộng
 tcmr:tiêm chủng mở rộng
 TCN:trước công nguyên,trung cấp nghề
 tcn:trước công nguyên,trung cấp nghề
-TCNN:Tài chính nhà nước
-tcnn:Tài chính nhà nước
+TCNN:Tài chính Nhà nước
+tcnn:Tài chính Nhà nước
 TCS:Trịnh Công Sơn
 tcs:Trịnh Công Sơn
-TCT:Tổng công ty
-tct:Tổng công ty
+TCT:tổng công ty
+tct:tổng công ty
 TCTD:tổ chức tín dụng
 tctd:tổ chức tín dụng
 TCTT:trò chơi trực tuyến
@@ -1398,18 +1390,18 @@ TGĐ:Tổng giám đốc
 tgđ:Tổng giám đốc
 TGPL:trợ giúp pháp lý
 tgpl:trợ giúp pháp lý
-TH:Truyền hình,Tiểu học,trường hợp
-th:Truyền hình,Tiểu học,trường hợp
-THCB:Trung học Chuyên ban
-thcb:Trung học Chuyên ban
-THCN:Trung học chuyên nghiệp
-thcn:Trung học chuyên nghiệp
-THCS:Trung học cơ sở
-thcs:Trung học cơ sở
-THCSND:Thực hiện chính sách nhà đất
-thcsnd:Thực hiện chính sách nhà đất
-THCSNĐ:Thực hiện chính sách nhà đất
-thcsnđ:Thực hiện chính sách nhà đất
+TH:truyền hình,tiểu học,trường hợp
+th:truyền hình,tiểu học,trường hợp
+THCB:trung học chuyên ban
+thcb:trung học chuyên ban
+THCN:trung học chuyên nghiệp
+thcn:trung học chuyên nghiệp
+THCS:trung học cơ sở
+thcs:trung học cơ sở
+THCSND:thực hiện chính sách nhà đất
+thcsnd:thực hiện chính sách nhà đất
+THCSNĐ:thực hiện chính sách nhà đất
+thcsnđ:thực hiện chính sách nhà đất
 THDL:trung học dân lập
 thdl:trung học dân lập
 THGT:tín hiệu giao thông
@@ -1418,12 +1410,12 @@ THKTS:truyền hình kỹ thuật số
 thkts:truyền hình kỹ thuật số
 THKTSMĐ:truyền hình kỹ thuật số mặt đất
 thktsmđ:truyền hình kỹ thuật số mặt đất
-THPT:Trung học phổ thông
-thpt:Trung học phổ thông
+THPT:trung học phổ thông
+thpt:trung học phổ thông
 THQG:thương hiệu quốc gia
 thqg:thương hiệu quốc gia
-THS:Tín hiệu số
-ths:Thạc sĩ,Tín hiệu số
+THS:tín hiệu số
+ths:Thạc sĩ,tín hiệu số
 THTT:truyền hình trực tiếp
 thtt:truyền hình trực tiếp
 THVN:Truyền hình Việt Nam
@@ -1444,24 +1436,24 @@ TMN:Thép Miền Nam
 tmn:Thép Miền Nam
 TMV:Công ty ôtô Toyota Việt Nam
 tmv:Công ty ôtô Toyota Việt Nam
-TN:Thanh niên
-tn:Thanh niên
+TN:thanh niên
+tn:thanh niên
 TNCN:thu nhập cá nhân
 tncn:thu nhập cá nhân
-TNCS:Thanh niên cộng sản
-tncs:Thanh niên cộng sản
+TNCS:Thanh niên Cộng sản
+tncs:Thanh niên Cộng sản
 TNĐH:tốt nghiệp đại học
 tnđh:tốt nghiệp đại học
-TNDN:Thu nhập doanh nghiệp
-tndn:Thu nhập doanh nghiệp
+TNDN:thu nhập doanh nghiệp
+tndn:thu nhập doanh nghiệp
 TNĐT:Thoát nước Đô thị
 tnđt:Thoát nước Đô thị
-TNGT:Tai nạn giao thông
-tngt:Tai nạn giao thông
-TNHC:Trinh nữ hoàng cung
-tnhc:Trinh nữ hoàng cung
-TNHH:Trách nhiệm hữu hạn
-tnhh:Trách nhiệm hữu hạn
+TNGT:tai nạn giao thông
+tngt:tai nạn giao thông
+TNHC:trinh nữ hoàng cung
+tnhc:trinh nữ hoàng cung
+TNHH:Trách nhiệm Hữu hạn
+tnhh:Trách nhiệm Hữu hạn
 TNK:thuế nhập khẩu
 tnk:thuế nhập khẩu
 TNKQ:trắc nghiệm khách quan
@@ -1488,8 +1480,8 @@ TNTN:thanh niên tình nguyện,tài nguyên thiên nhiên
 tntn:thanh niên tình nguyện,tài nguyên thiên nhiên
 TNTP:Thiếu niên Tiền phong
 tntp:Thiếu niên Tiền phong
-TNV:Tình nguyện viên
-tnv:Tình nguyện viên
+TNV:tình nguyện viên
+tnv:tình nguyện viên
 TNVN:Thanh niên Việt Nam
 tnvn:Thanh niên Việt Nam
 TNXH:tệ nạn xã hội
@@ -1503,26 +1495,26 @@ Tp:thành phố
 tp:thành phố
 TPCĐ:trái phiếu chuyển đổi
 tpcđ:trái phiếu chuyển đổi
-TPCN:Thực phẩm chức năng
-tpcn:Thực phẩm chức năng
+TPCN:thực phẩm chức năng
+tpcn:thực phẩm chức năng
 TPCT:Thành phố Cần Thơ
 tpct:Thành phố Cần Thơ
 TPHCM:Thành phố Hồ Chí Minh
 tphcm:Thành phố Hồ Chí Minh
 TP.HCM:Thành phố Hồ Chí Minh
-TPO:Tiên phong Online
-tpo:Tiên phong Online
+TPO:Tiền phong Online
+tpo:Tiền phong Online
 TQ:Trung Quốc
 tq:Trung Quốc
-TSDĐ:tiền sử dụng đất
-tsdđ:tiền sử dụng đất
+TSDĐ:tiền sử dụng đất,tái sử dụng đất
+tsdđ:tiền sử dụng đất,tái sử dụng đất
 TSKH:Tiến sỹ Khoa học
 tskh:Tiến sỹ Khoa học
 TS:Tiến sĩ
 ts:Tiến sĩ
 TS-BS:Tiến sĩ bác sĩ
-TT:Thông tin,Truyền thông,Thị trường,Trung tâm,Thể thao,Thị trấn
-tt:Thông tin,Truyền thông,Thị trường,Trung tâm,Thể thao,Thị trấn
+TT:thông tin,truyền thông,thị trường,trung tâm,thể thao,thị trấn
+tt:thông tin,truyền thông,thị trường,trung tâm,thể thao,thị trấn
 TTDN:trung tâm dạy nghề
 ttdn:trung tâm dạy nghề
 TTBĐS:thị trường bất động sản
@@ -1533,12 +1525,12 @@ TTBDVHNG:Trung tâm bồi dưỡng văn hóa ngoài giờ
 ttbdvhng:Trung tâm bồi dưỡng văn hóa ngoài giờ
 TTBVQTG:Trung tâm bảo vệ quyền tác giả
 ttbvqtg:Trung tâm bảo vệ quyền tác giả
-TTBYT:Trang thiết bị y tế
-ttbyt:Trang thiết bị y tế
+TTBYT:trang thiết bị y tế
+ttbyt:trang thiết bị y tế
 TTCK:Trung tâm chứng khoán,Thị trường Chứng khoán
 ttck:Trung tâm chứng khoán,Thị trường Chứng khoán
-TTCN:Trung tâm cai nghiện,Tiểu thủ công nghiệp
-ttcn:Trung tâm cai nghiện,Tiểu thủ công nghiệp
+TTCN:Trung tâm cai nghiện,tiểu thủ công nghiệp
+ttcn:Trung tâm cai nghiện,tiểu thủ công nghiệp
 TTCP:Thanh tra Chính phủ,Thủ tướng Chính phủ
 ttcp:Thanh tra Chính phủ,Thủ tướng Chính phủ
 TTCT:Thể Thao Cuối Tuần
@@ -1565,8 +1557,8 @@ TTHTCĐ:Trung tâm học tập cộng đồng
 tthtcđ:Trung tâm học tập cộng đồng
 TTHTSV:trung tâm hỗ trợ sinh viên
 tthtsv:trung tâm hỗ trợ sinh viên
-TTK:tổng thư ký
-ttk:tổng thư ký
+TTK:Tổng thư ký
+ttk:Tổng thư ký
 TTLT:Thông tư liên tịch
 ttlt:Thông tư liên tịch
 TTN:thanh thiếu niên
@@ -1579,12 +1571,12 @@ TTQLKT:trật tự quản lý kinh tế
 ttqlkt:trật tự quản lý kinh tế
 TTATGT:trật tự an toàn giao thông
 ttatgt:trật tự an toàn giao thông
-TTTT:Thông tin truyền thông
-tttt:Thông tin truyền thông
+TTTT:Thông tin Truyền thông
+tttt:Thông tin Truyền thông
 TTTH:Trung tâm Tin học
 ttth:Trung tâm Tin học
-TTTM:trung tâm thương mại
-tttm:trung tâm thương mại
+TTTM:Trung tâm Thương mại
+tttm:Trung tâm Thương mại
 TTTON:thụ tinh trong ống nghiệm
 ttton:thụ tinh trong ống nghiệm
 TTTTN:trí thức trẻ tình nguyện
@@ -1601,12 +1593,12 @@ TTXVN:Thông tấn xã Việt Nam
 ttxvn:Thông tấn xã Việt Nam
 TTX:Thông tấn xã
 ttx:Thông tấn xã
-TTYT:Trung tâm y tế
-ttyt:Trung tâm y tế
+TTYT:Trung tâm Y tế
+ttyt:Trung tâm T tế
 TTYTDP:Trung tâm Y tế dự phòng
 ttytdp:Trung tâm Y tế dự phòng
-TV:Ti vi,Thư viện
-tv:Ti vi,Thư viện
+TV:ti vi,thư viện
+tv:ti vi,thư viện
 TVHK:tiếp viên hàng không
 tvhk:tiếp viên hàng không
 TVN:Than Việt Nam
@@ -1623,14 +1615,14 @@ TX:Thị xã
 tx:Thị xã
 UB:Ủy ban
 ub:Ủy ban
-UBĐT:Ủy ban điều tra
-ubđt:Ủy ban điều tra
+UBĐT:Ủy ban Điều tra
+ubđt:Ủy ban Điều tra
 UBCKNN:Ủy ban Chứng khoán Nhà nước
 ubcknn:Ủy ban Chứng khoán Nhà nước
-UBKT:Uỷ ban Kiểm tra,Ủy ban kinh tế
-ubkt:Uỷ ban Kiểm tra,Ủy ban kinh tế
-UBMTTQ:Ủy ban Mạt trận Tổ quốc
-ubmttq:Ủy ban Mạt trận Tổ quốc
+UBKT:Uỷ ban Kiểm tra,Ủy ban Kinh tế
+ubkt:Uỷ ban Kiểm tra,Ủy ban Kinh tế
+UBMTTQ:Ủy ban Mặt trận Tổ quốc
+ubmttq:Ủy ban Mặt trận Tổ quốc
 UBND:Ủy ban Nhân dân
 ubnd:Ủy ban Nhân dân
 UBMTTQVN:Ủy ban Mặt trận Tổ quốc Việt Nam
@@ -1643,30 +1635,30 @@ UBTW:Ủy ban Trung Ương
 ubtw:Ủy ban Trung Ương
 UBTDTT:Ủy ban Thể dục Thể thao
 ubtdtt:Ủy ban Thể dục Thể thao
-UBTVQH:Ủy ban thường vụ Quốc hội
-ubtvqh:Ủy ban thường vụ Quốc hội
+UBTVQH:Ủy ban Thường vụ Quốc hội
+ubtvqh:Ủy ban Thường vụ Quốc hội
 ƯCV:ứng cử viên
 ưcv:ứng cử viên
 UV:Ủy viên
 uv:Ủy viên
-UVBCH:Ủy viên ban chấp hành
-uvbch:Ủy viên ban chấp hành
-UVBCT:Ủy viên Bộ chính trị
-uvbct:Ủy viên Bộ chính trị
-VCB:Ngân hàng ngoại thương Việt Nam
-vcb:Ngân hàng ngoại thương Việt Nam
-VCK:Vòng chung kết
-vck:Vòng chung kết
-VD:ví dụ
-vd:ví dụ
-VĐ:Vô địch
-vđ:Vô địch
-VDC:Công ty Điện toán và Truyền số liệu
-vdc:Công ty Điện toán và Truyền số liệu
-VĐQG:Vô địch Quốc gia
-vđqg:Vô địch Quốc gia
-VĐV:Vận động viên
-vđv:Vận động viên
+UVBCH:Ủy viên Ban chấp hành
+uvbch:Ủy viên Ban chấp hành
+UVBCT:Ủy viên Bộ Chính trị
+uvbct:Ủy viên Bộ Chính trị
+VCB:Ngân hàng Ngoại thương Việt Nam
+vcb:Ngân hàng Ngoại thương Việt Nam
+VCK:vòng chung kết
+vck:vòng chung kết
+VD:ví dụ,vận dụng,vận động
+vd:ví dụ,vận dụng,vận động
+VĐ:vô địch
+vđ:vô địch
+VDC:vận dụng cao
+vdc:vận dụng cao
+VĐQG:vô địch Quốc gia
+vđqg:vô địch Quốc gia
+VĐV:vận động viên
+vđv:vận động viên
 VĐVQG:Vận động viên Quốc gia
 vđvqg:Vận động viên Quốc gia
 VFF:Liên đoàn bóng đá Việt Nam
@@ -1681,8 +1673,8 @@ VHGDTTNNĐ:Văn hóa Giáo dục Thanh thiếu niên và Nhi đồng
 vhgdttnnđ:Văn hóa Giáo dục Thanh thiếu niên và Nhi đồng
 VHNT:Văn học Nghệ thuật
 vhnt:Văn học Nghệ thuật
-VHTT:Văn hóa thể thao,Văn hóa Thông tin
-vhtt:Văn hóa thể thao,Văn hóa Thông tin
+VHTT:Văn hóa thể thao,Văn hóa thông tin
+vhtt:Văn hóa thể thao,Văn hóa thông tin
 VKS:Viện Kiểm sát
 vks:Viện Kiểm sát
 VKSND:Viện Kiểm sát Nhân dân
@@ -1703,18 +1695,18 @@ VNCC:Tổng Công ty Xi măng Việt Nam
 vncc:Tổng Công ty Xi măng Việt Nam
 VNM:Vinamilk
 vnm:Vinamilk
-VP:Văn phòng
-vp:Văn phòng
-VPCP:Văn phòng chính phủ
-vpcp:Văn phòng chính phủ
-VPĐD:Văn phòng đại diện
-vpđd:Văn phòng đại diện
+VP:văn phòng
+vp:văn phòng
+VPCP:Văn phòng Chính phủ
+vpcp:Văn phòng Chính phủ
+VPĐD:văn phòng đại diện
+vpđd:văn phòng đại diện
 VQG:Vườn Quốc gia
 vqg:Vườn Quốc gia
-VS:Vệ sinh
-vs:Vệ sinh
-VT:Vũ trụ,Viễn thông,Vi tính
-vt:Vũ trụ,Viễn thông,Vi tính
+VS:vệ sinh
+vs:vệ sinh
+VT:vũ trụ,viễn thông,vi tính
+vt:vũ trụ,viễn thông,vi tính
 VTV:Đài truyền hình Việt Nam
 vtv:Đài truyền hình Việt Nam
 VYSA:Hội Thanh niên Sinh viên Việt Nam tại Nhật Bản
@@ -1727,51 +1719,51 @@ XD:Xây dựng
 xd:Xây dựng
 XDCB:xây dựng cơ bản
 xdcb:xây dựng cơ bản
-XĐGN:Xoá đói giảm nghèo
-xđgn:Xoá đói giảm nghèo
-XDHK:Xăng dầu hàng không
-xdhk:Xăng dầu hàng không
-XH:Xã hội
-xh:Xã hội
-XHCN:Xã hội chủ nghĩa
-xhcn:Xã hội chủ nghĩa
+XĐGN:xoá đói giảm nghèo
+xđgn:xoá đói giảm nghèo
+XDHK:xăng dầu hàng không
+xdhk:xăng dầu hàng không
+XH:xã hội
+xh:xã hội
+XHCN:xã hội chủ nghĩa
+xhcn:xã hội chủ nghĩa
 XHH:xã hội hóa
 xhh:xã hội hóa
-XK:Xuất khẩu
-xk:Xuất khẩu
+XK:xuất khẩu
+xk:xuất khẩu
 XKLĐ:xuất khẩu lao động
 xklđ:xuất khẩu lao động
-XN:Xí nghiệp
-xn:Xí nghiệp
-XNK:Xuất nhập khẩu
-xnk:Xuất nhập khẩu
+XN:xí nghiệp
+xn:xí nghiệp
+XNK:xuất nhập khẩu
+xnk:xuất nhập khẩu
 XSKT:xổ số kiến thiết
 xskt:xổ số kiến thiết
-XSMB:xổ số miền bắc
-xsmb:xổ số miền bắc
-XSMN:xổ số miền nam
-xsmn:xổ số miền nam
-XSMT:xổ số miền tây
-xsmt:xổ số miền tây
-XTTM:Xúc tiến thương mại
-xttm:Xúc tiến thương mại
-XX:Xét xử
-xx:Xét xử
+XSMB:xổ số miền Bắc
+xsmb:xổ số miền Bắc
+XSMN:xổ số miền Nam
+xsmn:xổ số miền Nam
+XSMT:xổ số miền Tây
+xsmt:xổ số miền Tây
+XTTM:xúc tiến thương mại
+xttm:xúc tiến thương mại
+XX:xét xử
+xx:xét xử
 YKVN:Y khoa Việt Nam
 ykvn:Y khoa Việt Nam
 YTDP:Y tế Dự phòng
 ytdp:Y tế Dự phòng
-TB:Thông báo,Thương binh
-tb:Thông báo,Thương binh
-CTR:Chương trình
-ctr:Chương trình
+TB:thông báo,thương binh
+tb:thông báo,thương binh
+CTR:chương trình
+ctr:chương trình
 P:phố,phường
-PA:Phương án
+PA:phương án
 p/a:phản ánh,phương án
-ĐA:Đồ án,Đề án
+ĐA:đồ án,đề án
 đ/a:đồ án
 đ/c:đồng chí
-DA:Dự án
+DA:dự án
 d/a:dự án
 BB:Biên bản
 bb:Biên bản
@@ -1781,20 +1773,20 @@ BTT:Bản thỏa thuận
 btt:Bản thỏa thuận
 BTTTT:Bộ thông tin truyền thông
 btttt:Bộ thông tin truyền thông
-GUQ:Giấy ủy quyền
-guq:Giấy ủy quyền
-GM:Giấy mời
-gm:Giấy mời
+GUQ:Giấy Ủy Quyền
+guq:Giấy Ủy Quyền
+GM:Giấy Mời
+gm:Giấy Mời
 GGT:Giấy giới thiệu
 ggt:Giấy giới thiệu
 GNP:Giấy nghỉ phép
 gnp:Giấy nghỉ phép
-PG:Phiếu gửi
-pg:Phiếu gửi
-PC:Phiếu chuyển
-pc:Phiếu chuyển
-PB:Phiếu báo
-pb:Phiếu báo
+PG:phiếu gửi
+pg:phiếu gửi
+PC:phiếu chuyển
+pc:phiếu chuyển
+PB:phiếu báo
+pb:phiếu báo
 SY:Bản sao y
 sy:Bản sao y
 SL:Bản sao lục
@@ -1811,8 +1803,8 @@ QyĐ:Quy định
 qyđ:Quy định
 YTế:Y tế
 ytế:Y tế
-TTr:Tờ trình
-ttr:Tờ trình
+TTr:tờ trình
+ttr:tờ trình
 thg:thân gửi
 th/g:thân gửi
 vv:về việc
@@ -1833,40 +1825,40 @@ AHLĐ:anh hùng lao động
 ahlđ:anh hùng lao động
 ahls:anh hùng liệt sĩ
 AHLS:anh hùng liệt sĩ
-ANQG:an ninh quốc gia
-anqg:an ninh quốc gia
-ANQP:an ninh quốc phòng
-anqp:an ninh quốc phòng
-ASXH:an sinh xã hội
-asxh:an sinh xã hội
-ATGTQG:an toàn giao thông quốc gia
-atgtqg:an toàn giao thông quốc gia
-ATLĐ:an toàn lao động
-atlđ:an toàn lao động
-BĐBP:bộ đội biên phòng
-bđbp:bộ đội biên phòng
-BGTVT:bộ giao thông vận tải
-bgtvt:bộ giao thông vận tải
-BHXHVN:bảo hiểm xã hội Việt Nam
-bhxhvn:bảo hiểm xã hội Việt Nam
-BLĐTBXH:bộ lao động thương binh xã hội
-blđtbxh:bộ lao động thương binh xã hội
-BNG:bộ ngoại giao
-bng:bộ ngoại giao
-BNN:bộ nông nghiệp
-bnn:bộ nông nghiệp
-BTNMT:bộ tài nguyên môi trường
-btnmt:bộ tài nguyên môi trường
-BTP:bộ tư pháp
-btp:bộ tư pháp
-BVTƯ:bệnh viện trung ương
-bvtư:bệnh viện trung ương
-BXD:bộ xây dựng
-bxd:bộ xây dựng
-BYT:bộ y tế
-byt:bộ y tế
-CATPHCM:công an thành phố Hồ Chí Minh
-catphcm:công an thành phố Hồ Chí Minh
+ANQG:An ninh Quốc gia
+anqg:An ninh Quốc gia
+ANQP:An ninh Quốc phòng
+anqp:An ninh Quốc phòng
+ASXH:An sinh Xã hội
+asxh:An sinh Xã hội
+ATGTQG:An toàn Giao thông Quốc gia
+atgtqg:An toàn Giao thông Quốc gia
+ATLĐ:An toàn Lao động
+atlđ:An toàn Lao động
+BĐBP:Bộ đội Biên phòng
+bđbp:Bộ đội Biên phòng
+BGTVT:Bộ Giao thông Vận tải
+bgtvt:Bộ Giao thông Vận tải
+BHXHVN:Bảo hiểm Xã hội Việt Nam
+bhxhvn:Bảo hiểm Xã hội Việt Nam
+BLĐTBXH:Bộ Lao động Thương binh Xã hội
+blđtbxh:Bộ Lao động Thương binh Xã hội
+BNG:Bộ Ngoại giao
+bng:Bộ Ngoại giao
+BNN:Bộ Nông nghiệp
+bnn:Bộ Nông nghiệp
+BTNMT:Bộ Tài nguyên Môi trường
+btnmt:Bộ Tài nguyên Môi trường
+BTP:Bộ Tư pháp
+btp:Bộ Tư pháp
+BVTƯ:Bệnh viện trung ương
+bvtư:Bệnh viện trung ương
+BXD:Bộ Xây dựng
+bxd:Bộ Xây dựng
+BYT:Bộ Y tế
+byt:Bộ Y tế
+CATPHCM:Công an thành phố Hồ Chí Minh
+catphcm:Công an thành phố Hồ Chí Minh
 CBNV:cán bộ nhân viên
 cbnv:cán bộ nhân viên
 CBVC:cán bộ viên chức
@@ -1877,8 +1869,8 @@ CHCN:cứu hộ cứu nạn
 chcn:cứu hộ cứu nạn
 CHQS:chỉ huy quân sự
 chqs:chỉ huy quân sự
-CHXH:cộng hòa xã hội
-chxh:cộng hòa xã hội
+CHXH:Cộng hòa Xã hội
+chxh:Cộng hòa Xã hội
 CLC:chất lượng cao
 clc:chất lượng cao
 CMTND:chứng minh thư nhân dân
@@ -1889,60 +1881,60 @@ CNPM:công nghệ phần mềm
 cnpm:công nghệ phần mềm
 CPN:chuyển phát nhanh
 cpn:chuyển phát nhanh
-CNXH:chủ nghĩa xã hội
-cnxh:chủ nghĩa xã hội
-CPTM:cổ phần thương mại
-cptm:cổ phần thương mại
-CQCA:cơ quan công an
-cqca:cơ quan công an
-CQCSĐT:cơ quan cảnh sát điều tra
-cqcsđt:cơ quan cảnh sát điều tra
-CQNN:cơ quan nhà nước
-cqnn:cơ quan nhà nước
+CNXH:Chủ nghĩa Xã hội
+cnxh:Chủ nghĩa Xã hội
+CPTM:Cổ phần Thương mại
+cptm:Cổ phần hương mại
+CQCA:Cơ quan Công an
+cqca:Cơ quan Công an
+CQCSĐT:Cơ quan Cảnh sát điều tra
+cqcsđt:Cơ quan Cảnh sát điều tra
+CQNN:Cơ quan Nhà nước
+cqnn:Cơ quan Nhà nước
 CSHT:cơ sở hạ tầng
 csht:cơ sở hạ tầng
-CSND:cảnh sát nhân dân
-csnd:cảnh sát nhân dân
-CSPCCC:cảnh sát phòng cháy chữa cháy
-cspccc:cảnh sát phòng cháy chữa cháy
+CSND:Cảnh sát nhân dân
+csnd:Cảnh sát nhân dân
+CSPCCC:Cảnh sát phòng cháy chữa cháy
+cspccc:Cảnh sát phòng cháy chữa cháy
 CSSK:chăm sóc sức khỏe
 cssk:chăm sóc sức khỏe
-CTHĐQT:chủ tịch hội đồng quản trị
-cthđqt:chủ tịch hội đồng quản trị
-CTYTNHH:công ty trách nhiệm hữu hạn
-ctytnhh:công ty trách nhiệm hữu hạn
+CTHĐQT:Chủ tịch hội đồng quản trị
+cthđqt:Chủ tịch hội đồng quản trị
+CTYTNHH:Công ty trách nhiệm hữu hạn
+ctytnhh:Công ty trách nhiệm hữu hạn
 DVTM:dịch vụ thương mại
 dvtm:dịch vụ thương mại
-ĐBSH:đồng bằng sông hồng
-đbsh:đồng bằng sông hồng
-ĐHKHXHNV:đại học Khoa học Xã hội nhân văn
-đhkhxhnv:đại học Khoa học Xã hội nhân văn
-ĐHYD:đại học y dược
-đhyd:đại học y dược
-ĐHL:đại học luật
-đhl:đại học luật
-ĐHNN:đại học nông nghiệp
-đhnn:đại học nông nghiệp
-ĐHSPKT:đại học sư phạm kỹ thuật
-đhspkt:đại học sư phạm kỹ thuật
-ĐHTH:đại học tổng hợp
-đhth:đại học tổng hợp
-ĐHXD:đại học xây dựng
-đhxd:đại học xây dựng
+ĐBSH:đồng bằng sông Hồng
+đbsh:đồng bằng sông Hồng
+ĐHKHXHNV:Đại học Khoa học Xã hội nhân văn
+đhkhxhnv:Đại học Khoa học Xã hội nhân văn
+ĐHYD:Đại học Y Dược
+đhyd:Đại học Y Dược
+ĐHL:Đại học luật
+đhl:Đại học luật
+ĐHNN:Đại học Nông nghiệp
+đhnn:Đại học Nông nghiệp
+ĐHSPKT:Đại học sư phạm kỹ thuật
+đhspkt:Đại học sư phạm kỹ thuật
+ĐHTH:Đại học Tổng hợp
+đhth:Đại học Tổng hợp
+ĐHXD:Đại học Xây dựng
+đhxd:Đại học Xây dựng
 ĐKDN:đăng ký doanh nghiệp
 đkdn:đăng ký doanh nghiệp
-ĐPTTH:đài phát thanh truyền hình
-đptth:đài phát thanh truyền hình
-ĐSVN:đường sắt việt nam
-đsvn:đường sắt việt nam
-ĐTBĐQG:đội tuyển bóng đá quốc gia
-đtbđqg:đội tuyển bóng đá quốc gia
+ĐPTTH:Đài phát thanh truyền hình
+đptth:Đài phát thanh truyền hình
+ĐSVN:Đường sắt Việt Nam
+đsvn:Đường sắt Việt Nam
+ĐTBĐQG:Đội tuyển bóng đá quốc gia
+đtbđqg:Đội tuyển bóng đá quốc gia
 ĐTCĐ:điện thoại cố định
 đtcđ:điện thoại cố định
 ĐTDD:điện thoại di động
 đtdd:điện thoại di động
-ĐTNCS:đoàn thanh niên cộng sản
-đtncs:đoàn thanh niên cộng sản
+ĐTNCS:đoàn Thanh niên Cộng sản
+đtncs:Đoàn Thanh niên Cộng sản
 ĐTPT:đầu tư phát triển
 đtpt:đầu tư phát triển
 ĐTVT:điện tử viễn thông
@@ -1969,14 +1961,14 @@ HCTĐ:hội chữ thập đỏ
 hctd:hội chữ thập đỏ
 HHK:hãng hàng không
 hhk:hãng hàng không
-HKVN:hàng không việt nam
-hkvn:hàng không việt nam
+HKVN:Hàng không Việt Nam
+hkvn:Hàng không Việt Nam
 HNB:hội nhà báo
 hnb:hội nhà báo
 HSD:hạn sử dụng
 hsd:hạn sử dụng
-HĐBALHQ:hội đồng bảo an liên hợp quốc
-hđbalhq:hội đồng bảo an liên hợp quốc
+HĐBALHQ:Hội đồng Bảo an Liên Hợp Quốc
+hđbalhq:Hội đồng Bảo an Liên Hợp Quốc
 KQXS:kết quả xổ số
 kqxs:kết quả xổ số
 KTTM:kinh tế thương mại
@@ -1995,8 +1987,8 @@ LLVTND:lực lượng vũ trang nhân dân
 llvtnd:lực lượng vũ trang nhân dân
 LTTP:lương thực thực phẩm
 lttp:lương thực thực phẩm
-LĐLĐVN:liên đoàn lao động việt nam
-lđlđvn:liên đoàn lao động việt nam
+LĐLĐVN:Liên đoàn Lao động Việt Nam
+lđlđvn:Liên đoàn Lao động Việt Nam
 MST:mã số thuế
 mst:mã số thuế
 MVT:máy vi tính
@@ -2019,14 +2011,14 @@ NMTĐ:nhà máy thủy điện
 nmtđ:nhà máy thủy điện
 NOXH:nhà ở xã hội
 noxh:nhà ở xã hội
-NSDLĐ:người sử dụng lao động
-nsdlđ:người sử dụng lao động
+NSDLĐ:Người sử dụng lao động
+nsdlđ:Người sử dụng lao động
 NTKTT:nhà thiết kế thời trang
 ntktt:nhà thiết kế thời trang
 NVKD:nhân viên kinh doanh
 nvkd:nhân viên kinh doanh
-NVNONN:người việt nam ở nước ngoài
-nvnonn:người việt nam ở nước ngoài
+NVNONN:người Việt Nam ở nước ngoài
+nvnonn:người Việt Nam ở nước ngoài
 NXBT:nhà xuất bản trẻ
 nxbt:nhà xuất bản trẻ
 PCCN:phòng chống cháy nổ
@@ -2037,16 +2029,16 @@ PKKQ:phòng không không quân
 pkkq:phòng không không quân
 PNVN:phụ nữ việt nam
 pnvn:phụ nữ việt nam
-PTGĐ:phó tổng giám đốc
-ptgd:phó tổng giám đốc
-QĐNDVN:quân đội nhân dân Việt Nam
-qđndvn:quân đội nhân dân Việt Nam
+PTGĐ:Phó tổng giám đốc
+ptgd:Phó tổng giám đốc
+QĐNDVN:Quân đội Nhân dân Việt Nam
+qđndvn:Quân đội Nhân dân Việt Nam
 QHCC:quan hệ công chúng
 qhcc:quan hệ công chúng
 QHQT:quan hệ quốc tế
 qhqt:quan hệ quốc tế
-QHVN:quốc hội Việt Nam
-qhvn:quốc hội Việt Nam
+QHVN:Quốc hội Việt Nam
+qhvn:Quốc hội Việt Nam
 QHXD:quy hoạch xây dựng
 qhxd:quy hoạch xây dựng
 QLCL:quản lý chất lượng
@@ -2075,18 +2067,18 @@ SKCĐ:sức khoẻ cộng đồng
 skcđ:sức khoẻ cộng đồng
 SKLĐ:sức khỏe lao động
 sklđ:sức khỏe lao động
-SLĐTBXH:sở lao động thương binh xã hội
-slđtbxh:sở lao động thương binh xã hội
+SLĐTBXH:Sở Lao động Thương binh Xã hội
+slđtbxh:Sở Lao động Thương binh Xã hội
 SVĐQG:sân vận động quốc gia
 svđqg:sân vận động quốc gia
 SXCN:sản xuất công nghiệp
 sxcn:sản xuất công nghiệp
-SXD:sở xây dựng
-sxd:sở xây dựng
-TANDTP:tòa án nhân dân thành phố
-tandtp:tòa án nhân dân thành phố
-TANDTPHCM:tòa án nhân dân thành phố Hồ Chí Minh
-tandtphcm:tòa án nhân dân thành phố Hồ Chí Minh
+SXD:Sở Xây dựng
+sxd:Sở Xây dựng
+TANDTP:Tòa án nhân dân thành phố
+tandtp:Tòa án nhân dân thành phố
+TANDTPHCM:Tòa án Nhân dân thành phố Hồ Chí Minh
+tandtphcm:Tòa án Nhân dân thành phố Hồ Chí Minh
 TBDĐ:thuê bao di động
 tbdđ:thuê bao di động
 TBYT:thiết bị y tế
@@ -2101,44 +2093,44 @@ TLD:tổng liên đoàn
 tld:tổng liên đoàn
 TPCP:trái phiếu chính phủ
 tpcp:trái phiếu chính phủ
-TPHN:thành phố hà nội
-tphn:thành phố hà nội
+TPHN:Thành phố Hà Nội
+tphn:Thành phố Hà Nội
 TTATXH:trật tự an toàn xã hội
 ttatxh:trật tự an toàn xã hội
-TTCKVN:thị trường chứng khoán việt nam
-ttckvn:thị trường chứng khoán việt nam
-TTHLQG:trung tâm huấn luyện quốc gia
-tthlqg:trung tâm huấn luyện quốc gia
-TTHNQG:trung tâm hội nghị quốc gia
-tthnqg:trung tâm hội nghị quốc gia
-TTMS:trung tâm mua sắm
-ttms:trung tâm mua sắm
-TTXKLĐ:trung tâm xuất khẩu lao động
-ttxklđ:trung tâm xuất khẩu lao động
+TTCKVN:Thị trường chứng khoán Việt Nam
+ttckvn:Thị trường chứng khoán Việt Nam
+TTHLQG:Trung tâm huấn luyện quốc gia
+tthlqg:Trung tâm huấn luyện quốc gia
+TTHNQG:Trung tâm hội nghị quốc gia
+tthnqg:Trung tâm hội nghị quốc gia
+TTMS:Trung tâm mua sắm
+ttms:Trung tâm mua sắm
+TTXKLĐ:Trung tâm xuất khẩu lao động
+ttxklđ:Trung tâm xuất khẩu lao động
 TVPL:tư vấn pháp luật
 tvpl:tư vấn pháp luật
 TMDV:thương mại dịch vụ
 tmdv:thương mại dịch vụ
-UBNDTPHCM:ủy ban nhân dân thành phố Hồ Chí Minh
-ubndtphcm:ủy ban nhân dân thành phố Hồ Chí Minh
-UBKTTƯ:ủy ban kiểm tra trung ương
-ubkttư:ủy ban kiểm tra trung ương
-UBMT:uỷ ban mặt trận
-ubmt:uỷ ban mặt trận
-UBQG:ủy ban quốc gia
-ubqg:ủy ban quốc gia
-UBTV:ủy ban thường vụ
-ubtv:ủy ban thường vụ
+UBNDTPHCM:Ủy ban Nhân dân thành phố Hồ Chí Minh
+ubndtphcm:Ủy ban Nhân dân thành phố Hồ Chí Minh
+UBKTTƯ:Ủy ban Kiểm tra Trung ương
+ubkttư:Ủy ban Kiểm tra Trung ương
+UBMT:Ủy ban Mặt trận
+ubmt:Ủy ban Mặt trận
+UBQG:Ủy ban Quốc gia
+ubqg:Ủy ban Quốc gia
+UBTV:Ủy ban Thường vụ
+ubtv:Ủy ban Thường vụ
 UCV:ứng cử viên
 ucv:ứng cử viên
 VBQPPL:văn bản quy phạm pháp luật
 vbqppl:văn bản quy phạm pháp luật
-VHTTDL:văn hóa thể thao du lịch
-vhttdl:văn hóa thể thao du lịch
-VND:Việt Nam Đồng
-vnd:Việt Nam Đồng
-VPQH:văn phòng quốc hội
-vpqh:văn phòng quốc hội
+VHTTDL:Văn hóa thể thao du lịch
+vhttdl:Văn hóa thể thao du lịch
+VND:việt nam đồng
+vnd:việt nam đồng
+VPQH:Văn phòng Quốc hội
+vpqh:Văn phòng Quốc hội
 VSATTP:vệ sinh an toàn thực phẩm
 vsattp:vệ sinh an toàn thực phẩm
 VSMT:vệ sinh môi trường
@@ -2147,8 +2139,8 @@ VTHH:vận tải hàng hóa
 vthh:vận tải hàng hóa
 XDCN:xây dựng công nghiệp
 xdcn:xây dựng công nghiệp
-XHCNVN:xã hội chủ nghĩa Việt Nam
-xhcnvn:xã hội chủ nghĩa Việt Nam
+XHCNVN:Xã hội Chủ nghĩa Việt Nam
+xhcnvn:Xã hội Chủ nghĩa Việt Nam
 XPHC:xử phạt hành chính
 xphc:xử phạt hành chính
 XTDL:xúc tiến du lịch
@@ -2169,20 +2161,20 @@ GDBĐS:giao dịch bất động sản
 gdbđs:giao dịch bất động sản
 TBĐT:thuê bao điện thoại
 tbđt:thuê bao điện thoại
-TTDBKTTVTW:trung tâm dự báo khí tượng thủy văn trung ương
-ttdbkttvtw:trung tâm dự báo khí tượng thủy văn trung ương
-TTCPQG:trung tâm chiếu phim quốc gia
-ttcpqg:trung tâm chiếu phim quốc gia
-BQLRPHĐN:ban quản lý rừng phòng hộ đầu nguồn
-bqlrphđn:ban quản lý rừng phòng hộ đầu nguồn
+TTDBKTTVTW:Trung tâm dự báo khí tượng thủy văn trung ương
+ttdbkttvtw:Trung tâm dự báo khí tượng thủy văn trung ương
+TTCPQG:Trung tâm chiếu phim quốc gia
+ttcpqg:Trung tâm chiếu phim quốc gia
+BQLRPHĐN:Ban quản lý rừng phòng hộ đầu nguồn
+bqlrphđn:Ban quản lý rừng phòng hộ đầu nguồn
 AHLLVTND:anh hùng lực lượng vũ trang nhân dân
 ahllvtnd:anh hùng lực lượng vũ trang nhân dân
 BHXHTN:bảo hiểm xã hội tự nguyện
 bhxhtn:bảo hiểm xã hội tự nguyện
 DTNT:dân tộc nội trú
 dtnt:dân tộc nội trú
-TCTC:tổ chức tài Chính
-tctc:tổ chức tài Chính
+TCTC:tổ chức tài chính
+tctc:tổ chức tài chính
 UBATGTQG:Ủy ban an toàn giao thông quốc gia
 ubatgtqg:Ủy ban an toàn giao thông quốc gia
 SBH:sổ bảo hiểm
@@ -2199,11 +2191,11 @@ SLL:số lượng lớn
 sll:số lượng lớn
 HĐGĐYK:hội đồng giám định y khoa
 hđgđyk:hội đồng giám định y khoa
-tthcm:tư tưởng Hồ Chí minh
-TTHCM:tư tưởng Hồ Chí minh
+tthcm:tư tưởng Hồ Chí Minh
+TTHCM:tư tưởng Hồ Chí Minh
 qrtd:quấy rối tình dục
 QRTD:quấy rối tình dục
 bltths:bộ luật tố tụng hình sự
 BLTTHS:bộ luật tố tụng hình sự
-TTGTVL:trung tâm giới thiệu việc làm
-ttgtvl:trung tâm giới thiệu việc làm
+TTGTVL:Trung tâm giới thiệu việc làm
+ttgtvl:Trung tâm giới thiệu việc làm

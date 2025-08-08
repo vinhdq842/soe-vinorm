@@ -826,7 +826,8 @@ class RuleBasedNSWExpander(NSWExpander):
                 else:
                     results.extend(
                         self._sequence_expander.expand_sequence(part)
-                        for part in re.split(r"[/\\]", word)
+                        for part in re.split(r"([/\\])", word)
+                        if part
                     )
                 i += 1
             else:

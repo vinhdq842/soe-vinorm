@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from concurrent.futures import ThreadPoolExecutor
-from typing import Dict, List, Optional
+from concurrent.futures import ProcessPoolExecutor
+from typing import Dict, List, Optional, Union
 
 from soe_vinorm.nsw_detector import CRFNSWDetector
 from soe_vinorm.nsw_expander import RuleBasedNSWExpander
@@ -41,6 +41,34 @@ class Normalizer(ABC):
         ...
 
 
+def _worker_initializer(
+    vn_dict: Union[List[str], None] = None,
+    abbr_dict: Union[Dict[str, List[str]], None] = None,
+    nsw_model_path: Union[str, None] = None,
+):
+    """Initialize worker instances."""
+    global worker_preprocessor, worker_detector, worker_expander
+
+    worker_preprocessor = TextPreprocessor(vn_dict)
+    worker_detector = CRFNSWDetector(
+        model_path=nsw_model_path, vn_dict=vn_dict, abbr_dict=abbr_dict
+    )
+    worker_expander = RuleBasedNSWExpander(vn_dict=vn_dict, abbr_dict=abbr_dict)
+
+
+def _worker_normalize(text: str) -> str:
+    """Normalize text in worker."""
+    global worker_preprocessor, worker_detector, worker_expander
+
+    tokens = worker_preprocessor(text).split()
+    if not tokens:
+        return text.strip()
+    nsw_tags = worker_detector.detect(tokens)
+    expanded_tokens = worker_expander.expand(tokens, nsw_tags)
+
+    return " ".join(expanded_tokens)
+
+
 class SoeNormalizer(Normalizer):
     """
     Effective Vietnamese text normalizer.
@@ -62,6 +90,7 @@ class SoeNormalizer(Normalizer):
         """
         self._vn_dict = vn_dict or load_vietnamese_syllables()
         self._abbr_dict = abbr_dict or load_abbreviation_dict()
+        self._nsw_model_path = nsw_model_path
 
         self._preprocessor = TextPreprocessor(self._vn_dict)
         self._nsw_detector = CRFNSWDetector(
@@ -119,19 +148,12 @@ class SoeNormalizer(Normalizer):
         if n_jobs == 1:
             return [self.normalize(text) for text in texts]
 
-        with ThreadPoolExecutor(max_workers=n_jobs) as executor:
-            tokenized_texts = [
-                text.split() for text in executor.map(self._preprocessor, texts)
-            ]
-            nsw_tags = self._nsw_detector.batch_detect(tokenized_texts)
-            expanded_texts = [
-                " ".join(expanded_tokens)
-                for expanded_tokens in executor.map(
-                    self._nsw_expander.expand, tokenized_texts, nsw_tags
-                )
-            ]
-
-        return expanded_texts
+        with ProcessPoolExecutor(
+            max_workers=n_jobs,
+            initializer=_worker_initializer,
+            initargs=(self._vn_dict, self._abbr_dict, self._nsw_model_path),
+        ) as executor:
+            return list(executor.map(_worker_normalize, texts))
 
 
 def normalize_text(

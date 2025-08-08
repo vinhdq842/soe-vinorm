@@ -296,7 +296,7 @@ class CRFNSWDetector(NSWDetector):
             "MEA",  # measurement
             "MONEY",  # money
             "NDAT",  # date
-            "NDAY", # day
+            "NDAY",  # day
             "NDIG",  # digit
             "NFRC",  # fraction
             "NMON",  # month

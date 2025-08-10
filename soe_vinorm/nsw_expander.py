@@ -343,7 +343,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def expand_sequence(self, sequence: str, english: bool = False) -> str:
             """Expand sequence patterns."""
-            sequence = sequence.lower().replace(".", "")
+            sequence = sequence.lower()
 
             # u.23, u23 - I am u30 now :(
             if re.match(r"^u\.?\d{2}$", sequence):
@@ -351,6 +351,9 @@ class RuleBasedNSWExpander(NSWExpander):
 
             result = []
             for char in sequence:
+                if not char.strip():
+                    continue
+
                 if char in (
                     mapping := (
                         SEQUENCE_PHONES_EN_MAPPING
@@ -525,7 +528,7 @@ class RuleBasedNSWExpander(NSWExpander):
         def expand_foreign_word(self, word: str) -> str:
             """Expand foreign word."""
             return " ".join(
-                self._expand_one_word(w) for w in re.split(r"-+|\s+|\.+|_+", word)
+                self._expand_one_word(w) for w in re.split(r"-+|\s+|\.+|_+", word) if w
             )
 
         def _expand_one_word(self, word: str) -> str:
@@ -735,7 +738,7 @@ class RuleBasedNSWExpander(NSWExpander):
                     self._sequence_expander.expand_sequence(tokens[start_idx])
                 )
 
-            return " ".join(result)
+            return " ".join(filter(len, result))
 
     def __init__(
         self,
@@ -750,7 +753,9 @@ class RuleBasedNSWExpander(NSWExpander):
         self._vn_dict = set(vn_dict or load_vietnamese_syllables())
         self._abbr_dict = abbr_dict or load_abbreviation_dict()
         self._nosign_dict = set(map(unidecode, self._vn_dict))
-        self._no_norm_list = [".", ",", "...", "-"]
+
+        # no normalization for these characters
+        self._no_norm_list = [".", ",", ":", ";", "!", "?", "...", "-"]
 
         self._number_expander = self.NumberExpander()
         self._sequence_expander = self.SequenceExpander(self._number_expander)

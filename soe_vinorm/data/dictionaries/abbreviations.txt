@@ -566,8 +566,10 @@ GS:Giáo sư
 gs:Giáo sư
 GSTS:Giáo sư Tiến sỹ
 gsts:Giáo sư Tiến sỹ
+GS.TS:Giáo sư Tiến sỹ
 GSTSKH:Giáo sư Tiến sỹ Khoa học
 gstskh:Giáo sư Tiến sỹ Khoa học
+GS.TSKH:Giáo sư Tiến sỹ Khoa học
 GSTT:giám sát trọng tài
 gstt:giám sát trọng tài
 GT:giao thông,giá trị
@@ -1139,6 +1141,10 @@ PGHH:Phật giáo Hòa Hảo
 pghh:Phật giáo Hòa Hảo
 PGS:Phó Giáo sư
 pgs:Phó Giáo sư
+PGS.TS:Phó Giáo sư Tiến sĩ
+PGSTS:Phó Giáo sư Tiến sĩ
+PGS.TSKH:Phó Giáo sư Tiến sĩ Khoa học
+PGSTSKH:Phó Giáo sư Tiến sĩ Khoa học
 PHHS:phụ huynh học sinh
 phhs:phụ huynh học sinh
 PL:pháp luật

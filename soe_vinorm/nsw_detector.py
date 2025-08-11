@@ -117,7 +117,7 @@ class CRFNSWDetector(NSWDetector):
                 "is_in_dict": int(token.lower() in self._vn_dict),
                 "is_in_abbr_dict": int(token in self._abbr_dict),
                 # Special character features
-                "word_has_hyphen": int("-" in token),
+                "word_has_hyphen": int("-" in token or "–" in token),
                 "word_has_tilde": int("~" in token),
                 "word_has_at": int("@" in token),
                 "word_has_comma": int("," in token),

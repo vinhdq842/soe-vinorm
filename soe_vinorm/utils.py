@@ -63,8 +63,7 @@ def get_model_weights_path(cache_dir=None) -> Path:
             repo_id=HF_MODEL_REPO_ID,
             cache_dir=str(cache_dir),
             allow_patterns=[
-                "abbreviation_expander/tokenizer.json",
-                "abbreviation_expander/bert.opt.infer.quant.onnx",
+                "abbreviation_expander/v0.2/*",
                 "nsw_detector/*",
             ],
         )

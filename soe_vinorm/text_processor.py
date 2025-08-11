@@ -148,12 +148,12 @@ class TextPreprocessor(TextProcessor):
         prefix = []
 
         # Extract suffix punctuation
-        while token and token[-1] in "-.,:?&":
+        while token and token[-1] in "-.,:?&/\\[]":
             suffix = [token[-1]] + suffix
             token = token[:-1]
 
         # Extract prefix punctuation (but not for negative numbers)
-        while token and token[0] in "-.,:?&" and not re.match(r"-[0-9.,]+", token):
+        while token and token[0] in "-.,:?&/\\[]" and not re.match(r"-[0-9.,]+", token):
             prefix.append(token[0])
             token = token[1:]
 
@@ -201,10 +201,8 @@ class TextPreprocessor(TextProcessor):
     def _is_vietnamese_or_uppercase(self, token: str) -> bool:
         """Check if token contains Vietnamese characters or is all uppercase and contains no numbers."""
         return (
-            token.upper() == token
-            and not re.search(r"[-0-9,.]+", token)
-            or re.search(self._VIETNAMESE_CHARS, token)
-        )
+            token.upper() == token or re.search(self._VIETNAMESE_CHARS, token)
+        ) and not re.search(r"[-0-9,.]+", token)
 
     def _process_url(self, token: str) -> List[str]:
         """Process URL patterns."""
@@ -282,7 +280,7 @@ class TextPreprocessor(TextProcessor):
                 return unidecode.unidecode(part_lower) in "ueoai"
             return False
 
-        can_separate = any(check_dict(part) for part in parts)
+        can_separate = all(check_dict(part) for part in parts)
         return can_separate, parts
 
 

@@ -1,10 +1,10 @@
+import json
 import re
 from abc import ABC, abstractmethod
-from typing import Dict, List, Set, Tuple, Union
+from typing import Dict, List, Set, Union
 
 import numpy as np
-from onnxruntime import GraphOptimizationLevel, InferenceSession, SessionOptions
-from tokenizers import Tokenizer
+from onnxruntime import InferenceSession
 from unidecode import unidecode
 
 from soe_vinorm.constants import (
@@ -338,20 +338,29 @@ class RuleBasedNSWExpander(NSWExpander):
     class SequenceExpander:
         """Handles expansion of sequences."""
 
-        def __init__(self, number_expander):
+        def __init__(self, number_expander, vn_dict: Set[str], no_norm_list: List[str]):
             self._number_expander = number_expander
+            self._vn_dict = vn_dict
+            self._no_norm_list = no_norm_list
 
         def expand_sequence(self, sequence: str, english: bool = False) -> str:
             """Expand sequence patterns."""
-            sequence = sequence.lower()
+            sequence_lower = sequence.lower()
 
             # u.23, u23 - I am u30 now :(
-            if re.match(r"^u\.?\d{2}$", sequence):
-                return f"u {self._number_expander.expand_number(sequence[1:])}"
+            if re.match(r"^u\.?\d{2}$", sequence_lower):
+                return f"u {self._number_expander.expand_number(sequence_lower[1:])}"
+
+            if sequence_lower in self._vn_dict:
+                return sequence
 
             result = []
-            for char in sequence:
+            for char in sequence_lower:
                 if not char.strip():
+                    continue
+
+                if char in self._no_norm_list:
+                    result.append(char)
                     continue
 
                 if char in (
@@ -372,61 +381,58 @@ class RuleBasedNSWExpander(NSWExpander):
             return " ".join(result)
 
     class AbbreviationExpander:
-        """Handles expansion of abbreviations using language models."""
+        """Handles expansion of abbreviations using a likelihood scorer."""
 
         def __init__(
-            self, abbr_dict: Dict[str, List[str]], number_expander, sequence_expander
+            self,
+            number_expander,
+            sequence_expander,
+            abbr_dict: Dict[str, List[str]],
         ):
             self._abbr_dict = abbr_dict
             self._number_expander = number_expander
             self._sequence_expander = sequence_expander
-            self._window_size = 8
 
-            model_path = get_model_weights_path() / "abbreviation_expander"
-            session_options = SessionOptions()
-            session_options.graph_optimization_level = (
-                GraphOptimizationLevel.ORT_ENABLE_ALL
-            )
-            self._abbr_model = InferenceSession(
-                model_path / "bert.opt.infer.quant.onnx",
-                session_options,
+            model_path = get_model_weights_path() / "abbreviation_expander" / "v0.2"
+            self._scorer = InferenceSession(
+                model_path / "scorer.onnx",
                 providers=["CPUExecutionProvider"],
             )
-            self._abbr_tokenizer = Tokenizer.from_file(
-                str(model_path / "tokenizer.json")
-            )
-            self._abbr_tokenizer.enable_padding(
-                pad_id=self._abbr_tokenizer.token_to_id("<pad>"), length=32
-            )
-            self._abbr_tokenizer.enable_truncation(max_length=32)
+
+            with open(model_path / "config.json", "r", encoding="utf-8") as f:
+                config = json.load(f)
+            self._window_size = config["window_size"]
+            self._vocab = config["vocab"]
+            self._seq_len = config["seq_len"]
 
         def expand_abbreviation(
             self, abbr: str, left_context: str, right_context: str
         ) -> str:
             """Expand an abbreviation using context."""
+
+            # Remove hyphens
             abbr = re.sub(r"\s*-\s*", "", abbr)
+            # Split the abbreviation into parts
             parts = list(filter(len, re.split(r"\.+|\s+", abbr)))
 
+            # If the abbreviation has more than one part but is in the dictionary when joined (e.g. TP.HCM), expand it recursively
             if "".join(parts) in self._abbr_dict and len(parts) > 1:
                 return self.expand_abbreviation(
                     "".join(parts), left_context, right_context
                 )
 
+            # Otherwise, expand parts one by one
             if len(parts) > 1:
                 result = []
-                for i, part in enumerate(parts):
+                for part in parts:
                     if part.isnumeric():
                         result.append(self._number_expander.expand_number(part))
                     else:
                         result.append(
                             self.expand_abbreviation(
-                                part.replace(".", ""),
-                                self._get_left_context(
-                                    " ".join([left_context, " ".join(result)])
-                                ),
-                                self._get_right_context(
-                                    " ".join([" ".join(parts[i + 1 :]), right_context])
-                                ),
+                                part,
+                                " ".join([left_context, *result]),
+                                f"LABB {right_context}",
                             )
                         )
                 return " ".join(result)
@@ -439,75 +445,47 @@ class RuleBasedNSWExpander(NSWExpander):
             if re.match(r"^[^0-9]+\d+$", abbr):
                 text, number = re.search(r"^([^0-9]+)(\d+)$", abbr).groups()[:2]
                 return (
-                    self.expand_abbreviation(text, left_context, right_context)
-                    + " "
-                    + self._number_expander.expand_number(number)
+                    f"{self.expand_abbreviation(text, left_context, right_context)} "
+                    f"{self._number_expander.expand_number(number)}"
                 )
 
             if abbr in self._abbr_dict:
                 if len(self._abbr_dict[abbr]) == 1:
                     return self._abbr_dict[abbr][0]
                 else:
-                    # Use language model to choose best expansion
-                    candidates = [
-                        (
-                            self._calculate_perplexity(
-                                " ".join([left_context, candidate, right_context])
-                            ),
-                            candidate,
-                        )
-                        for candidate in self._abbr_dict[abbr]
-                    ]
-                    candidates.sort()
-                    return candidates[0][1]
+                    # Use likelihood scorer to choose best expansion
+                    input_ids = self._prepare_input(
+                        self._abbr_dict[abbr], left_context, right_context
+                    )
+                    scores = self._scorer.run(
+                        None, {self._scorer.get_inputs()[0].name: input_ids}
+                    )[0]
+                    return self._abbr_dict[abbr][np.argmax(scores)]
 
             return self._sequence_expander.expand_sequence(abbr)
 
-        def _prepare_abbr_input(self, sentence: str) -> Tuple[np.ndarray, np.ndarray]:
-            """Prepare input for the abbreviation language model."""
-            input_ids = np.array(self._abbr_tokenizer.encode(sentence).ids)[
-                np.newaxis, ...
+        def _prepare_input(
+            self, candidates: List[str], left_context: str, right_context: str
+        ) -> np.ndarray:
+            """Prepare input for likelihood scorer."""
+            left_context = self._get_left_context(left_context)
+            right_context = self._get_right_context(right_context)
+            examples = [
+                f"{left_context} {candidate.lower()} {right_context}".strip()
+                for candidate in candidates
             ]
-            seq_len = input_ids.shape[1]
-            repeat_input = np.tile(input_ids, (seq_len - 2, 1)).astype(dtype=np.int64)
 
-            mask = np.eye(seq_len, seq_len, k=1, dtype=np.int64)[:-2]
-            mask[repeat_input == 1] = 0
-            mask_token_id = self._abbr_tokenizer.token_to_id("<mask>")
-            masked_input = np.where(mask == 1, mask_token_id, repeat_input)
-            labels = np.where(masked_input != mask_token_id, -100, repeat_input)
+            input_ids = []
+            for example in examples:
+                ids = [
+                    self._vocab[token] if token in self._vocab else self._vocab["<unk>"]
+                    for token in example.split()
+                ]
+                if len(ids) < self._seq_len:
+                    ids += [self._vocab["<pad>"]] * (self._seq_len - len(ids))
+                input_ids.append(ids[: self._seq_len])
 
-            return masked_input, labels
-
-        def _calculate_perplexity(self, sentence: str, lower: bool = True) -> float:
-            """Calculate perplexity of a sentence using the language model."""
-            sentence = sentence.lower() if lower else sentence
-            masked_input, labels = self._prepare_abbr_input(sentence)
-
-            ort_inputs = {self._abbr_model.get_inputs()[0].name: masked_input}
-            logits = self._abbr_model.run(None, ort_inputs)[0]
-
-            # Calculate cross-entropy loss
-            logits_flat = logits.reshape(-1, logits.shape[-1])
-            labels_flat = labels.reshape(-1)
-
-            valid_mask = labels_flat != -100
-            logits_valid = logits_flat[valid_mask]
-            labels_valid = labels_flat[valid_mask]
-
-            log_probs = self._log_softmax(logits_valid)
-            loss = -np.mean(log_probs[np.arange(len(labels_valid)), labels_valid])
-
-            return float(loss)
-
-        def _log_softmax(self, x: np.ndarray) -> np.ndarray:
-            """Compute log softmax using numpy."""
-            x_max = np.max(x, axis=-1, keepdims=True)
-            x_stable = x - x_max
-            exp_x = np.exp(x_stable)
-            sum_exp_x = np.sum(exp_x, axis=-1, keepdims=True)
-            softmax = exp_x / sum_exp_x
-            return np.log(softmax + 1e-8)
+            return np.array(input_ids)
 
         def _get_left_context(self, text: str) -> str:
             """Get left context window."""
@@ -520,7 +498,7 @@ class RuleBasedNSWExpander(NSWExpander):
     class ForeignWordExpander:
         """Handles expansion of foreign words."""
 
-        def __init__(self, vn_dict: Set[str], number_expander, sequence_expander):
+        def __init__(self, number_expander, sequence_expander, vn_dict: Set[str]):
             self._vn_dict = vn_dict
             self._number_expander = number_expander
             self._sequence_expander = sequence_expander
@@ -620,7 +598,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def expand_range(self, range_str: str) -> str:
             """Expand ranges."""
-            if re.match(r"[0-9.,]+([-:][0-9.,]+)+", range_str):
+            if re.match(r"[0-9.,]+([-–:][0-9.,]+)+", range_str):
                 return " đến ".join(
                     self._number_expander.expand_number(x)
                     for x in re.findall(r"[0-9.,]+", range_str)
@@ -672,8 +650,8 @@ class RuleBasedNSWExpander(NSWExpander):
                 units = re.split(r"\s*/\s*", measure)
                 return " trên ".join(self._expand_unit(unit) for unit in units)
             # number - number unit
-            elif re.match(r"^[0-9.,]+\s*-\s*.*$", measure):
-                n, m = re.split(r"\s*-\s*", measure)[:2]
+            elif re.match(r"^[0-9.,]+\s*[-–]\s*.*$", measure):
+                n, m = re.split(r"\s*[-–]\s*", measure)[:2]
                 return f"{self._number_expander.expand_number(n)} đến {self.expand_measure(m)}"
             # number unit
             elif re.match(r"^[0-9.,]+[^0-9.,][^.,]*$", measure):
@@ -755,18 +733,20 @@ class RuleBasedNSWExpander(NSWExpander):
         self._nosign_dict = set(map(unidecode, self._vn_dict))
 
         # no normalization for these characters
-        self._no_norm_list = [".", ",", ":", ";", "!", "?", "...", "-"]
+        self._no_norm_list = [".", ",", ":", ";", "!", "?", "...", "-", "/", "\\"]
 
         self._number_expander = self.NumberExpander()
-        self._sequence_expander = self.SequenceExpander(self._number_expander)
+        self._sequence_expander = self.SequenceExpander(
+            self._number_expander, self._vn_dict, self._no_norm_list
+        )
         self._time_date_expander = self.TimeDateExpander(
             self._number_expander, self._sequence_expander
         )
         self._abbr_expander = self.AbbreviationExpander(
-            self._abbr_dict, self._number_expander, self._sequence_expander
+            self._number_expander, self._sequence_expander, self._abbr_dict
         )
         self._foreign_expander = self.ForeignWordExpander(
-            self._vn_dict, self._number_expander, self._sequence_expander
+            self._number_expander, self._sequence_expander, self._vn_dict
         )
         self._quarter_expander = self.QuarterExpander(self._number_expander)
         self._version_expander = self.VersionExpander(
@@ -819,11 +799,18 @@ class RuleBasedNSWExpander(NSWExpander):
         results = []
         current_group = []
 
+        left_context = []
+        right_context = [
+            words[i].lower() if tags[i] == "O" else tags[i][2:]
+            for i in range(len(words))
+        ]
+
         i = 0
         while i < len(words):
             if tags[i] == "O":
                 # Normal words
                 word = words[i]
+                left_context.append(word.lower())
                 if (
                     word.lower() in self._vn_dict and len(word) > 1
                 ) or word in self._no_norm_list:
@@ -851,18 +838,21 @@ class RuleBasedNSWExpander(NSWExpander):
                     i += 1
 
                 # Expand the group
+                nsw = " ".join(current_group)
                 if tag_type in self._expanders:
-                    results.append(self._expanders[tag_type](" ".join(current_group)))
+                    results.append(self._expanders[tag_type](nsw))
+                    left_context.append(tag_type)
                 elif tag_type == "LABB":
-                    results.append(
-                        self._abbr_expander.expand_abbreviation(
-                            " ".join(current_group),
-                            " ".join(results),
-                            " ".join(words[i:]),
-                        )
+                    expanded_abbreviation = self._abbr_expander.expand_abbreviation(
+                        nsw,
+                        " ".join(left_context),
+                        " ".join(right_context[i:]),
                     )
+                    results.append(expanded_abbreviation)
+                    left_context.append(expanded_abbreviation.lower())
                 else:
-                    results.append(" ".join(current_group))
+                    results.append(nsw)
+                    left_context.append(tag_type)
 
                 current_group = []
 

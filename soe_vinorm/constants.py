@@ -28,7 +28,7 @@ SEQUENCE_PHONES_VI_MAPPING = {
     "ê": "ê",
     "f": "ép",
     "g": "gờ",
-    "h": "hát",
+    "h": "hờ",
     "i": "i",
     "j": "di",
     "k": "ca",

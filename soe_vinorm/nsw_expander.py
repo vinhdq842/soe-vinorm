@@ -485,7 +485,7 @@ class RuleBasedNSWExpander(NSWExpander):
                     ids += [self._vocab["<pad>"]] * (self._seq_len - len(ids))
                 input_ids.append(ids[: self._seq_len])
 
-            return np.array(input_ids)
+            return np.array(input_ids, dtype=np.int64)
 
         def _get_left_context(self, text: str) -> str:
             """Get left context window."""

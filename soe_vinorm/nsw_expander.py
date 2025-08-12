@@ -446,47 +446,19 @@ class RuleBasedNSWExpander(NSWExpander):
             self._seq_len = config["seq_len"]
 
         def expand_abbreviation(
-            self, abbr: str, left_context: str, right_context: str
+            self,
+            abbr: str,
+            left_context: str,
+            right_context: str,
+            attempt_cleaning: bool = True,
         ) -> str:
             """Expand an abbreviation using context."""
 
-            if abbr not in self._abbr_dict:
-                # Remove hyphens
-                abbr = re.sub(r"\s*-\s*", "", abbr)
-                # Split the abbreviation into parts
-                parts = list(filter(len, re.split(r"\.+|\s+", abbr)))
-
-                # If the abbreviation has more than one part but is in the dictionary when joined (e.g. TP.HCM), expand it recursively
-                if (new_abbr := "".join(parts)) in self._abbr_dict and len(parts) > 1:
-                    return self.expand_abbreviation(
-                        new_abbr, left_context, right_context
-                    )
-
-                # Otherwise, expand parts one by one
-                if len(parts) > 1:
-                    result = []
-                    for part in parts:
-                        if part.replace(",", "").isdigit():
-                            result.append(self._number_expander.expand_number(part))
-                        else:
-                            result.append(
-                                self.expand_abbreviation(
-                                    part,
-                                    " ".join([left_context, *result]),
-                                    f"LABB {right_context}",
-                                )
-                            )
-                    return " ".join(result)
-                elif len(parts):
-                    abbr = parts[0]
-                else:
-                    return ""
-
             # Handle patterns like "ABC123"
-            if re.match(r"^[^0-9]+\d+$", abbr):
-                text, number = re.search(r"^([^0-9]+)(\d+)$", abbr).groups()[:2]
+            if match := re.match(r"^([^0-9]+)(\d+)$", abbr):
+                text, number = match.groups()
                 return (
-                    f"{self.expand_abbreviation(text, left_context, right_context)} "
+                    f"{self.expand_abbreviation(text, left_context, right_context, attempt_cleaning)} "
                     f"{self._number_expander.expand_number(number)}"
                 )
 
@@ -494,7 +466,7 @@ class RuleBasedNSWExpander(NSWExpander):
                 if len(self._abbr_dict[abbr]) == 1:
                     return self._abbr_dict[abbr][0]
                 else:
-                    # Use likelihood scorer to choose best expansion
+                    # Use a likelihood scorer to choose the best expansion
                     input_ids = self._prepare_input(
                         self._abbr_dict[abbr], left_context, right_context
                     )
@@ -502,6 +474,36 @@ class RuleBasedNSWExpander(NSWExpander):
                         None, {self._scorer.get_inputs()[0].name: input_ids}
                     )[0]
                     return self._abbr_dict[abbr][np.argmax(scores)]
+            elif attempt_cleaning:
+                # Remove hyphens
+                abbr = re.sub(r"\s*-\s*", "", abbr)
+                # Split the abbreviation into parts
+                parts = list(filter(None, re.split(r"\.+|\s+|(\d+)", abbr)))
+
+                if not parts:
+                    return ""
+
+                # If the joined abbreviation is in the dictionary, expand it recursively
+                if (new_abbr := "".join(parts)) in self._abbr_dict:
+                    return self.expand_abbreviation(
+                        new_abbr, left_context, right_context, False
+                    )
+
+                # Otherwise, expand parts one by one
+                result = []
+                for part in parts:
+                    if part.isdigit():
+                        result.append(self._number_expander.expand_number(part))
+                    else:
+                        result.append(
+                            self.expand_abbreviation(
+                                part,
+                                " ".join([left_context, *result]),
+                                f"LABB {right_context}",
+                                False,
+                            )
+                        )
+                return " ".join(result)
 
             return self._sequence_expander.expand_sequence(abbr)
 

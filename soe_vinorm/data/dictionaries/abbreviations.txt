@@ -258,8 +258,8 @@ CSVN:Cộng sản Việt Nam
 csvn:Cộng sản Việt Nam
 CSXH:chính sách xã hội
 csxh:chính sách xã hội
-CT:chính trị,công ty,chỉ thị
-ct:chính trị,công ty,chỉ thị
+CT:chính trị,công ty,chỉ thị,cắt lớp vi tính
+ct:chính trị,công ty,chỉ thị,cắt lớp vi tính
 CTCC:công trình công cộng
 ctcc:công trình công cộng
 CTCH:chấn thương chỉnh hình

@@ -1422,6 +1422,8 @@ THQG:thương hiệu quốc gia
 thqg:thương hiệu quốc gia
 THS:tín hiệu số
 ths:Thạc sĩ,tín hiệu số
+ThS.BS:Thạc sĩ Bác sĩ
+Ths-BS:Thạc sĩ Bác sĩ
 THTT:truyền hình trực tiếp
 thtt:truyền hình trực tiếp
 THVN:Truyền hình Việt Nam
@@ -1518,7 +1520,8 @@ TSKH:Tiến sỹ Khoa học
 tskh:Tiến sỹ Khoa học
 TS:Tiến sĩ
 ts:Tiến sĩ
-TS-BS:Tiến sĩ bác sĩ
+TS-BS:Tiến sĩ Bác sĩ
+TS.BS:Tiến sĩ Bác sĩ
 TT:thông tin,truyền thông,thị trường,trung tâm,thể thao,thị trấn
 tt:thông tin,truyền thông,thị trường,trung tâm,thể thao,thị trấn
 TTDN:trung tâm dạy nghề

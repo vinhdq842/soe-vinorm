@@ -44,6 +44,11 @@ class RuleBasedNSWExpander(NSWExpander):
         Handles expansion of numbers, digits, and numeric patterns.
         """
 
+        def __init__(self):
+            self._op_map = str.maketrans(
+                {"+": "cộng", "-": "trừ", "*": "nhân", "/": "chia", "^": "mũ"}
+            )
+
         def expand_digit(self, digit: str) -> str:
             """Expand a single digit to its spoken form."""
             result = []
@@ -63,8 +68,20 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 # Remove separators and unhandlable chars
                 number = number.replace(".", "")
-                while len(number) > 1 and number[0] == "0" and number[1].isnumeric():
+                while len(number) > 1 and number[0] == "0" and number[1].isdigit():
                     number = number[1:]
+
+                if len(re.findall(r"[-+]?[0-9.,]+", number)) > 1:
+                    return (
+                        re.sub(
+                            r"\s*([-+]?[0-9.,]+)\s*",
+                            lambda m: f" {self.expand_number(m.group(1))} ",
+                            number,
+                        )
+                        .strip()
+                        .translate(self._op_map)
+                    )
+
                 number = re.sub(r"[^0-9.,]", "", number)
 
                 # Handle decimal part
@@ -88,7 +105,7 @@ class RuleBasedNSWExpander(NSWExpander):
                 # Apply Vietnamese number pronunciation rules
                 result = self._apply_vietnamese_rules(result)
 
-                return (sign + " " + result + " " + decimal_part).strip()
+                return f"{sign} {result} {decimal_part}".strip()
 
             except IndexError:
                 return self.expand_digit(number)
@@ -250,17 +267,15 @@ class RuleBasedNSWExpander(NSWExpander):
             # DD[/-]MM
             if re.match(r"^\d{1,2}\s*[/-]\s*\d{1,2}$", day_str):
                 d, m = re.split(r"\s*/\s*|\s*-\s*", day_str)[:2]
-                prefix = "mùng " if len(d.lstrip("0")) == 1 or d == "10" else ""
                 return (
-                    f"{prefix}{self._number_expander.expand_number(d)} tháng "
+                    f"{self._number_expander.expand_number(d)} tháng "
                     f"{self._number_expander.expand_number(m)}"
                 )
             # DD [-] DD[/]MM
             elif re.match(r"^\d{1,2}\s*-\s*\d{1,2}/\d{1,2}$", day_str):
                 d1, d2 = re.split(r"\s*-\s*", day_str)[:2]
-                prefix = "mùng " if len(d1.lstrip("0")) == 1 or d1 == "10" else ""
                 return (
-                    f"{prefix}{self._number_expander.expand_number(d1)} đến ngày "
+                    f"{self._number_expander.expand_number(d1)} đến ngày "
                     f"{self.expand_day(d2)}"
                 )
             # DD[/]MM [-] DD[/]MM
@@ -277,9 +292,8 @@ class RuleBasedNSWExpander(NSWExpander):
             # DD[/]MM[/]YYYY
             if re.match(r"^\d{1,2}/\d{1,2}/\d{2,4}$", date_str):
                 d, m, y = re.split(r"/", date_str)[:3]
-                prefix = "mùng " if len(d.lstrip("0")) == 1 or d == "10" else ""
                 return (
-                    f"{prefix}{self._number_expander.expand_number(d)} tháng "
+                    f"{self._number_expander.expand_number(d)} tháng "
                     f"{self._number_expander.expand_number(m)} năm "
                     f"{self._number_expander.expand_number(y)}"
                 )
@@ -293,9 +307,8 @@ class RuleBasedNSWExpander(NSWExpander):
             # DD [-] DD[/]MM[/]YYYY
             elif re.match(r"^\d{1,2}\s*-\s*\d{1,2}/\d{1,2}/\d{2,4}$", date_str):
                 d1, d2 = re.split(r"\s*-\s*", date_str)[:2]
-                prefix = "mùng " if len(d1.lstrip("0")) == 1 or d1 == "10" else ""
                 return (
-                    f"{prefix}{self._number_expander.expand_number(d1)} đến ngày "
+                    f"{self._number_expander.expand_number(d1)} đến ngày "
                     f"{self.expand_date(d2)}"
                 )
             # DD[/]MM[/]YYYY [-] DD[/]MM[/]YYYY
@@ -351,16 +364,23 @@ class RuleBasedNSWExpander(NSWExpander):
             if re.match(r"^u\.?\d{2}$", sequence_lower):
                 return f"u {self._number_expander.expand_number(sequence_lower[1:])}"
 
-            if sequence_lower in self._vn_dict:
+            # Only expand single character words if in english mode
+            if sequence_lower in self._vn_dict and (
+                not english or len(sequence_lower) > 1
+            ):
                 return sequence
 
             result = []
-            for char in sequence_lower:
+            idx = 0
+            while idx < len(sequence_lower):
+                char = sequence_lower[idx]
                 if not char.strip():
+                    idx += 1
                     continue
 
                 if char in self._no_norm_list:
                     result.append(char)
+                    idx += 1
                     continue
 
                 if char in (
@@ -370,13 +390,33 @@ class RuleBasedNSWExpander(NSWExpander):
                         else SEQUENCE_PHONES_VI_MAPPING
                     )
                 ):
-                    result.append(mapping[char])
-                elif char.isnumeric():
-                    result.append(NUMBER_MAPPING[char])
+                    result.append(
+                        mapping[char].capitalize()
+                        if sequence[idx].isupper()
+                        else mapping[char]
+                    )
+                    idx += 1
+                elif char.isdigit():
+                    digit_idx = idx
+                    number = ""
+                    while (
+                        digit_idx < len(sequence_lower)
+                        and sequence_lower[digit_idx].isdigit()
+                    ):
+                        number += sequence_lower[digit_idx]
+                        digit_idx += 1
+
+                    if number[0] != "0" and len(number) <= 4:
+                        result.append(self._number_expander.expand_number(number))
+                    else:
+                        result.extend(NUMBER_MAPPING[c] for c in number)
+                    idx = digit_idx
                 elif char in MONEY_UNITS_MAPPING:
                     result.append(MONEY_UNITS_MAPPING[char])
+                    idx += 1
                 else:
                     result.append(char)
+                    idx += 1
 
             return " ".join(result)
 
@@ -410,36 +450,37 @@ class RuleBasedNSWExpander(NSWExpander):
         ) -> str:
             """Expand an abbreviation using context."""
 
-            # Remove hyphens
-            abbr = re.sub(r"\s*-\s*", "", abbr)
-            # Split the abbreviation into parts
-            parts = list(filter(len, re.split(r"\.+|\s+", abbr)))
+            if abbr not in self._abbr_dict:
+                # Remove hyphens
+                abbr = re.sub(r"\s*-\s*", "", abbr)
+                # Split the abbreviation into parts
+                parts = list(filter(len, re.split(r"\.+|\s+", abbr)))
 
-            # If the abbreviation has more than one part but is in the dictionary when joined (e.g. TP.HCM), expand it recursively
-            if "".join(parts) in self._abbr_dict and len(parts) > 1:
-                return self.expand_abbreviation(
-                    "".join(parts), left_context, right_context
-                )
+                # If the abbreviation has more than one part but is in the dictionary when joined (e.g. TP.HCM), expand it recursively
+                if (new_abbr := "".join(parts)) in self._abbr_dict and len(parts) > 1:
+                    return self.expand_abbreviation(
+                        new_abbr, left_context, right_context
+                    )
 
-            # Otherwise, expand parts one by one
-            if len(parts) > 1:
-                result = []
-                for part in parts:
-                    if part.isnumeric():
-                        result.append(self._number_expander.expand_number(part))
-                    else:
-                        result.append(
-                            self.expand_abbreviation(
-                                part,
-                                " ".join([left_context, *result]),
-                                f"LABB {right_context}",
+                # Otherwise, expand parts one by one
+                if len(parts) > 1:
+                    result = []
+                    for part in parts:
+                        if part.replace(",", "").isdigit():
+                            result.append(self._number_expander.expand_number(part))
+                        else:
+                            result.append(
+                                self.expand_abbreviation(
+                                    part,
+                                    " ".join([left_context, *result]),
+                                    f"LABB {right_context}",
+                                )
                             )
-                        )
-                return " ".join(result)
-            elif len(parts):
-                abbr = parts[0]
-            else:
-                return ""
+                    return " ".join(result)
+                elif len(parts):
+                    abbr = parts[0]
+                else:
+                    return ""
 
             # Handle patterns like "ABC123"
             if re.match(r"^[^0-9]+\d+$", abbr):
@@ -511,7 +552,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def _expand_one_word(self, word: str) -> str:
             """Expand numeric word or return unchanged. Need more refined handling later."""
-            if word.isnumeric():
+            if word.isdigit():
                 return self._number_expander.expand_number(word)
             return word
 
@@ -707,16 +748,20 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 if not found:
                     result.append(
-                        self._sequence_expander.expand_sequence(tokens[start_idx])
+                        self._sequence_expander.expand_sequence(
+                            tokens[start_idx], english=tokens[start_idx] != "@"
+                        )
                     )
                     start_idx += 1
 
             if start_idx < len(tokens):
                 result.append(
-                    self._sequence_expander.expand_sequence(tokens[start_idx])
+                    self._sequence_expander.expand_sequence(
+                        tokens[start_idx], english=tokens[start_idx] != "@"
+                    )
                 )
 
-            return " ".join(filter(len, result))
+            return re.sub(r"\s*\.\s*", " chấm ", " ".join(filter(len, result))).strip()
 
     def __init__(
         self,

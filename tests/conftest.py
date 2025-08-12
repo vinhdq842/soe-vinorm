@@ -76,5 +76,9 @@ def tokenize_examples() -> List[Tuple[str, List[str]]]:
         (
             'Như nhìn nhận của một số nhà chuyên môn, hiện nay nếu muốn chinh phục người nghe, bên cạnh kỹ thuật tốt, giọng hát nội lực, còn phải chú trọng đến những yếu tố tiếp cận đại chúng (phải có ca khúc riêng, âm nhạc phù hợp xu hướng, hình ảnh/vũ đạo thu hút…). "Có thể nói, với Về với em, Võ Hạ Trâm thành công khi đã bước ra vùng an toàn của mình.',
             ['Như', 'nhìn', 'nhận', 'của', 'một', 'số', 'nhà', 'chuyên', 'môn', ',', 'hiện', 'nay', 'nếu', 'muốn', 'chinh', 'phục', 'người', 'nghe', ',', 'bên', 'cạnh', 'kỹ', 'thuật', 'tốt', ',', 'giọng', 'hát', 'nội', 'lực', ',', 'còn', 'phải', 'chú', 'trọng', 'đến', 'những', 'yếu', 'tố', 'tiếp', 'cận', 'đại', 'chúng', 'phải', 'có', 'ca', 'khúc', 'riêng', ',', 'âm', 'nhạc', 'phù', 'hợp', 'xu', 'hướng', ',', 'hình', 'ảnh/vũ', 'đạo', 'thu', 'hút', '…', '.', 'Có', 'thể', 'nói', ',', 'với', 'Về', 'với', 'em', ',', 'Võ', 'Hạ', 'Trâm', 'thành', 'công', 'khi', 'đã', 'bước', 'ra', 'vùng', 'an', 'toàn', 'của', 'mình', '.']        
+        ),
+        (
+            'Tại giải vô địch điền kinh toàn trường hồi tháng 12/2024, thành tích 10 giây 04 của Gout, khi đó mới 16 tuổi, không được công nhận vì chạy thuận chiều gió là 3,4m/giây.',
+            ['Tại', 'giải', 'vô', 'địch', 'điền', 'kinh', 'toàn', 'trường', 'hồi', 'tháng', '12/2024', ',', 'thành', 'tích', '10', 'giây', '04', 'của', 'Gout', ',', 'khi', 'đó', 'mới', '16', 'tuổi', ',', 'không', 'được', 'công', 'nhận', 'vì', 'chạy', 'thuận', 'chiều', 'gió', 'là', '3,4m/giây', '.']
         )
     ]

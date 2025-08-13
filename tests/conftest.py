@@ -80,5 +80,13 @@ def tokenize_examples() -> List[Tuple[str, List[str]]]:
         (
             'Tại giải vô địch điền kinh toàn trường hồi tháng 12/2024, thành tích 10 giây 04 của Gout, khi đó mới 16 tuổi, không được công nhận vì chạy thuận chiều gió là 3,4m/giây.',
             ['Tại', 'giải', 'vô', 'địch', 'điền', 'kinh', 'toàn', 'trường', 'hồi', 'tháng', '12/2024', ',', 'thành', 'tích', '10', 'giây', '04', 'của', 'Gout', ',', 'khi', 'đó', 'mới', '16', 'tuổi', ',', 'không', 'được', 'công', 'nhận', 'vì', 'chạy', 'thuận', 'chiều', 'gió', 'là', '3,4m/giây', '.']
+        ),
+        (
+            'Bài về sự tạo bọt khí trong ly champagne liên quan áp suất, âm học, lực ma sát nhớt, được đánh giá là điểm nhấn văn hóa, đưa ẩm thực Pháp vào đề thi IPhO.',
+            ['Bài', 'về', 'sự', 'tạo', 'bọt', 'khí', 'trong', 'ly', 'champagne', 'liên', 'quan', 'áp', 'suất', ',', 'âm', 'học', ',', 'lực', 'ma', 'sát', 'nhớt', ',', 'được', 'đánh', 'giá', 'là', 'điểm', 'nhấn', 'văn', 'hóa', ',', 'đưa', 'ẩm', 'thực', 'Pháp', 'vào', 'đề', 'thi', 'IPhO', '.']
+        ),
+        (
+            'Ngày 8.11, TAND H.Nghĩa Hành (Quảng Ngãi) xét xử sơ thẩm vụ án hình sự đối với bị cáo Nguyễn Vũ Duy Anh (32 tuổi, ở TT.Sông Vệ, H.Tư Nghĩa, Quảng Ngãi) về tội chống người thi hành công vụ và tuyên phạt 15 tháng tù.',
+            ['Ngày', '8.11', ',', 'TAND', 'H', '.', 'Nghĩa', 'Hành', 'Quảng', 'Ngãi', 'xét', 'xử', 'sơ', 'thẩm', 'vụ', 'án', 'hình', 'sự', 'đối', 'với', 'bị', 'cáo', 'Nguyễn', 'Vũ', 'Duy', 'Anh', '32', 'tuổi', ',', 'ở', 'TT', '.', 'Sông', 'Vệ', ',', 'H', '.', 'Tư', 'Nghĩa', ',', 'Quảng', 'Ngãi', 'về', 'tội', 'chống', 'người', 'thi', 'hành', 'công', 'vụ', 'và', 'tuyên', 'phạt', '15', 'tháng', 'tù', '.']
         )
     ]

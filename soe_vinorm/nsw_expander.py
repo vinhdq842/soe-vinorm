@@ -249,12 +249,12 @@ class RuleBasedNSWExpander(NSWExpander):
                     f"{self._number_expander.expand_number(h1)} đến "
                     f"{self.expand_time(h2)}"
                 )
-            # HH[hg] [-] HH[hg]
-            elif re.match(r"^\d{1,2}[hg]\s*-\s*\d{1,2}[hg]$", time_str):
+            # HH[hg](MM)* [-] HH[hg](MM)*
+            elif re.match(r"^\d{1,2}[hg]\d{0,2}\s*-\s*\d{1,2}[hg]\d{0,2}$", time_str):
                 h1, h2 = re.split(r"\s*-\s*", time_str)[:2]
                 return f"{self.expand_time(h1)} đến {self.expand_time(h2)}"
-            # HH[:hg]MM [-] HH[:hg]MM
-            elif re.match(r"^\d{1,2}[:hg]\d{1,2}\s*-\s*\d{1,2}[:hg]\d{1,2}$", time_str):
+            # HH[:]MM [-] HH[:]MM
+            elif re.match(r"^\d{1,2}:\d{1,2}\s*-\s*\d{1,2}:\d{1,2}$", time_str):
                 t1, t2 = re.split(r"\s*-\s*", time_str)[:2]
                 return f"{self.expand_time(t1)} đến {self.expand_time(t2)}"
 
@@ -718,9 +718,9 @@ class RuleBasedNSWExpander(NSWExpander):
     class UrlExpander:
         """Handles expansion of URLs using lexicon-based maximum matching (https://arxiv.org/abs/2209.02971)."""
 
-        def __init__(self, sequence_expander, nosign_dict):
+        def __init__(self, sequence_expander, no_tone_dict):
             self._sequence_expander = sequence_expander
-            self._nosign_dict = nosign_dict
+            self._no_tone_dict = no_tone_dict
 
         def expand_url(self, url: str) -> str:
             """Expand URLs using lexicon-based maximum matching."""
@@ -740,7 +740,7 @@ class RuleBasedNSWExpander(NSWExpander):
                     candidate_str = "".join(candidate)
 
                     if (
-                        candidate_str.lower() in self._nosign_dict
+                        candidate_str.lower() in self._no_tone_dict
                         and len(candidate_str) > 1
                     ):
                         result.append(candidate_str)
@@ -777,7 +777,7 @@ class RuleBasedNSWExpander(NSWExpander):
         """
         self._vn_dict = set(vn_dict or load_vietnamese_syllables())
         self._abbr_dict = abbr_dict or load_abbreviation_dict()
-        self._nosign_dict = set(map(unidecode, self._vn_dict))
+        self._no_tone_dict = set(map(unidecode, self._vn_dict))
 
         # no normalization for these characters
         self._no_norm_list = [".", ",", ":", ";", "!", "?", "...", "-", "/", "\\"]
@@ -814,7 +814,7 @@ class RuleBasedNSWExpander(NSWExpander):
             self._number_expander, self._sequence_expander, self._vn_dict
         )
         self._url_expander = self.UrlExpander(
-            self._sequence_expander, self._nosign_dict
+            self._sequence_expander, self._no_tone_dict
         )
 
         self._expanders = {
@@ -857,15 +857,18 @@ class RuleBasedNSWExpander(NSWExpander):
             if tags[i] == "O":
                 # Normal words
                 word = words[i]
-                left_context.append(word.lower())
+                word_lower = word.lower()
+                left_context.append(word_lower)
                 if (
-                    word.lower() in self._vn_dict and len(word) > 1
-                ) or word in self._no_norm_list:
+                    (word_lower in self._vn_dict or word_lower in self._no_tone_dict)
+                    and len(word) > 1
+                    or word in self._no_norm_list
+                ):
                     results.append(word)
                 else:
                     results.extend(
                         self._sequence_expander.expand_sequence(part)
-                        for part in re.split(r"([/\\])", word)
+                        for part in re.split(r"([/\\.])", word)
                         if part
                     )
                 i += 1

@@ -270,6 +270,8 @@ class TextPreprocessor(TextProcessor):
             Tuple of (can_separate, separated_parts)
         """
         parts = list(filter(len, re.split(self._VIETNAMESE_CAPITAL_SPLIT, token)))
+        if len(parts) <= 1:
+            return True, parts
 
         def check_dict(part: str) -> bool:
             """Check if a part exists in the Vietnamese dictionary."""
@@ -280,7 +282,11 @@ class TextPreprocessor(TextProcessor):
                 return unidecode.unidecode(part_lower) in "ueoai"
             return False
 
-        can_separate = all(check_dict(part) for part in parts)
+        all_parts_in_dict = all(check_dict(part) or "." in part for part in parts)
+        any_part_contains_toned_chars = any(
+            unidecode.unidecode(part) != part for part in parts
+        )
+        can_separate = all_parts_in_dict or any_part_contains_toned_chars
         return can_separate, parts
 
 

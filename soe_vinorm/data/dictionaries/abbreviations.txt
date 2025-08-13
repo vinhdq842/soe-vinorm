@@ -564,12 +564,13 @@ GPXD:giấy phép xây dựng
 gpxd:giấy phép xây dựng
 GS:Giáo sư
 gs:Giáo sư
-GSTS:Giáo sư Tiến sỹ
-gsts:Giáo sư Tiến sỹ
-GS.TS:Giáo sư Tiến sỹ
-GSTSKH:Giáo sư Tiến sỹ Khoa học
-gstskh:Giáo sư Tiến sỹ Khoa học
-GS.TSKH:Giáo sư Tiến sỹ Khoa học
+GSTS:Giáo sư Tiến sĩ
+gsts:Giáo sư Tiến sĩ
+GS.TS:Giáo sư Tiến sĩ
+GSTSKH:Giáo sư Tiến sĩ Khoa học
+gstskh:Giáo sư Tiến sĩ Khoa học
+GS.TSKH:Giáo sư Tiến sĩ Khoa học
+GS.TS.BS:Giáo sư Tiến sĩ Bác sĩ
 GSTT:giám sát trọng tài
 gstt:giám sát trọng tài
 GT:giao thông,giá trị
@@ -1049,12 +1050,12 @@ NQ:Nghị quyết
 nq:Nghị quyết
 NQD:ngoài quốc doanh
 nqd:ngoài quốc doanh
-NS:nghệ sỹ
-ns:nghệ sỹ
-NSND:nghệ sỹ nhân dân
-nsnd:nghệ sỹ nhân dân
-NSƯT:Nghệ sỹ ưu tú
-nsưt:Nghệ sỹ ưu tú
+NS:Nghệ sĩ
+ns:Nghệ sĩ
+NSND:Nghệ sĩ nhân dân
+nsnd:Nghệ sĩ nhân dân
+NSƯT:Nghệ sĩ ưu tú
+nsưt:Nghệ sĩ ưu tú
 NSNN:ngân sách nhà nước
 nsnn:ngân sách nhà nước
 NST:nhiễm sắc thể
@@ -1516,10 +1517,10 @@ TQ:Trung Quốc
 tq:Trung Quốc
 TSDĐ:tiền sử dụng đất,tái sử dụng đất
 tsdđ:tiền sử dụng đất,tái sử dụng đất
-TSKH:Tiến sỹ Khoa học
-tskh:Tiến sỹ Khoa học
-TS:Tiến sĩ
-ts:Tiến sĩ
+TSKH:Tiến sĩ Khoa học
+tskh:Tiến sĩ Khoa học
+TS:Tiến sĩ,Thí sinh
+ts:Tiến sĩ,Thí sinh
 TS-BS:Tiến sĩ Bác sĩ
 TS.BS:Tiến sĩ Bác sĩ
 TT:thông tin,truyền thông,thị trường,trung tâm,thể thao,thị trấn
@@ -1798,8 +1799,8 @@ PB:phiếu báo
 pb:phiếu báo
 SY:Bản sao y
 sy:Bản sao y
-SL:Bản sao lục
-sl:Bản sao lục
+SL:Bản sao lục,số lượng
+sl:Bản sao lục,số lượng
 FB:facebook
 fb:facebook
 ThS:Thạc sĩ
@@ -1817,6 +1818,7 @@ ttr:tờ trình
 thg:thân gửi
 th/g:thân gửi
 vv:về việc
+v.v:vân vân
 v/v:về việc
 cty:công ty
 ngta:người ta

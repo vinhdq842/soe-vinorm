@@ -859,12 +859,17 @@ class RuleBasedNSWExpander(NSWExpander):
                 word = words[i]
                 word_lower = word.lower()
                 left_context.append(word_lower)
+
+                # Is in default Vietnamese dictionary or no tone dictionary
                 if (
                     (word_lower in self._vn_dict or word_lower in self._no_tone_dict)
                     and len(word) > 1
                     or word in self._no_norm_list
                 ):
                     results.append(word)
+                # In case the detector does not work well, only consider numbers with 1-8 digits
+                elif re.match(r"^-?\d[\d.,]{0,8}$", word):
+                    results.append(self._number_expander.expand_number(word))
                 else:
                     results.extend(
                         self._sequence_expander.expand_sequence(part)

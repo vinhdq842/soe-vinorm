@@ -55,6 +55,9 @@ class RuleBasedNSWExpander(NSWExpander):
             for char in digit:
                 if char in NUMBER_MAPPING:
                     result.append(NUMBER_MAPPING[char])
+                else:
+                    result.append(char)
+
             return " ".join(result)
 
         def expand_number(self, number: str) -> str:
@@ -581,7 +584,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def expand_version(self, version: str) -> str:
             """Expand version numbers."""
-            if re.match(r"^\d(\.\d+)*$", version):
+            if re.match(r"^\d+(\.\d+)*$", version):
                 return " chấm ".join(
                     self._number_expander.expand_number(num)
                     for num in version.split(".")
@@ -598,7 +601,7 @@ class RuleBasedNSWExpander(NSWExpander):
             """Expand fractions."""
             parts = list(filter(len, re.split(r"[/:]", fraction)))
             return " trên ".join(
-                self._number_expander.expand_number(part) for part in parts
+                self._number_expander.expand_number(part) for part in parts if part
             )
 
     class MoneyExpander:
@@ -611,9 +614,13 @@ class RuleBasedNSWExpander(NSWExpander):
             """Expand money amounts."""
             value = re.sub(r"[^0-9,.\s]", "", money)
             unit = re.sub(r"[0-9,.\s]", "", money)
+
             result = self._number_expander.expand_number(value)
             if unit in MONEY_UNITS_MAPPING:
                 result += f" {MONEY_UNITS_MAPPING[unit]}"
+            else:
+                result += f" {unit}"
+
             return result.strip()
 
     class ScoreExpander:
@@ -686,19 +693,21 @@ class RuleBasedNSWExpander(NSWExpander):
             measure = measure.strip()
 
             # Pure number
-            if re.match(r"^[0-9.,]+$", measure):
+            if re.match(r"^-?[0-9.,]+$", measure):
                 return self._number_expander.expand_number(measure)
             # Units only
             elif re.match(r"^[^0-9/][^/]*(\s*/\s*[^/]+)*$", measure):
                 units = re.split(r"\s*/\s*", measure)
                 return " trên ".join(self._expand_unit(unit) for unit in units)
             # number - number unit
-            elif re.match(r"^[0-9.,]+\s*[-–]\s*.*$", measure):
+            elif re.match(r"^-?[0-9.,]+\s*[-–]\s*.*$", measure):
                 n, m = re.split(r"\s*[-–]\s*", measure)[:2]
                 return f"{self._number_expander.expand_number(n)} đến {self.expand_measure(m)}"
             # number unit
-            elif re.match(r"^[0-9.,]+[^0-9.,][^.,]*$", measure):
-                n, u = re.search(r"^([0-9.,]+)([^0-9.,][^.,]*)$", measure).groups()[:2]
+            elif re.match(r"^-?[0-9.,]+[^0-9.,][^.,]*$", measure):
+                n, u = re.search(r"^(-?[0-9.,]+)([^0-9.,][^.,]*)$", measure).groups()[
+                    :2
+                ]
                 return (
                     f"{self._number_expander.expand_number(n)} {self.expand_measure(u)}"
                 )
@@ -780,7 +789,20 @@ class RuleBasedNSWExpander(NSWExpander):
         self._no_tone_dict = set(map(unidecode, self._vn_dict))
 
         # no normalization for these characters
-        self._no_norm_list = [".", ",", ":", ";", "!", "?", "...", "-", "/", "\\"]
+        self._no_norm_list = [
+            ".",
+            ",",
+            ":",
+            ";",
+            "!",
+            "?",
+            "...",
+            "-",
+            "–",
+            "/",
+            "\\",
+            "~",
+        ]
 
         self._number_expander = self.NumberExpander()
         self._sequence_expander = self.SequenceExpander(
@@ -859,12 +881,17 @@ class RuleBasedNSWExpander(NSWExpander):
                 word = words[i]
                 word_lower = word.lower()
                 left_context.append(word_lower)
+
+                # Is in default Vietnamese dictionary or no tone dictionary
                 if (
                     (word_lower in self._vn_dict or word_lower in self._no_tone_dict)
                     and len(word) > 1
                     or word in self._no_norm_list
                 ):
                     results.append(word)
+                # In case the detector does not work well, only consider numbers with 1-8 digits
+                elif re.match(r"^-?\d[\d.,]{0,8}$", word):
+                    results.append(self._number_expander.expand_number(word))
                 else:
                     results.extend(
                         self._sequence_expander.expand_sequence(part)

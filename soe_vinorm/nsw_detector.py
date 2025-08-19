@@ -266,7 +266,7 @@ class CRFNSWDetector(NSWDetector):
             raise TypeError("tokenized_text must be a list of strings")
 
         features = [self._feature_extractor.extract_features(tokenized_text)]
-        return self._crf.predict(features)[0].tolist()
+        return self._crf.predict(features)[0]
 
     def batch_detect(self, tokenized_texts: List[List[str]]) -> List[List[str]]:
         """
@@ -287,7 +287,7 @@ class CRFNSWDetector(NSWDetector):
         features = [
             self._feature_extractor.extract_features(text) for text in tokenized_texts
         ]
-        return self._crf.predict(features).tolist()
+        return self._crf.predict(features)
 
     def get_labels(self) -> List[str]:
         """

@@ -32,7 +32,7 @@ class TextPreprocessor(TextProcessor):
     _PUNCTUATION_TOKENS = r"\s*([$€¥₫₭฿₹₽₱!⇒°<>…;!\\|])\s*"
     _NUMERIC_PATTERN = r"^[0-9%:.,/-]+$"
     _RANGE_PATTERN = r"^([0-9.]+(,[0-9]+)?)([-~][0-9.]+(,[0-9]+)?)*$"
-    _URL_PATTERN = r"((https?|ftp)://)?(www)?.*(\.(com|org|net|int|edu|gov|mil|co|tk|io|us|tv|ws|fr|de|cn|vn|biz|blog|fr|lol|cc|cf|ga|ml|info)).*"
+    _URLE_PATTERN = r"((https?|ftp)://)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9@]*(\.[a-zA-Z0-9][-a-zA-Z0-9@]*)*(\.(com|org|net|int|edu|gov|mil|co|tk|io|us|tv|ws|fr|de|cn|vn|biz|blog|lol|cc|cf|ga|ml|info))(\/[^\s]*)?"
     _VIETNAMESE_CAPITAL_PATTERN = r"([A-ZÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ][a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹý]+)+"
     _VIETNAMESE_CAPITAL_SPLIT = r"([A-ZÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ][a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹý]+)"
     _VIETNAMESE_CHARS = r"[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]"
@@ -40,7 +40,7 @@ class TextPreprocessor(TextProcessor):
     _VN_CHAR_PUNCT_NUMBER_PATTERN = r"([a-zA-Z]*[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ][a-zA-Z]*)([+:,.&?]*)([0-9])"
     _NUMBER_PUNCT_VN_CHAR_PATTERN = r"([0-9])([+:,.&?]*)([a-zA-Z]*[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ][a-zA-Z]*)"
     _MULTIPLE_DOTS = r"(\s*\.\s*){3,}"
-    _NUMBER_SEPARATOR = r"(?<=[0-9])\s*([-/])\s*(?=[0-9])"
+    _NUMBER_SEPARATOR = r"(?<![0-9,.])([0-9]{1,4})\s*([-/])\s*([0-9]{1,4})(?![0-9,.])"
     _COLON_COMMA_PATTERN = r"(?<=[0-9])\s*([:,])\s*(?=[^0-9]|$)"
 
     def __init__(self, vn_dict: Union[List[str], None] = None):
@@ -79,7 +79,7 @@ class TextPreprocessor(TextProcessor):
         # Step 7: Process tokens
         text = self._process_all_tokens(text)
 
-        # Step 8: Concatenate numbers separated by specific symbols
+        # Step 8: Concatenate numbers separated by specific symbols, as it may be a date or a range (e.g. 23 - 8 -> 23-8)
         return self._concatenate_number_separators(text)
 
     def _normalize_unicode(self, text: str) -> str:
@@ -124,7 +124,7 @@ class TextPreprocessor(TextProcessor):
 
     def _concatenate_number_separators(self, text: str) -> str:
         """Concatenate numbers separated by specific symbols."""
-        return re.sub(self._NUMBER_SEPARATOR, r"\1", text)
+        return re.sub(self._NUMBER_SEPARATOR, r"\1\2\3", text)
 
     def _process_token(self, token: str) -> List[str]:
         """Process a single token."""
@@ -165,9 +165,9 @@ class TextPreprocessor(TextProcessor):
         if self._is_numeric_or_range_pattern(token):
             return [token]
 
-        # Check if it's a URL
-        if self._is_url_pattern(token):
-            return self._process_url(token)
+        # Check if it contains URL or email patterns
+        if self._contains_url_email_pattern(token):
+            return self._process_url_email(token)
 
         # Check if it's Vietnamese concatenated syllables with each's first letter is capital
         if self._is_vietnamese_concatenated_with_capital_first(token):
@@ -186,9 +186,9 @@ class TextPreprocessor(TextProcessor):
             self._RANGE_PATTERN, token
         )
 
-    def _is_url_pattern(self, token: str) -> bool:
-        """Check if token matches URL patterns."""
-        return bool(re.match(self._URL_PATTERN, token))
+    def _contains_url_email_pattern(self, token: str) -> bool:
+        """Check if token contains URL or email patterns."""
+        return bool(re.search(self._URLE_PATTERN, token))
 
     def _is_vietnamese_concatenated_with_capital_first(self, token: str) -> bool:
         """Check if token is Vietnamese concatenated syllables with each's first letter is capital."""
@@ -204,12 +204,20 @@ class TextPreprocessor(TextProcessor):
             token.upper() == token or re.search(self._VIETNAMESE_CHARS, token)
         ) and not re.search(r"[-0-9,.]+", token)
 
-    def _process_url(self, token: str) -> List[str]:
-        """Process URL patterns."""
+    def _process_url_email(self, token: str) -> List[str]:
+        """Process URL or email patterns."""
         parts = re.split(r"(,)", token)
-        result = [parts[0]]
-        for part in parts[1:]:
-            result.extend(self._process_token(part))
+        result = []
+        for part in parts:
+            last_index = 0
+            for match in re.finditer(self._URLE_PATTERN, part):
+                if match.start() > last_index:
+                    result.extend(self._process_token(part[last_index : match.start()]))
+                result.append(part[match.start() : match.end()])
+                last_index = match.end()
+            if last_index < len(part):
+                result.extend(self._process_token(part[last_index:]))
+
         return result
 
     def _process_vietnamese_concatenated_with_capital_first(
@@ -222,6 +230,7 @@ class TextPreprocessor(TextProcessor):
             for part in parts:
                 result.extend(self._process_token(part))
             return result
+
         return parts
 
     def _process_vietnamese_or_uppercase(self, token: str) -> List[str]:
@@ -287,6 +296,7 @@ class TextPreprocessor(TextProcessor):
             unidecode.unidecode(part) != part for part in parts
         )
         can_separate = all_parts_in_dict or any_part_contains_toned_chars
+
         return can_separate, parts
 
 

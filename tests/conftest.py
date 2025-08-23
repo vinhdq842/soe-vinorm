@@ -88,5 +88,13 @@ def tokenize_examples() -> List[Tuple[str, List[str]]]:
         (
             'Ngày 8.11, TAND H.Nghĩa Hành (Quảng Ngãi) xét xử sơ thẩm vụ án hình sự đối với bị cáo Nguyễn Vũ Duy Anh (32 tuổi, ở TT.Sông Vệ, H.Tư Nghĩa, Quảng Ngãi) về tội chống người thi hành công vụ và tuyên phạt 15 tháng tù.',
             ['Ngày', '8.11', ',', 'TAND', 'H', '.', 'Nghĩa', 'Hành', 'Quảng', 'Ngãi', 'xét', 'xử', 'sơ', 'thẩm', 'vụ', 'án', 'hình', 'sự', 'đối', 'với', 'bị', 'cáo', 'Nguyễn', 'Vũ', 'Duy', 'Anh', '32', 'tuổi', ',', 'ở', 'TT', '.', 'Sông', 'Vệ', ',', 'H', '.', 'Tư', 'Nghĩa', ',', 'Quảng', 'Ngãi', 'về', 'tội', 'chống', 'người', 'thi', 'hành', 'công', 'vụ', 'và', 'tuyên', 'phạt', '15', 'tháng', 'tù', '.']
+        ),
+        (
+            'Link Github:https://github.com/abc/d-ef-GHI\nLink Space Demo: https://huggingface.co/spaces/abc/d-ef-GHI\nLink HF model: https://huggingface.co/abc/d-ef-GHI',
+            ['Link', 'Github', ':', 'https://github.com/abc/d-ef-GHI', 'Link', 'Space', 'Demo', ':', 'https://huggingface.co/spaces/abc/d-ef-GHI', 'Link', 'HF', 'model', ':', 'https://huggingface.co/abc/d-ef-GHI']
+        ),
+        (
+            'Lợi nhuận sau thuế	-5,221,102	9,266,401	23,773,787	-644,867	12  - 5',
+            ['Lợi', 'nhuận', 'sau', 'thuế', '-5,221,102', '9,266,401', '23,773,787', '-644,867', '12-5']
         )
     ]

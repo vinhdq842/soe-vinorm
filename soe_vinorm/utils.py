@@ -50,6 +50,7 @@ def load_abbreviation_dict() -> Dict[str, List[str]]:
 
 
 HF_MODEL_REPO_ID = "vinhdq842/soe-vinorm"
+HF_MODEL_REPO_REVISION = "b12f553"
 
 
 @lru_cache(maxsize=1)
@@ -62,6 +63,7 @@ def get_model_weights_path(cache_dir=None) -> Path:
         snapshot_download(
             repo_id=HF_MODEL_REPO_ID,
             cache_dir=str(cache_dir),
+            revision=HF_MODEL_REPO_REVISION,
             allow_patterns=[
                 "abbreviation_expander/v0.2/*",
                 "nsw_detector/*",

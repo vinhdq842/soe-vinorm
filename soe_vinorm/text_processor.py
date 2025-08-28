@@ -40,7 +40,7 @@ class TextPreprocessor(TextProcessor):
     _VN_CHAR_PUNCT_NUMBER_PATTERN = r"([a-zA-Z]*[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ][a-zA-Z]*)([+:,.&?]*)([0-9])"
     _NUMBER_PUNCT_VN_CHAR_PATTERN = r"([0-9])([+:,.&?]*)([a-zA-Z]*[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ][a-zA-Z]*)"
     _MULTIPLE_DOTS = r"(\s*\.\s*){3,}"
-    _NUMBER_SEPARATOR = r"(?<![0-9,.])([0-9]{1,4})\s*([-/])\s*([0-9]{1,4})(?![0-9,.])"
+    _NUMBER_SEPARATOR = r"(?<=[0-9])\s*([-/])\s+(?=[0-9])"
     _COLON_COMMA_PATTERN = r"(?<=[0-9])\s*([:,])\s*(?=[^0-9]|$)"
 
     def __init__(self, vn_dict: Union[List[str], None] = None):
@@ -124,7 +124,7 @@ class TextPreprocessor(TextProcessor):
 
     def _concatenate_number_separators(self, text: str) -> str:
         """Concatenate numbers separated by specific symbols."""
-        return re.sub(self._NUMBER_SEPARATOR, r"\1\2\3", text)
+        return re.sub(self._NUMBER_SEPARATOR, r"\1", text)
 
     def _process_token(self, token: str) -> List[str]:
         """Process a single token."""

@@ -91,7 +91,7 @@ class CRFNSWDetector(NSWDetector):
                 "is_last_word": int(index == len(tokenized_text) - 1),
                 "is_complete_capital": int(token.upper() == token),
                 "is_alphanumeric": int(self._is_alphanumeric(token)),
-                "is_numeric": int(self._is_numeric(token)),
+                "is_numeric": int(token.isdigit()),
                 # Context features
                 "prev_word": "" if index == 0 else tokenized_text[index - 1],
                 "next_word": ""
@@ -143,14 +143,6 @@ class CRFNSWDetector(NSWDetector):
         def _is_alphanumeric(self, token: str) -> bool:
             """Check if token contains both letters and numbers."""
             return bool(re.match(r"^(?=[^0-9]*[0-9])(?=[^a-zA-Z]*[a-zA-Z])", token))
-
-        def _is_numeric(self, token: str) -> bool:
-            """Check if token represents a numeric value"""
-            try:
-                float(token)
-                return True
-            except ValueError:
-                return False
 
         def _get_word_shape(self, token: str) -> str:
             """Get the word shape pattern."""

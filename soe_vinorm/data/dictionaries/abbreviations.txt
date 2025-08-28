@@ -1667,6 +1667,8 @@ VDC:vận dụng cao
 vdc:vận dụng cao
 VĐQG:vô địch Quốc gia
 vđqg:vô địch Quốc gia
+VĐTG:vô địch thế giới
+vđtg:vô địch thế giới
 VĐV:vận động viên
 vđv:vận động viên
 VĐVQG:Vận động viên Quốc gia
@@ -1685,6 +1687,7 @@ VHNT:Văn học Nghệ thuật
 vhnt:Văn học Nghệ thuật
 VHTT:Văn hóa thể thao,Văn hóa thông tin
 vhtt:Văn hóa thể thao,Văn hóa thông tin
+VH-TT:Văn hóa Thể thao
 VKS:Viện Kiểm sát
 vks:Viện Kiểm sát
 VKSND:Viện Kiểm sát Nhân dân
@@ -1888,6 +1891,7 @@ CMTND:chứng minh thư nhân dân
 cmtnd:chứng minh thư nhân dân
 CNC:công nghệ cao
 cnc:công nghệ cao
+CNCH:cứu nạn cứu hộ
 CNPM:công nghệ phần mềm
 cnpm:công nghệ phần mềm
 CPN:chuyển phát nhanh

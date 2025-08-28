@@ -91,7 +91,7 @@ Original: Theo phương án của Ban Quản lý dự án đường sắt, Bộ 
 Normalized: Theo phương án của Ban Quản lý dự án đường sắt , Bộ Xây dựng , tuyến đường sắt đô thị Thủ Thiêm - Long Thành có chiều dài khoảng bốn mươi hai ki lô mét , thiết kế đường đôi , khổ đường một nghìn bốn trăm ba mươi lăm mi li mét , tốc độ thiết kế một trăm hai mươi ki lô mét trên giờ .
 --------------------------------------------------
 Original: iPhone 16 Pro hiện có giá 999 USD cho phiên bản bộ nhớ 128 GB, và 1.099 USD cho bản 256 GB. Trong khi đó, mẫu 16 Pro Max có dung lượng khởi điểm 256 GB với giá 1.199 USD.
-Normalized: iPhone mười sáu Pro hiện có giá chín trăm chín mươi chín U Ét Dê cho phiên bản bộ nhớ một trăm hai mươi tám ghi ga bai , và một nghìn không trăm chín mươi chín U Ét Dê cho bản hai trăm năm mươi sáu ghi ga bai . Trong khi đó , mẫu mười sáu Pro Max có dung lượng khởi điểm hai trăm năm mươi sáu ghi ga bai với giá một nghìn một trăm chín mươi chín U Ét Dê .
+Normalized: iPhone mười sáu Pro hiện có giá chín trăm chín mươi chín U Ét Đê cho phiên bản bộ nhớ một trăm hai mươi tám ghi ga bai , và một nghìn không trăm chín mươi chín U Ét Đê cho bản hai trăm năm mươi sáu ghi ga bai . Trong khi đó , mẫu mười sáu Pro Max có dung lượng khởi điểm hai trăm năm mươi sáu ghi ga bai với giá một nghìn một trăm chín mươi chín U Ét Đê .
 --------------------------------------------------
 ```
 

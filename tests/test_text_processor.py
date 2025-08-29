@@ -29,6 +29,15 @@ class TestTextPreprocessor:
         result = preprocessor(text)
         assert result == "anh rất ngại"
 
+    def test_idempotent(self, tokenize_examples):
+        """Test that preprocessing is idempotent."""
+        preprocessor = TextPreprocessor()
+
+        for input_text, _ in tokenize_examples:
+            first_pass = preprocessor(input_text)
+            second_pass = preprocessor(first_pass)
+            assert first_pass == second_pass
+
     def test_call_complete_pipeline(self, vn_dict):
         """Test complete preprocessing pipeline."""
         preprocessor = TextPreprocessor(vn_dict=vn_dict)

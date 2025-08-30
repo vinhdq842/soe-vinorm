@@ -332,6 +332,8 @@ dd:dinh dưỡng,dân dụng
 đđ:động đất,đất đai
 DDVN:Duyên Dáng Việt Nam
 ddvn:Duyên Dáng Việt Nam
+ĐGNL:Đánh giá năng lực
+đgnl:Đánh giá năng lực
 ĐH:Đại học,Đại hội
 đh:Đại học,Đại hội
 ĐHBC:Đại học Bán công

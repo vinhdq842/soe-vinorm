@@ -52,7 +52,7 @@ class RuleBasedNSWExpander(NSWExpander):
         def expand_digit(self, digit: str) -> str:
             """Expand a single digit to its spoken form."""
             result = []
-            for char in digit:
+            for char in digit.replace(" ", ""):
                 if char in NUMBER_MAPPING:
                     result.append(NUMBER_MAPPING[char])
                 else:

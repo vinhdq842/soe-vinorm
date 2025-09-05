@@ -144,6 +144,11 @@ class TextPreprocessor(TextProcessor):
 
     def _extract_punctuation(self, token: str) -> Tuple[List[str], str, List[str]]:
         """Extract prefix and suffix punctuation from a token."""
+
+        # If it's a URL, don't extract prefix and suffix punctuation
+        if re.match(self._URLE_PATTERN, token):
+            return [], token, []
+
         suffix = []
         prefix = []
 

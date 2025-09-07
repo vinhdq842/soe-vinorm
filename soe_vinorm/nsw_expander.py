@@ -381,7 +381,7 @@ class RuleBasedNSWExpander(NSWExpander):
                     idx += 1
                     continue
 
-                if char in self._no_norm_list:
+                if char in self._no_norm_list and not english:
                     result.append(char)
                     idx += 1
                     continue
@@ -760,7 +760,8 @@ class RuleBasedNSWExpander(NSWExpander):
                 if not found:
                     result.append(
                         self._sequence_expander.expand_sequence(
-                            tokens[start_idx], english=tokens[start_idx] != "@"
+                            tokens[start_idx],
+                            english=tokens[start_idx] not in ["@", "."],
                         )
                     )
                     start_idx += 1
@@ -768,7 +769,7 @@ class RuleBasedNSWExpander(NSWExpander):
             if start_idx < len(tokens):
                 result.append(
                     self._sequence_expander.expand_sequence(
-                        tokens[start_idx], english=tokens[start_idx] != "@"
+                        tokens[start_idx], english=tokens[start_idx] not in ["@", "."]
                     )
                 )
 

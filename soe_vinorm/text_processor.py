@@ -51,7 +51,7 @@ class TextPreprocessor(TextProcessor):
             vn_dict: Optional list of Vietnamese syllables.
             If not provided, the default Vietnamese syllables will be used.
         """
-        self._vn_dict = set(vn_dict) if vn_dict else set(load_vietnamese_syllables())
+        self._vn_dict = set(vn_dict or load_vietnamese_syllables())
 
     def __call__(self, text: str) -> str:
         """Process the input text."""

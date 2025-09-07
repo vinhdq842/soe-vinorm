@@ -1,6 +1,7 @@
 import pickle
 import re
 from abc import ABC, abstractmethod
+from pathlib import Path
 from typing import Any, Dict, List, Set, Union
 
 from sklearn_crfsuite import CRF
@@ -47,8 +48,8 @@ class CRFNSWDetector(NSWDetector):
             Initialize the feature extractor.
 
             Args:
-                vn_dict: Set of Vietnamese words for dictionary lookup
-                abbr_dict: Set of abbreviations for abbreviation lookup
+                vn_dict: Set of Vietnamese words for dictionary lookup.
+                abbr_dict: Set of abbreviations for abbreviation lookup.
             """
             self._vn_dict = vn_dict
             self._abbr_dict = abbr_dict
@@ -58,10 +59,10 @@ class CRFNSWDetector(NSWDetector):
             Extract features for all tokens in the text.
 
             Args:
-                tokenized_text: List of tokens to extract features from
+                tokenized_text: List of tokens to extract features from.
 
             Returns:
-                List of feature dictionaries for each token
+                List of feature dictionaries for each token.
             """
             return [
                 self._extract_token_features(tokenized_text, i)
@@ -75,11 +76,11 @@ class CRFNSWDetector(NSWDetector):
             Extract features for a single token.
 
             Args:
-                tokenized_text: List of all tokens
-                index: Index of the current token
+                tokenized_text: List of all tokens.
+                index: Index of the current token.
 
             Returns:
-                Dictionary of features for the token
+                Dictionary of features for the token.
             """
             token = tokenized_text[index]
 
@@ -221,21 +222,26 @@ class CRFNSWDetector(NSWDetector):
         model_path: Union[str, None] = None,
         vn_dict: Union[List[str], None] = None,
         abbr_dict: Union[Dict[str, List[str]], None] = None,
+        **kwargs,
     ):
         """
         Initialize the CRF NSW detector.
 
         Args:
-            model_path: Path to the CRF model file. If None, uses default path.
-            vn_dict: List of Vietnamese words for dictionary lookup. If None, uses default Vietnamese syllables.
-            abbr_dict: Dictionary of abbreviations and their expansions. If None, uses default abbreviations.
+            model_path: Path to the model repository directory. If None, use default path.
+            vn_dict: List of Vietnamese words for dictionary lookup. If None, use default Vietnamese dictionary.
+            abbr_dict: Dictionary of abbreviations and their expansions. If None, use default abbreviation dictionary.
         """
         super().__init__()
 
         if model_path is None:
-            model_path = get_model_weights_path() / "nsw_detector" / "crf.pkl"
+            model_path = get_model_weights_path()
+        else:
+            model_path = Path(model_path)
 
-        with open(model_path, "rb") as f:
+        model_path = model_path / "nsw_detector"
+
+        with open(model_path / "crf.pkl", "rb") as f:
             self._crf: CRF = pickle.load(f)
 
         self._vn_dict = set(vn_dict or load_vietnamese_syllables())
@@ -247,10 +253,10 @@ class CRFNSWDetector(NSWDetector):
         Detect NSW labels for a single tokenized text.
 
         Args:
-            tokenized_text: List of tokens to classify
+            tokenized_text: List of tokens to classify.
 
         Returns:
-            List of labels for each token
+            List of labels for each token.
         """
         if not isinstance(tokenized_text, list) or not all(
             isinstance(token, str) for token in tokenized_text
@@ -265,10 +271,10 @@ class CRFNSWDetector(NSWDetector):
         Detect NSW labels for multiple tokenized texts.
 
         Args:
-            tokenized_texts: List of tokenized texts to classify
+            tokenized_texts: List of tokenized texts to classify.
 
         Returns:
-            List of label lists for each text
+            List of label lists for each text.
         """
         if not isinstance(tokenized_texts, list) or not all(
             isinstance(text, list) and all(isinstance(token, str) for token in text)
@@ -286,7 +292,7 @@ class CRFNSWDetector(NSWDetector):
         Get the list of possible labels for the CRF model.
 
         Returns:
-            List of BIO-style labels
+            List of BIO-style labels.
         """
         # Base labels for different NSW types
         base_labels = [

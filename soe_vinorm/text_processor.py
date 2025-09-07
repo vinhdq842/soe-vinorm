@@ -43,13 +43,12 @@ class TextPreprocessor(TextProcessor):
     _NUMBER_SEPARATOR = r"(?<=[0-9])\s*([-/])\s+(?=[0-9])"
     _COLON_COMMA_PATTERN = r"(?<=[0-9])\s*([:,])\s*(?=[^0-9]|$)"
 
-    def __init__(self, vn_dict: Union[List[str], None] = None):
+    def __init__(self, vn_dict: Union[List[str], None] = None, **kwargs):
         """
         Initialize the text preprocessor.
 
         Args:
-            vn_dict: Optional list of Vietnamese syllables.
-            If not provided, the default Vietnamese syllables will be used.
+            vn_dict: List of Vietnamese words for dictionary lookup. If None, use default Vietnamese dictionary.
         """
         self._vn_dict = set(vn_dict or load_vietnamese_syllables())
 

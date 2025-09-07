@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from concurrent.futures import ProcessPoolExecutor
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
+
+from tqdm import tqdm
 
 from soe_vinorm.nsw_detector import CRFNSWDetector
 from soe_vinorm.nsw_expander import RuleBasedNSWExpander
@@ -27,13 +29,16 @@ class Normalizer(ABC):
         ...
 
     @abstractmethod
-    def batch_normalize(self, texts: List[str], n_jobs: int = 1) -> List[str]:
+    def batch_normalize(
+        self, texts: List[str], n_jobs: int = 1, show_progress: bool = False
+    ) -> List[str]:
         """
         Normalize multiple texts efficiently.
 
         Args:
             texts: List of input texts to normalize.
             n_jobs: Number of jobs to run in parallel.
+            show_progress: Whether to show progress bar.
 
         Returns:
             List of normalized texts.
@@ -44,16 +49,16 @@ class Normalizer(ABC):
 def _worker_initializer(
     vn_dict: Union[List[str], None] = None,
     abbr_dict: Union[Dict[str, List[str]], None] = None,
-    nsw_model_path: Union[str, None] = None,
+    kwargs: Dict[str, Any] = {},
 ):
     """Initialize worker instances."""
     global worker_preprocessor, worker_detector, worker_expander
 
-    worker_preprocessor = TextPreprocessor(vn_dict)
-    worker_detector = CRFNSWDetector(
-        model_path=nsw_model_path, vn_dict=vn_dict, abbr_dict=abbr_dict
+    worker_preprocessor = TextPreprocessor(vn_dict, **kwargs)
+    worker_detector = CRFNSWDetector(vn_dict=vn_dict, abbr_dict=abbr_dict, **kwargs)
+    worker_expander = RuleBasedNSWExpander(
+        vn_dict=vn_dict, abbr_dict=abbr_dict, **kwargs
     )
-    worker_expander = RuleBasedNSWExpander(vn_dict=vn_dict, abbr_dict=abbr_dict)
 
 
 def _worker_normalize(text: str) -> str:
@@ -78,7 +83,7 @@ class SoeNormalizer(Normalizer):
         self,
         vn_dict: Optional[List[str]] = None,
         abbr_dict: Optional[Dict[str, List[str]]] = None,
-        nsw_model_path: Optional[str] = None,
+        **kwargs,
     ):
         """
         Initialize the effective Vietnamese normalizer.
@@ -86,21 +91,21 @@ class SoeNormalizer(Normalizer):
         Args:
             vn_dict: List of Vietnamese words for dictionary lookup. If None, use default Vietnamese dictionary.
             abbr_dict: Dictionary of abbreviations and their expansions. If None, use default abbreviation dictionary.
-            nsw_model_path: Path to NSW detection model. If None, use default NSW detection model.
         """
         self._vn_dict = vn_dict or load_vietnamese_syllables()
         self._abbr_dict = abbr_dict or load_abbreviation_dict()
-        self._nsw_model_path = nsw_model_path
+        self._kwargs = kwargs
 
-        self._preprocessor = TextPreprocessor(self._vn_dict)
+        self._preprocessor = TextPreprocessor(self._vn_dict, **kwargs)
         self._nsw_detector = CRFNSWDetector(
-            model_path=nsw_model_path,
             vn_dict=self._vn_dict,
             abbr_dict=self._abbr_dict,
+            **kwargs,
         )
         self._nsw_expander = RuleBasedNSWExpander(
             vn_dict=self._vn_dict,
             abbr_dict=self._abbr_dict,
+            **kwargs,
         )
 
     def normalize(self, text: str) -> str:
@@ -126,14 +131,16 @@ class SoeNormalizer(Normalizer):
 
         return " ".join(expanded_tokens)
 
-    def batch_normalize(self, texts: List[str], n_jobs: int = 1) -> List[str]:
+    def batch_normalize(
+        self, texts: List[str], n_jobs: int = 1, show_progress: bool = False
+    ) -> List[str]:
         """
-        Normalize multiple texts efficiently (optimization in-progress).
+        Normalize multiple texts efficiently.
 
         Args:
             texts: List of input texts to normalize.
             n_jobs: Number of jobs to run in parallel.
-
+            show_progress: Whether to show progress bar.
         Returns:
             List of normalized texts.
         """
@@ -146,21 +153,36 @@ class SoeNormalizer(Normalizer):
             raise ValueError("Number of jobs must be greater than 0")
 
         if n_jobs == 1:
-            return [self.normalize(text) for text in texts]
+            return [
+                self.normalize(text)
+                for text in tqdm(
+                    texts,
+                    desc="Normalizing texts",
+                    total=len(texts),
+                    disable=not show_progress,
+                )
+            ]
 
         with ProcessPoolExecutor(
             max_workers=n_jobs,
             initializer=_worker_initializer,
-            initargs=(self._vn_dict, self._abbr_dict, self._nsw_model_path),
+            initargs=(self._vn_dict, self._abbr_dict, self._kwargs),
         ) as executor:
-            return list(executor.map(_worker_normalize, texts))
+            return list(
+                tqdm(
+                    executor.map(_worker_normalize, texts),
+                    desc="Normalizing texts",
+                    total=len(texts),
+                    disable=not show_progress,
+                )
+            )
 
 
 def normalize_text(
     text: str,
     vn_dict: Optional[List[str]] = None,
     abbr_dict: Optional[Dict[str, List[str]]] = None,
-    nsw_model_path: Optional[str] = None,
+    **kwargs,
 ) -> str:
     """
     Quick normalization function.
@@ -169,7 +191,6 @@ def normalize_text(
         text: Input text to normalize.
         vn_dict: Optional Vietnamese dictionary. If None, use default Vietnamese dictionary.
         abbr_dict: Optional abbreviation dictionary. If None, use default abbreviation dictionary.
-        nsw_model_path: Path to NSW detection model. If None, use default NSW detection model.
 
     Returns:
         Normalized text.
@@ -177,7 +198,7 @@ def normalize_text(
     normalizer = SoeNormalizer(
         vn_dict=vn_dict,
         abbr_dict=abbr_dict,
-        nsw_model_path=nsw_model_path,
+        **kwargs,
     )
     return normalizer.normalize(text)
 
@@ -186,18 +207,19 @@ def batch_normalize_texts(
     texts: List[str],
     vn_dict: Optional[List[str]] = None,
     abbr_dict: Optional[Dict[str, List[str]]] = None,
-    nsw_model_path: Optional[str] = None,
     n_jobs: int = 1,
+    show_progress: bool = False,
+    **kwargs,
 ) -> List[str]:
     """
-    Batch normalization function (optimization in-progress).
+    Batch normalization function.
 
     Args:
         texts: List of input texts to normalize.
         vn_dict: Optional Vietnamese dictionary. If None, use default Vietnamese dictionary.
         abbr_dict: Optional abbreviation dictionary. If None, use default abbreviation dictionary.
-        nsw_model_path: Path to NSW detection model. If None, use default NSW detection model.
         n_jobs: Number of jobs to run in parallel.
+        show_progress: Whether to show progress bar.
 
     Returns:
         List of normalized texts.
@@ -205,6 +227,6 @@ def batch_normalize_texts(
     normalizer = SoeNormalizer(
         vn_dict=vn_dict,
         abbr_dict=abbr_dict,
-        nsw_model_path=nsw_model_path,
+        **kwargs,
     )
-    return normalizer.batch_normalize(texts, n_jobs=n_jobs)
+    return normalizer.batch_normalize(texts, n_jobs=n_jobs, show_progress=show_progress)

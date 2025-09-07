@@ -1,6 +1,7 @@
 import json
 import re
 from abc import ABC, abstractmethod
+from pathlib import Path
 from typing import Dict, List, Set, Union
 
 import numpy as np
@@ -39,9 +40,14 @@ class RuleBasedNSWExpander(NSWExpander):
     NSW expander using rule-based approach.
     """
 
+    @staticmethod
+    def _identity(text: str) -> str:
+        """Identity function that returns input unchanged."""
+        return text
+
     class NumberExpander:
         """
-        Handles expansion of numbers, digits, and numeric patterns.
+        Handle expansion of numbers, digits, and numeric patterns.
         """
 
         def __init__(self):
@@ -209,7 +215,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return str(number - subtract)
 
     class TimeDateExpander:
-        """Handles expansion of time and date patterns."""
+        """Handle expansion of time and date patterns."""
 
         def __init__(self, number_expander, sequence_expander):
             self._number_expander = number_expander
@@ -352,7 +358,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return self._sequence_expander.expand_sequence(month_str)
 
     class SequenceExpander:
-        """Handles expansion of sequences."""
+        """Handle expansion of sequences."""
 
         def __init__(self, number_expander, vn_dict: Set[str], no_norm_list: List[str]):
             self._number_expander = number_expander
@@ -424,19 +430,26 @@ class RuleBasedNSWExpander(NSWExpander):
             return " ".join(result)
 
     class AbbreviationExpander:
-        """Handles expansion of abbreviations using a likelihood scorer."""
+        """Handle expansion of abbreviations using a likelihood scorer."""
 
         def __init__(
             self,
             number_expander,
             sequence_expander,
             abbr_dict: Dict[str, List[str]],
+            model_path: Union[str, None] = None,
         ):
             self._abbr_dict = abbr_dict
             self._number_expander = number_expander
             self._sequence_expander = sequence_expander
 
-            model_path = get_model_weights_path() / "abbreviation_expander" / "v0.2"
+            if model_path is None:
+                model_path = get_model_weights_path()
+            else:
+                model_path = Path(model_path)
+
+            model_path = model_path / "abbreviation_expander" / "v0.2"
+
             self._scorer = InferenceSession(
                 model_path / "scorer.onnx",
                 providers=["CPUExecutionProvider"],
@@ -444,6 +457,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
             with open(model_path / "config.json", "r", encoding="utf-8") as f:
                 config = json.load(f)
+
             self._window_size = config["window_size"]
             self._vocab = config["vocab"]
             self._seq_len = config["seq_len"]
@@ -542,7 +556,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return " ".join(text.split()[: self._window_size])
 
     class ForeignWordExpander:
-        """Handles expansion of foreign words."""
+        """Handle expansion of foreign words."""
 
         def __init__(self, number_expander, sequence_expander, vn_dict: Set[str]):
             self._vn_dict = vn_dict
@@ -562,7 +576,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return word
 
     class QuarterExpander:
-        """Handles expansion of quarter notation."""
+        """Handle expansion of quarter notation."""
 
         def __init__(self, number_expander):
             self._number_expander = number_expander
@@ -576,7 +590,7 @@ class RuleBasedNSWExpander(NSWExpander):
             )
 
     class VersionExpander:
-        """Handles expansion of version numbers."""
+        """Handle expansion of version numbers."""
 
         def __init__(self, number_expander, sequence_expander):
             self._number_expander = number_expander
@@ -592,7 +606,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return self._sequence_expander.expand_sequence(version)
 
     class FractionExpander:
-        """Handles expansion of fractions."""
+        """Handle expansion of fractions."""
 
         def __init__(self, number_expander):
             self._number_expander = number_expander
@@ -605,7 +619,7 @@ class RuleBasedNSWExpander(NSWExpander):
             )
 
     class MoneyExpander:
-        """Handles expansion of money amounts."""
+        """Handle expansion of money amounts."""
 
         def __init__(self, number_expander):
             self._number_expander = number_expander
@@ -624,7 +638,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return result.strip()
 
     class ScoreExpander:
-        """Handles expansion of scores."""
+        """Handle expansion of scores."""
 
         def __init__(self, number_expander, sequence_expander):
             self._number_expander = number_expander
@@ -640,7 +654,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return self._sequence_expander.expand_sequence(score)
 
     class RangeExpander:
-        """Handles expansion of ranges."""
+        """Handle expansion of ranges."""
 
         def __init__(self, number_expander, sequence_expander):
             self._number_expander = number_expander
@@ -656,7 +670,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return self._sequence_expander.expand_sequence(range_str)
 
     class PercentExpander:
-        """Handles expansion of percentages."""
+        """Handle expansion of percentages."""
 
         def __init__(self, number_expander, sequence_expander):
             self._number_expander = number_expander
@@ -681,7 +695,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return self._sequence_expander.expand_sequence(percent)
 
     class MeasureExpander:
-        """Handles expansion of measurements."""
+        """Handle expansion of measurements."""
 
         def __init__(self, number_expander, sequence_expander, vn_dict):
             self._number_expander = number_expander
@@ -725,7 +739,7 @@ class RuleBasedNSWExpander(NSWExpander):
             return self._sequence_expander.expand_sequence(unit)
 
     class UrlExpander:
-        """Handles expansion of URLs using lexicon-based maximum matching (https://arxiv.org/abs/2209.02971)."""
+        """Handle expansion of URLs using lexicon-based maximum matching (https://arxiv.org/abs/2209.02971)."""
 
         def __init__(self, sequence_expander, no_tone_dict):
             self._sequence_expander = sequence_expander
@@ -777,13 +791,19 @@ class RuleBasedNSWExpander(NSWExpander):
 
     def __init__(
         self,
+        model_path: Union[str, None] = None,
         vn_dict: Union[List[str], None] = None,
         abbr_dict: Union[Dict[str, List[str]], None] = None,
+        expand_url: bool = True,
+        **kwargs,
     ):
         """Initialize the rule-based NSW expander.
+
         Args:
-            vn_dict: A list of Vietnamese words. If None, the default Vietnamese dictionary will be used.
-            abbr_dict: A dictionary of abbreviations and their expansions. If None, the default abbreviation dictionary will be used.
+            model_path: Path to the model repository directory. If None, use default path.
+            vn_dict: List of Vietnamese words for dictionary lookup. If None, use default Vietnamese dictionary.
+            abbr_dict: Dictionary of abbreviations and their expansions. If None, use default abbreviation dictionary.
+            expand_url: Whether to expand URLs. If True, expand URLs. If False, return URLs unchanged.
         """
         self._vn_dict = set(vn_dict or load_vietnamese_syllables())
         self._abbr_dict = abbr_dict or load_abbreviation_dict()
@@ -813,7 +833,10 @@ class RuleBasedNSWExpander(NSWExpander):
             self._number_expander, self._sequence_expander
         )
         self._abbr_expander = self.AbbreviationExpander(
-            self._number_expander, self._sequence_expander, self._abbr_dict
+            self._number_expander,
+            self._sequence_expander,
+            self._abbr_dict,
+            model_path,
         )
         self._foreign_expander = self.ForeignWordExpander(
             self._number_expander, self._sequence_expander, self._vn_dict
@@ -857,7 +880,7 @@ class RuleBasedNSWExpander(NSWExpander):
             "NTIM": self._time_date_expander.expand_time,
             "NVER": self._version_expander.expand_version,
             "ROMA": self._number_expander.expand_roma,
-            "URLE": self._url_expander.expand_url,
+            "URLE": self._url_expander.expand_url if expand_url else self._identity,
             "LWRD": self._foreign_expander.expand_foreign_word,
         }
 

@@ -51,27 +51,15 @@ def _worker_initializer(
     abbr_dict: Union[Dict[str, List[str]], None] = None,
     kwargs: Dict[str, Any] = {},
 ):
-    """Initialize worker instances."""
-    global worker_preprocessor, worker_detector, worker_expander
-
-    worker_preprocessor = TextPreprocessor(vn_dict, **kwargs)
-    worker_detector = CRFNSWDetector(vn_dict=vn_dict, abbr_dict=abbr_dict, **kwargs)
-    worker_expander = RuleBasedNSWExpander(
-        vn_dict=vn_dict, abbr_dict=abbr_dict, **kwargs
-    )
+    """Initialize worker instance."""
+    global worker_normalizer
+    worker_normalizer = SoeNormalizer(vn_dict=vn_dict, abbr_dict=abbr_dict, **kwargs)
 
 
 def _worker_normalize(text: str) -> str:
-    """Normalize text in worker."""
-    global worker_preprocessor, worker_detector, worker_expander
-
-    tokens = worker_preprocessor(text).split()
-    if not tokens:
-        return text.strip()
-    nsw_tags = worker_detector.detect(tokens)
-    expanded_tokens = worker_expander.expand(tokens, nsw_tags)
-
-    return " ".join(expanded_tokens)
+    """Normalize text in worker instance."""
+    global worker_normalizer
+    return worker_normalizer.normalize(text)
 
 
 class SoeNormalizer(Normalizer):

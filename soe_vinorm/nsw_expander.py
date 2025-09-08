@@ -80,7 +80,12 @@ class RuleBasedNSWExpander(NSWExpander):
                 while len(number) > 1 and number[0] == "0" and number[1].isdigit():
                     number = number[1:]
 
-                if len(re.findall(r"[-+]?[0-9.,]+", number)) > 1:
+                number = number.strip()
+                if (
+                    len(matches := re.findall(r"[-+]?[0-9.,]+", number)) > 1
+                    or matches
+                    and matches[0] != number
+                ):
                     return (
                         re.sub(
                             r"\s*([-+]?[0-9.,]+)\s*",
@@ -249,7 +254,7 @@ class RuleBasedNSWExpander(NSWExpander):
                 h1, h2 = re.split(r"\s*/\s*", time_str)[:2]
                 return (
                     f"{self._number_expander.expand_number(h1)} trên "
-                    f"{self._number_expander.expand_number(h2)} giờ"
+                    f"{self.expand_time(h2)}"
                 )
             # HH [-] HH[hg]
             elif re.match(r"^\d{1,2}\s*-\s*\d{1,2}[hg]$", time_str):
@@ -470,15 +475,6 @@ class RuleBasedNSWExpander(NSWExpander):
             attempt_cleaning: bool = True,
         ) -> str:
             """Expand an abbreviation using context."""
-
-            # Handle patterns like "ABC123"
-            if match := re.match(r"^([^0-9]+)(\d+)$", abbr):
-                text, number = match.groups()
-                return (
-                    f"{self.expand_abbreviation(text, left_context, right_context, attempt_cleaning)} "
-                    f"{self._number_expander.expand_number(number)}"
-                )
-
             if abbr in self._abbr_dict:
                 if len(self._abbr_dict[abbr]) == 1:
                     return self._abbr_dict[abbr][0]
@@ -492,10 +488,8 @@ class RuleBasedNSWExpander(NSWExpander):
                     )[0]
                     return self._abbr_dict[abbr][np.argmax(scores)]
             elif attempt_cleaning:
-                # Remove hyphens
-                abbr = re.sub(r"\s*-\s*", "", abbr)
                 # Split the abbreviation into parts
-                parts = list(filter(None, re.split(r"\.+|\s+|(\d+)", abbr)))
+                parts = list(filter(None, re.split(r"-+|\.+|\s+|(\d+)", abbr)))
 
                 if not parts:
                     return ""
@@ -646,7 +640,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def expand_score(self, score: str) -> str:
             """Expand scores."""
-            if re.match(r"[0-9.,]+([-:/][0-9.,]+)+", score):
+            if re.match(r"[0-9.,]+([-–:/][0-9.,]+)+", score):
                 return " ".join(
                     self._number_expander.expand_number(x)
                     for x in re.findall(r"[0-9.,]+", score)
@@ -908,7 +902,14 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 # Is in default Vietnamese dictionary or no tone dictionary
                 if (
-                    (word_lower in self._vn_dict or word_lower in self._no_tone_dict)
+                    (
+                        word_lower in self._vn_dict
+                        or word_lower in self._no_tone_dict
+                        or (
+                            unidecode(word_lower) != word_lower
+                            and re.match(r"^[a-z]+$", unidecode(word_lower))
+                        )
+                    )
                     and len(word) > 1
                     or word in self._no_norm_list
                 ):

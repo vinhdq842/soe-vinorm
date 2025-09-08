@@ -130,9 +130,9 @@ BX:bến xe
 bx:bến xe
 BXL:bộ xử lý
 bxl:bộ xử lý
-CAHN:công an Hà Nội
-cahn:công an Hà Nội
-CAND:công an Nhân dân
+CAHN:Công an Hà Nội
+cahn:Công an Hà Nội
+CAND:Công an Nhân dân
 cand:công an Nhân dân
 CATP:Công an Thành phố
 catp:Công an Thành phố
@@ -528,6 +528,7 @@ GCQ:giấy chủ quyền
 gcq:giấy chủ quyền
 GD:Giáo dục
 gd:Giáo dục
+GD&ĐT:Giáo dục và đào tạo
 GĐ:Giám đốc
 gđ:Giám đốc
 GĐNS:giám đốc nhân sự
@@ -1072,12 +1073,12 @@ NTK:nhà thiết kế
 ntk:nhà thiết kế
 NV:nhân viên,nguyện vọng
 nv:nhân viên,nguyện vọng
-NV1:nguyện vọng 1
-nv1:nguyện vọng 1
-NV2:nguyện vọng 2
-nv2:nguyện vọng 2
-NV3:nguyện vọng 3
-nv3:nguyện vọng 3
+NV1:nguyện vọng một
+nv1:nguyện vọng một
+NV2:nguyện vọng hai
+nv2:nguyện vọng hai
+NV3:nguyện vọng ba
+nv3:nguyện vọng ba
 NVH:nhà văn hóa
 nvh:nhà văn hóa
 NVHTN:nhà văn hóa Thanh niên

@@ -36,7 +36,7 @@ class TextPreprocessor(TextProcessor):
     _VIETNAMESE_CAPITAL_PATTERN = r"([A-ZÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ][a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹý]+)+"
     _VIETNAMESE_CAPITAL_SPLIT = r"([A-ZÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ][a-zàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹý]+)"
     _VIETNAMESE_CHARS = r"[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]"
-    _PUNCTUATION_SPLIT = r"([-.,:?!<>=#%\\])"
+    _PUNCTUATION_SPLIT = r"([-&.,:?!<>=#%\\])"
     _VN_CHAR_PUNCT_NUMBER_PATTERN = r"([a-zA-Z]*[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ][a-zA-Z]*)([+:,.&?]*)([0-9])"
     _NUMBER_PUNCT_VN_CHAR_PATTERN = r"([0-9])([+:,.&?]*)([a-zA-Z]*[À-ÃÈ-ÊÌÍÒ-ÕÙÚÝà-ãè-êìíò-õùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ][a-zA-Z]*)"
     _MULTIPLE_DOTS = r"(\s*\.\s*){3,}"
@@ -205,8 +205,10 @@ class TextPreprocessor(TextProcessor):
     def _is_vietnamese_or_uppercase(self, token: str) -> bool:
         """Check if token contains Vietnamese characters or is all uppercase and contains no numbers."""
         return (
-            token.upper() == token or re.search(self._VIETNAMESE_CHARS, token)
-        ) and not re.search(r"[-0-9,.]+", token)
+            (token.upper() == token or re.search(self._VIETNAMESE_CHARS, token))
+            and not re.search(r"[-0-9,.]+", token)
+            and not re.match(r"^[A-Z]&[A-Z]$", token)
+        )
 
     def _process_url_email(self, token: str) -> List[str]:
         """Process URL or email patterns."""

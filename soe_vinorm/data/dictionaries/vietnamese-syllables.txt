@@ -1189,7 +1189,6 @@ chiền
 chiển
 chiễn
 chiến
-​​chiến
 chiện
 chiêng
 chiềng
@@ -2936,7 +2935,6 @@ dỵ
 đáy
 đạy
 đắc
-ðắc
 đặc
 đắk
 đăm

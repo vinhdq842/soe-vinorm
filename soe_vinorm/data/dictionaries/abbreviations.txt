@@ -130,6 +130,8 @@ BX:bến xe
 bx:bến xe
 BXL:bộ xử lý
 bxl:bộ xử lý
+CA:Công an
+ca:Công an
 CAHN:Công an Hà Nội
 cahn:Công an Hà Nội
 CAND:Công an Nhân dân
@@ -156,6 +158,8 @@ CĐ:Cao đẳng,công điện
 cđ:Cao đẳng,công điện
 CĐDC:chất độc da cam
 cđdc:chất độc da cam
+CĐS:Chuyển đổi số
+cđs:Chuyển đổi số
 CĐSP:Cao đẳng Sư phạm
 cđsp:Cao đẳng Sư phạm
 CĐV:cổ động viên
@@ -176,6 +180,8 @@ CK:chứng khoán
 ck:chứng khoán
 CKI:chuyên khoa một
 CKII:chuyên khoa hai
+CK1:chuyên khoa một
+CK2:chuyên khoa hai
 CLB:câu lạc bộ
 clb:câu lạc bộ
 CMND:Chứng minh nhân dân
@@ -216,6 +222,8 @@ CPXD:cấp phép xây dựng
 cpxd:cấp phép xây dựng
 CQĐT:Cơ quan điều tra
 cqđt:Cơ quan điều tra
+CS:cảnh sát
+cs:cảnh sát
 CSCĐ:cảnh sát cơ động
 cscđ:cảnh sát cơ động
 CSDC:cảnh sát dã chiến
@@ -296,6 +304,8 @@ CTXH:công tác xã hội
 ctxh:công tác xã hội
 CV:chuyên viên
 cv:chuyên viên
+CVĐC:công viên địa chất
+cvđc:công viên địa chất
 DAGTĐT:dự án giao thông đô thị
 dagtđt:dự án giao thông đô thị
 ĐATP:Đông Á - Thép Pomina
@@ -358,6 +368,8 @@ ddvn:Duyên Dáng Việt Nam
 đhct:Đại học Cần Thơ
 ĐHĐD:Đại học Đông Dương
 đhđd:Đại học Đông Dương
+ĐHĐCĐ:Đại hội đồng cổ đông
+đhđcđ:Đại hội đồng cổ đông
 ĐHDL:Đại học Dân lập
 đhdl:Đại học Dân lập
 ĐHĐN:Đại học Đà nẵng
@@ -400,12 +412,16 @@ dhs:du học sinh
 đkdt:đăng ký dự thi
 ĐKĐT:điện kế điện tử
 đkđt:điện kế điện tử
+ĐKĐĐ:Đăng ký đất đai
+đkđđ:Đăng ký đất đai
 ĐKHK:đăng ký hộ khẩu
 đkhk:đăng ký hộ khẩu
 ĐKKD:đăng ký kinh doanh
 đkkd:đăng ký kinh doanh
 ĐKKH:đăng ký kết hôn
 đkkh:đăng ký kết hôn
+ĐKNKTT:đăng ký nhân khẩu thường trú
+đknktt:đăng ký nhân khẩu thường trú
 ĐKVĐ:đương kim vô địch
 đkvđ:đương kim vô địch
 ĐKVN:điền kinh Việt Nam
@@ -669,6 +685,8 @@ HĐTS:Hội đồng tuyển sinh
 hđts:Hội đồng tuyển sinh
 HĐTT:Hội đồng Trọng tài
 hđtt:Hội đồng Trọng tài
+HĐTV:Hội đồng thành viên
+hđtv:Hội đồng thành viên
 HDV:hướng dẫn viên
 hdv:hướng dẫn viên
 HĐXX:Hội đồng Xét xử
@@ -877,12 +895,12 @@ KTX:ký túc xá
 ktx:ký túc xá
 KV:khu vực
 kv:khu vực
-KV1:khu vực 1
-kv1:khu vực 1
-KV2:khu vực 2
-kv2:khu vực 2
-KV3:khu vực 3
-kv3:khu vực 3
+KV1:khu vực một
+kv1:khu vực một
+KV2:khu vực hai
+kv2:khu vực hai
+KV3:khu vực ba
+kv3:khu vực ba
 LB:liên bang
 lb:liên bang
 LCT:luật công ty,luật cạnh tranh
@@ -943,6 +961,8 @@ MTTQ:Mặt trận Tổ quốc
 mttq:Mặt trận Tổ quốc
 MTTQVN:Mặt trận Tổ quốc Việt Nam
 mttqvn:Mặt trận Tổ quốc Việt Nam
+MTV:một thành viên
+mtv:một thành viên
 MTXT:máy tính xách tay
 mtxt:máy tính xách tay
 NC:nghiên cứu
@@ -1048,6 +1068,7 @@ nn:Nhà nước
 NNCĐDC:nạn nhân chất độc da cam
 nncđdc:nạn nhân chất độc da cam
 NNPTNT:Nông nghiệp và Phát triển Nông thôn
+NN&PTNT:Nông nghiệp và Phát triển Nông thôn
 nnptnt:Nông nghiệp và Phát triển Nông thôn
 NPP:Nhà phân phối
 npp:Nhà phân phối
@@ -1149,6 +1170,7 @@ PGS:Phó Giáo sư
 pgs:Phó Giáo sư
 PGS.TS:Phó Giáo sư Tiến sĩ
 PGSTS:Phó Giáo sư Tiến sĩ
+PGS.TS.BS:Phó Giáo sư Tiến sĩ Bác sĩ
 PGS.TSKH:Phó Giáo sư Tiến sĩ Khoa học
 PGSTSKH:Phó Giáo sư Tiến sĩ Khoa học
 PHHS:phụ huynh học sinh
@@ -1528,6 +1550,7 @@ TS:Tiến sĩ,Thí sinh
 ts:Tiến sĩ,Thí sinh
 TS-BS:Tiến sĩ Bác sĩ
 TS.BS:Tiến sĩ Bác sĩ
+TS-DS:Tiến sĩ Dược sĩ
 TT:thông tin,truyền thông,thị trường,trung tâm,thể thao,thị trấn
 tt:thông tin,truyền thông,thị trường,trung tâm,thể thao,thị trấn
 TTDN:trung tâm dạy nghề
@@ -1737,6 +1760,8 @@ XD:Xây dựng
 xd:Xây dựng
 XDCB:xây dựng cơ bản
 xdcb:xây dựng cơ bản
+XDCĐ:xây dựng cầu đường
+xdcđ:xây dựng cầu đường
 XĐGN:xoá đói giảm nghèo
 xđgn:xoá đói giảm nghèo
 XDHK:xăng dầu hàng không
@@ -1811,6 +1836,7 @@ FB:facebook
 fb:facebook
 ThS:Thạc sĩ
 Ths:Thạc sĩ
+Th.s:Thạc sĩ
 TTg:Thủ tướng
 ttg:Thủ tướng
 TrS:Bản trích sao
@@ -1939,6 +1965,8 @@ dvtm:dịch vụ thương mại
 đhth:Đại học Tổng hợp
 ĐHXD:Đại học Xây dựng
 đhxd:Đại học Xây dựng
+ĐH-CĐ:Đại học Cao đẳng
+đh-cđ:Đại học Cao đẳng
 ĐKDN:đăng ký doanh nghiệp
 đkdn:đăng ký doanh nghiệp
 ĐPTTH:Đài phát thanh truyền hình
@@ -2028,9 +2056,12 @@ nmnđ:nhà máy nhiệt điện
 NMTĐ:nhà máy thủy điện
 nmtđ:nhà máy thủy điện
 NOXH:nhà ở xã hội
+NƠXH:nhà ở xã hội
 noxh:nhà ở xã hội
 NSDLĐ:Người sử dụng lao động
 nsdlđ:Người sử dụng lao động
+NSX:ngày sản xuất
+nsx:ngày sản xuất
 NTKTT:nhà thiết kế thời trang
 ntktt:nhà thiết kế thời trang
 NVKD:nhân viên kinh doanh
@@ -2053,6 +2084,8 @@ QĐNDVN:Quân đội Nhân dân Việt Nam
 qđndvn:Quân đội Nhân dân Việt Nam
 QHCC:quan hệ công chúng
 qhcc:quan hệ công chúng
+QHCT:quy hoạch chi tiết
+qhct:quy hoạch chi tiết
 QHQT:quan hệ quốc tế
 qhqt:quan hệ quốc tế
 QHVN:Quốc hội Việt Nam
@@ -2167,6 +2200,8 @@ YT:y tế
 yt:y tế
 YHCT:y học cổ truyền
 yhct:y học cổ truyền
+KTCK:kinh tế cửa khẩu
+ktck:kinh tế cửa khẩu
 KKTCK:khu kinh tế cửa khẩu
 kktck:khu kinh tế cửa khẩu
 QLNĐ:quản lý nhà đất

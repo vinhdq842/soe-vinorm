@@ -205,10 +205,8 @@ class TextPreprocessor(TextProcessor):
     def _is_vietnamese_or_uppercase(self, token: str) -> bool:
         """Check if token contains Vietnamese characters or is all uppercase and contains no numbers."""
         return (
-            (token.upper() == token or re.search(self._VIETNAMESE_CHARS, token))
-            and not re.search(r"[-0-9,.]+", token)
-            and not re.match(r"^[A-Z]&[A-Z]$", token)
-        )
+            token.upper() == token or re.search(self._VIETNAMESE_CHARS, token)
+        ) and not re.search(r"[-0-9,.]+", token)
 
     def _process_url_email(self, token: str) -> List[str]:
         """Process URL or email patterns."""
@@ -241,9 +239,11 @@ class TextPreprocessor(TextProcessor):
 
     def _process_vietnamese_or_uppercase(self, token: str) -> List[str]:
         """Process Vietnamese or uppercase tokens that contains no numbers."""
-        return self._handle_slash_patterns(
-            list(filter(len, re.split(self._PUNCTUATION_SPLIT, token)))
-        )
+        token = " ".join(filter(len, re.split(self._PUNCTUATION_SPLIT, token)))
+        # Handle & pattern
+        token = re.sub(r"([^\W\d_])\s(&)\s([^\W\d_])", r"\1\2\3", token)
+
+        return self._handle_slash_patterns(token.split())
 
     def _handle_slash_patterns(self, token_list: List[str]) -> List[str]:
         """Handle special slash patterns in token list."""

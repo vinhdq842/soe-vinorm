@@ -565,7 +565,7 @@ class RuleBasedNSWExpander(NSWExpander):
 
         def _expand_one_word(self, word: str) -> str:
             """Expand numeric word or return unchanged. Need more refined handling later."""
-            if word.isdigit():
+            if word.replace(".", "", len(word) // 3).replace(",", "", 1).isdigit():
                 return self._number_expander.expand_number(word)
             return word
 
@@ -912,6 +912,7 @@ class RuleBasedNSWExpander(NSWExpander):
                     )
                     and len(word) > 1
                     or word in self._no_norm_list
+                    or any(w in self._vn_dict for w in re.split(r"[-.]", word_lower))
                 ):
                     results.append(word)
                 # In case the detector does not work well, only consider numbers with 1-8 digits

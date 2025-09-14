@@ -732,18 +732,18 @@ class RuleBasedNSWExpander(NSWExpander):
                 return unit
             return self._sequence_expander.expand_sequence(unit)
 
-    class UrlExpander:
-        """Handle expansion of URLs using lexicon-based maximum matching (https://arxiv.org/abs/2209.02971)."""
+    class UrlEmailExpander:
+        """Handle expansion of URLs and emails using lexicon-based maximum matching (https://arxiv.org/abs/2209.02971)."""
 
         def __init__(self, sequence_expander, no_tone_dict):
             self._sequence_expander = sequence_expander
             self._no_tone_dict = no_tone_dict
 
-        def expand_url(self, url: str) -> str:
-            """Expand URLs using lexicon-based maximum matching."""
-            url = url.strip()
+        def expand_urle(self, urle: str) -> str:
+            """Expand URLs and emails using lexicon-based maximum matching."""
+            urle = urle.strip()
             result = []
-            tokens = list(url)
+            tokens = list(urle)
             min_window = 1
             max_window = len(tokens)
             start_idx = 0
@@ -788,7 +788,8 @@ class RuleBasedNSWExpander(NSWExpander):
         model_path: Union[str, None] = None,
         vn_dict: Union[List[str], None] = None,
         abbr_dict: Union[Dict[str, List[str]], None] = None,
-        expand_url: bool = True,
+        expand_urle: bool = True,
+        expand_sequence: bool = True,
         **kwargs,
     ):
         """Initialize the rule-based NSW expander.
@@ -797,27 +798,22 @@ class RuleBasedNSWExpander(NSWExpander):
             model_path: Path to the model repository directory. If None, use default path.
             vn_dict: List of Vietnamese words for dictionary lookup. If None, use default Vietnamese dictionary.
             abbr_dict: Dictionary of abbreviations and their expansions. If None, use default abbreviation dictionary.
-            expand_url: Whether to expand URLs. If True, expand URLs. If False, return URLs unchanged.
+            expand_urle: Whether to expand URLs and emails. If False, return URLs and emails unchanged.
+            expand_sequence: Whether to expand unknown sequences by reading them character by character phonetically. If False, return sequences unchanged.
         """
         self._vn_dict = set(vn_dict or load_vietnamese_syllables())
         self._abbr_dict = abbr_dict or load_abbreviation_dict()
         self._no_tone_dict = set(map(unidecode, self._vn_dict))
 
         # no normalization for these characters
+        # fmt: off
         self._no_norm_list = [
-            ".",
-            ",",
-            ":",
-            ";",
-            "!",
-            "?",
-            "...",
-            "-",
-            "–",
-            "/",
-            "\\",
+            ".",   ",",   ":",   ";",
+            "!",   "?",   "...",
+            "-",   "–",   "/",   "\\",
             "~",
         ]
+        # fmt: on
 
         self._number_expander = self.NumberExpander()
         self._sequence_expander = self.SequenceExpander(
@@ -853,12 +849,14 @@ class RuleBasedNSWExpander(NSWExpander):
         self._measure_expander = self.MeasureExpander(
             self._number_expander, self._sequence_expander, self._vn_dict
         )
-        self._url_expander = self.UrlExpander(
+        self._urle_expander = self.UrlEmailExpander(
             self._sequence_expander, self._no_tone_dict
         )
 
         self._expanders = {
-            "LSEQ": self._sequence_expander.expand_sequence,
+            "LSEQ": self._sequence_expander.expand_sequence
+            if expand_sequence
+            else self._identity,
             "MEA": self._measure_expander.expand_measure,
             "MONEY": self._money_expander.expand_money,
             "NDAT": self._time_date_expander.expand_date,
@@ -874,7 +872,7 @@ class RuleBasedNSWExpander(NSWExpander):
             "NTIM": self._time_date_expander.expand_time,
             "NVER": self._version_expander.expand_version,
             "ROMA": self._number_expander.expand_roma,
-            "URLE": self._url_expander.expand_url if expand_url else self._identity,
+            "URLE": self._urle_expander.expand_urle if expand_urle else self._identity,
             "LWRD": self._foreign_expander.expand_foreign_word,
         }
 

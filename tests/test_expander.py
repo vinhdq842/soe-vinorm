@@ -18,10 +18,20 @@ class TestRuleBasedNSWExpander:
 
     def test_expand_with_urle_arg(self):
         """Test expander with urle."""
-        expander = RuleBasedNSWExpander(expand_url=True)
+        expander = RuleBasedNSWExpander(expand_urle=True)
         result = expander.expand(["https://www.example.com"], ["B-URLE"])
         assert result != ["https://www.example.com"]
 
-        expander = RuleBasedNSWExpander(expand_url=False)
+        expander = RuleBasedNSWExpander(expand_urle=False)
         result = expander.expand(["https://www.example.com"], ["B-URLE"])
         assert result == ["https://www.example.com"]
+
+    def test_expand_with_sequence_arg(self):
+        """Test expander with sequence."""
+        expander = RuleBasedNSWExpander(expand_sequence=True)
+        result = expander.expand(["abc"], ["B-LSEQ"])
+        assert result != ["abc"]
+
+        expander = RuleBasedNSWExpander(expand_sequence=False)
+        result = expander.expand(["abc"], ["B-LSEQ"])
+        assert result == ["abc"]

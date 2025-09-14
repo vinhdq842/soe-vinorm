@@ -314,7 +314,7 @@ class CRFNSWDetector(NSWDetector):
             "NTIM",  # time
             "NVER",  # version
             "ROMA",  # roman numerals
-            "URLE",  # URL
+            "URLE",  # URL and email
             "O",  # other (not NSW)
         ]
 

@@ -70,6 +70,7 @@ SEQUENCE_PHONES_VI_MAPPING = {
     ";": "chấm phẩy",
     "/": "gạch chéo",
     "\\": "gạch chéo ngược",
+    "±": "cộng trừ",
 }
 
 SEQUENCE_PHONES_EN_MAPPING = {
@@ -119,6 +120,7 @@ SEQUENCE_PHONES_EN_MAPPING = {
     ";": "se mi co lừn",
     "/": "sờ lát",
     "\\": "bách sờ lát",
+    "±": "pờ lớt mai nớt",
 }
 
 MONEY_UNITS_MAPPING = {
@@ -183,12 +185,15 @@ MEASUREMENT_UNITS_MAPPING = {
     "hecta": "héc ta",
     "MHz": "mê ga héc",
     "°": "độ",
+    "°C": "độ xê",
+    "°F": "độ ép",
     "⁰": "độ",
+    "⁰C": "độ xê",
+    "⁰F": "độ ép",
     "Mb": "mê ga bít",
     "MB": "mê ga bai",
     "GB": "ghi ga bai",
     "amp": "am pe",
-    "C": "xê",
     "′": "phút",
     "″": "giây",
     "s": "giây",

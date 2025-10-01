@@ -102,6 +102,10 @@ BQLDA:Ban Quản lý dự án
 bqlda:Ban Quản lý dự án
 BS:bác sĩ,biển số
 bs:bác sĩ,biển số
+BS.CKI:bác sĩ chuyên khoa một
+BS.CKII:bác sĩ chuyên khoa hai
+BS.CK1:bác sĩ chuyên khoa một
+BS.CK2:bác sĩ chuyên khoa hai
 BSC:công ty Chứng khoán Ngân hàng Đầu tư và Phát triển Việt Nam
 bsc:công ty Chứng khoán Ngân hàng Đầu tư và Phát triển Việt Nam
 BST:bộ sưu tập
@@ -176,8 +180,8 @@ CHXNCN:Cộng hòa Xã hội Chủ nghĩa
 chxncn:Cộng hòa Xã hội Chủ nghĩa
 CHXHCNVN:Cộng hòa Xã hội Chủ nghĩa Việt Nam
 chxhcnvn:Cộng hòa Xã hội Chủ nghĩa Việt Nam
-CK:chứng khoán
-ck:chứng khoán
+CK:chứng khoán,chuyên khoa
+ck:chứng khoán,chuyên khoa
 CKI:chuyên khoa một
 CKII:chuyên khoa hai
 CK1:chuyên khoa một

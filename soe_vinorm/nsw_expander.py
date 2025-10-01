@@ -75,8 +75,6 @@ class RuleBasedNSWExpander(NSWExpander):
                     sign = {"+": "cộng", "-": "trừ"}[number[0]]
                     number = number[1:]
 
-                # Remove separators and unhandlable chars
-                number = number.replace(".", "")
                 while len(number) > 1 and number[0] == "0" and number[1].isdigit():
                     number = number[1:]
 
@@ -100,9 +98,16 @@ class RuleBasedNSWExpander(NSWExpander):
 
                 # Handle decimal part
                 decimal_part = ""
-                if "," in number:
+                if number.count(",") == 1:
+                    number = number.replace(".", "")
                     decimal_part = f"phẩy {self.expand_digit(number.split(',')[-1])}"
                     number = "".join(number.split(",")[:-1])
+                elif number.count(".") == 1 and len(number[number.index(".") :]) <= 3:
+                    number = number.replace(",", "")
+                    decimal_part = f"chấm {self.expand_digit(number.split('.')[-1])}"
+                    number = "".join(number.split(".")[:-1])
+                else:
+                    number = number.replace(".", "")
 
                 # Split into chunks of 3 digits
                 chunks = self._split_into_chunks(number)
@@ -428,6 +433,9 @@ class RuleBasedNSWExpander(NSWExpander):
                 elif char in MONEY_UNITS_MAPPING:
                     result.append(MONEY_UNITS_MAPPING[char])
                     idx += 1
+                elif char in MEASUREMENT_UNITS_MAPPING:
+                    result.append(MEASUREMENT_UNITS_MAPPING[char])
+                    idx += 1
                 else:
                     result.append(char)
                     idx += 1
@@ -560,7 +568,7 @@ class RuleBasedNSWExpander(NSWExpander):
         def expand_foreign_word(self, word: str) -> str:
             """Expand foreign word."""
             return " ".join(
-                self._expand_one_word(w) for w in re.split(r"-+|\s+|\.+|_+", word) if w
+                self._expand_one_word(w) for w in re.split(r"-+|\s+|_+", word) if w
             )
 
         def _expand_one_word(self, word: str) -> str:
@@ -661,6 +669,10 @@ class RuleBasedNSWExpander(NSWExpander):
                     self._number_expander.expand_number(x)
                     for x in re.findall(r"[0-9.,]+", range_str)
                 )
+
+            if re.match(r".*([-–:].*)+", range_str):
+                return re.sub(r"\s*[-–:]\s*", " đến ", range_str).strip()
+
             return self._sequence_expander.expand_sequence(range_str)
 
     class PercentExpander:
@@ -728,8 +740,18 @@ class RuleBasedNSWExpander(NSWExpander):
                 return MEASUREMENT_UNITS_MAPPING[unit]
             elif unit in MONEY_UNITS_MAPPING:
                 return MONEY_UNITS_MAPPING[unit]
-            elif unit in self._vn_dict:
+            elif unit.lower() in SEQUENCE_PHONES_VI_MAPPING:
+                return SEQUENCE_PHONES_VI_MAPPING[unit.lower()]
+            elif " " in unit:
+                if (
+                    no_space_unit := unit.replace(" ", "")
+                ) in MEASUREMENT_UNITS_MAPPING:
+                    return MEASUREMENT_UNITS_MAPPING[no_space_unit]
+
+                return " ".join(self._expand_unit(u) for u in unit.split() if u)
+            elif unit.lower() in self._vn_dict:
                 return unit
+
             return self._sequence_expander.expand_sequence(unit)
 
     class UrlEmailExpander:

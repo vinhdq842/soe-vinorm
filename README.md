@@ -95,6 +95,47 @@ Normalized: iPhone mười sáu Pro hiện có giá chín trăm chín mươi ch�
 --------------------------------------------------
 ```
 
+Normalization options (v0.3)
+
+```python
+from soe_vinorm import SoeNormalizer, batch_normalize_texts, normalize_text
+
+# By default, expand_sequence and expand_urle are True
+normalizer = SoeNormalizer(expand_sequence=False, expand_urle=False)
+text = "iPhone 16 Pro hiện có giá 999 USD cho phiên bản bộ nhớ 128 GB. Liên hệ example@example.com để mua."
+
+# Single
+result = normalizer.normalize(text)
+print(result)
+# Output: iPhone mười sáu Pro hiện có giá chín trăm chín mươi chín USD cho phiên bản bộ nhớ một trăm hai mươi tám ghi ga bai . Liên hệ example@example.com để mua .
+
+result = normalize_text(text, expand_sequence=True, expand_urle=False)
+print(result)
+# Output: iPhone mười sáu Pro hiện có giá chín trăm chín mươi chín U Ét Đê cho phiên bản bộ nhớ một trăm hai mươi tám ghi ga bai . Liên hệ example@example.com để mua .
+
+
+# Batch
+texts = [text] * 5
+
+results = normalizer.batch_normalize(texts, n_jobs=2, show_progress=True)
+print(results)
+# Output: ['iPhone mười sáu Pro hiện có giá chín trăm chín mươi chín USD cho phiên bản bộ nhớ một trăm hai mươi tám ghi ga bai . Liên hệ example@example.com để mua .', ...]
+
+results = batch_normalize_texts(texts, n_jobs=2, expand_sequence=False, expand_urle=True)
+print(results)
+# Output: ['iPhone mười sáu Pro hiện có giá chín trăm chín mươi chín USD cho phiên bản bộ nhớ một trăm hai mươi tám ghi ga bai . Liên hệ i xam pi le a còng i xam pi le chấm com để mua .', ...]
+```
+
+Load from pre-downloaded weights (v0.3)
+
+```python
+!git lfs install
+!git clone https://huggingface.co/vinhdq842/soe-vinorm model-repo
+from soe_vinorm import SoeNormalizer
+
+normalizer = SoeNormalizer(model_path="model-repo")
+```
+
 ## Approach: Two-stage normalization
 
 ### Preprocessing & tokenizing

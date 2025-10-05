@@ -575,7 +575,12 @@ class RuleBasedNSWExpander(NSWExpander):
             """Expand numeric word or return unchanged. Need more refined handling later."""
             if word.replace(".", "", len(word) // 3).replace(",", "", 1).isdigit():
                 return self._number_expander.expand_number(word)
-            return word
+
+            return re.sub(
+                r"\s*(\d+)\s*",
+                lambda m: f" {self._number_expander.expand_number(m.group(1))} ",
+                word,
+            ).strip()
 
     class QuarterExpander:
         """Handle expansion of quarter notation."""
@@ -719,10 +724,10 @@ class RuleBasedNSWExpander(NSWExpander):
             elif re.match(r"^[^0-9/][^/]*(\s*/\s*[^/]+)*$", measure):
                 units = re.split(r"\s*/\s*", measure)
                 return " trên ".join(self._expand_unit(unit) for unit in units)
-            # number - number unit
-            elif re.match(r"^-?[0-9.,]+\s*[-–]\s*.*$", measure):
+            # number unit* - number unit*
+            elif re.match(r"^-?[0-9.,]+.*?\s*[-–]\s*[0-9.,]+.*$", measure):
                 n, m = re.split(r"\s*[-–]\s*", measure)[:2]
-                return f"{self._number_expander.expand_number(n)} đến {self.expand_measure(m)}"
+                return f"{self.expand_measure(n)} đến {self.expand_measure(m)}"
             # number unit
             elif re.match(r"^-?[0-9.,]+[^0-9.,][^.,]*$", measure):
                 n, u = re.search(r"^(-?[0-9.,]+)([^0-9.,][^.,]*)$", measure).groups()[

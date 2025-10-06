@@ -154,18 +154,25 @@ normalizer = SoeNormalizer(model_path="model-repo")
 
 ### Other details
 - Foreign NSWs are currently kept as-is.
-- Abbreviation NSWs
+- Abbreviation expansion model
   - **v0.1**: Quantized PhoBERT model combined with a Vietnamese abbreviation dictionary.
   - **v0.2**: A small neural network, also incorporating a Vietnamese abbreviation dictionary.
 
+## Limitations
+
+Due to the inherent characteristics of ML models, i.e., their tendency to learn data-specific quirks (in this case, from newspaper articles), this library can make basic errors on spontaneous text (e.g., arbitrarily composed text without context).
+
 ## Testing
+
 Run all tests with:
 ```bash
 pytest tests
 ```
 
 ## Author
+
 - Vinh Dang (<quangvinh0842@gmail.com>)
 
 ## License
+
 MIT License

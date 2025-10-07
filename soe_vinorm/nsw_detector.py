@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Set, Union
 
 from sklearn_crfsuite import CRF
 
+from soe_vinorm.constants import MEASUREMENT_UNITS_MAPPING, MONEY_UNITS_MAPPING
 from soe_vinorm.utils import (
     get_model_weights_path,
     load_abbreviation_dict,
@@ -87,12 +88,12 @@ class CRFNSWDetector(NSWDetector):
             features = {
                 # Basic token information
                 "wi": token,
-                "is_first_capital": int(token[0].isupper()),
-                "is_first_word": int(index == 0),
-                "is_last_word": int(index == len(tokenized_text) - 1),
-                "is_complete_capital": int(token.upper() == token),
-                "is_alphanumeric": int(self._is_alphanumeric(token)),
-                "is_numeric": int(token.isdigit()),
+                "is_first_capital": token[0].isupper(),
+                "is_first_word": index == 0,
+                "is_last_word": index == len(tokenized_text) - 1,
+                "is_complete_capital": token.upper() == token,
+                "is_alphanumeric": self._is_alphanumeric(token),
+                "is_numeric": token.isdigit(),
                 # Context features
                 "prev_word": "" if index == 0 else tokenized_text[index - 1],
                 "next_word": ""
@@ -115,31 +116,45 @@ class CRFNSWDetector(NSWDetector):
                 "ws": self._get_word_shape(token),
                 "short_ws": self._get_short_word_shape(token),
                 # Dictionary lookup features
-                "is_in_dict": int(token.lower() in self._vn_dict),
-                "is_in_abbr_dict": int(token in self._abbr_dict),
+                "in_vn_dict": self._in_dict(token.lower(), self._vn_dict),
+                "in_abbr_dict": self._in_dict(token, self._abbr_dict),
+                "in_money_dict": self._in_dict(token, MONEY_UNITS_MAPPING),
+                "in_measurement_dict": self._in_dict(token, MEASUREMENT_UNITS_MAPPING),
                 # Special character features
-                "word_has_hyphen": int("-" in token or "–" in token),
-                "word_has_tilde": int("~" in token),
-                "word_has_at": int("@" in token),
-                "word_has_comma": int("," in token),
-                "word_has_colon": int(":" in token),
-                "word_has_dot": int("." in token),
+                "word_has_hyphen": "-" in token or "–" in token,
+                "word_has_tilde": "~" in token,
+                "word_has_at": "@" in token,
+                "word_has_comma": "," in token,
+                "word_has_colon": ":" in token,
+                "word_has_dot": "." in token,
                 # Pattern features
-                "word_has_ws_xxslashxxxx": int(
-                    bool(re.match(r"^\d{1,2}\/\d{4}$", token))
+                "word_has_ws_xxslashxxxx": bool(re.match(r"^\d{1,2}\/\d{4}$", token)),
+                "word_has_romanslashxxxx": bool(
+                    re.match(r"^[IVXLCDM]+[/.-]\d{4}$", token)
                 ),
-                "word_has_romanslashxxxx": int(
-                    bool(re.match(r"^[IVXLCDM]+[/.-]\d{4}$", token))
+                "word_has_num_dash_colon_num": bool(
+                    re.match(r"^\d[\d.,]*([-–:]\d[\d.,]*)+$", token)
                 ),
-                "word_contain_only_roman": int(bool(re.match(r"^[IVXLCDM]+$", token))),
+                "word_contain_only_roman": bool(re.match(r"^[IVXLCDM]+$", token)),
                 # Time and date pattern features
-                "word_has_time_shape": int(self._is_time_pattern(token)),
-                "word_has_day_shape": int(self._is_day_pattern(token)),
-                "word_has_date_shape": int(self._is_date_pattern(token)),
-                "word_has_month_shape": int(self._is_month_pattern(token)),
+                "word_has_time_shape": self._is_time_pattern(token),
+                "word_has_day_shape": self._is_day_pattern(token),
+                "word_has_date_shape": self._is_date_pattern(token),
+                "word_has_month_shape": self._is_month_pattern(token),
             }
 
             return features
+
+        def _in_dict(self, token: str, dict: Union[Set[str], Dict[str, str]]) -> float:
+            """Check if token has any part in dictionary."""
+            if token in dict or re.sub(r"[-.]|\d+", "", token) in dict:
+                return 1.0
+
+            parts = list(filter(None, re.split(r"[-.]|(\d+)", token)))
+            if parts:
+                return sum(1 for part in parts if part in dict) / len(parts)
+
+            return 0.0
 
         def _is_alphanumeric(self, token: str) -> bool:
             """Check if token contains both letters and numbers."""

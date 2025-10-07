@@ -50,7 +50,7 @@ def load_abbreviation_dict() -> Dict[str, List[str]]:
 
 
 HF_MODEL_REPO_ID = "vinhdq842/soe-vinorm"
-HF_MODEL_REPO_REVISION = "b12f553"
+HF_MODEL_REPO_REVISION = "cb9705b"
 
 
 @lru_cache(maxsize=1)

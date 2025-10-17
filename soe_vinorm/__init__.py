@@ -4,7 +4,7 @@ Soe Vinorm: Vietnamese Text Normalization Toolkit
 A Python library for converting Vietnamese text to its spoken form.
 """
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 from .normalizer import (
     SoeNormalizer,

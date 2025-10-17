@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from concurrent.futures import ProcessPoolExecutor
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Union
 
 from tqdm import tqdm
 
@@ -69,8 +69,8 @@ class SoeNormalizer(Normalizer):
 
     def __init__(
         self,
-        vn_dict: Optional[List[str]] = None,
-        abbr_dict: Optional[Dict[str, List[str]]] = None,
+        vn_dict: Union[List[str], None] = None,
+        abbr_dict: Union[Dict[str, List[str]], None] = None,
         **kwargs,
     ):
         """
@@ -129,6 +129,7 @@ class SoeNormalizer(Normalizer):
             texts: List of input texts to normalize.
             n_jobs: Number of jobs to run in parallel.
             show_progress: Whether to show progress bar.
+
         Returns:
             List of normalized texts.
         """
@@ -168,8 +169,8 @@ class SoeNormalizer(Normalizer):
 
 def normalize_text(
     text: str,
-    vn_dict: Optional[List[str]] = None,
-    abbr_dict: Optional[Dict[str, List[str]]] = None,
+    vn_dict: Union[List[str], None] = None,
+    abbr_dict: Union[Dict[str, List[str]], None] = None,
     **kwargs,
 ) -> str:
     """
@@ -193,8 +194,8 @@ def normalize_text(
 
 def batch_normalize_texts(
     texts: List[str],
-    vn_dict: Optional[List[str]] = None,
-    abbr_dict: Optional[Dict[str, List[str]]] = None,
+    vn_dict: Union[List[str], None] = None,
+    abbr_dict: Union[Dict[str, List[str]], None] = None,
     n_jobs: int = 1,
     show_progress: bool = False,
     **kwargs,

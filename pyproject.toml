@@ -2,7 +2,7 @@
 name = "soe-vinorm"
 dynamic = ["version"]
 description = "An effective text normalization tool for Vietnamese"
-authors = [{name = "Vinh Dang", email = "quangvinh0842@gmail.com"}]
+authors = [{name = "Vinh Dang", email = "vinhdq842@gmail.com"}]
 requires-python = ">=3.8"
 readme = "README.md"
 license = "MIT"
@@ -35,6 +35,9 @@ Homepage = "https://github.com/vinhdq842/soe-vinorm"
 Documentation = "https://github.com/vinhdq842/soe-vinorm"
 Issues = "https://github.com/vinhdq842/soe-vinorm/issues"
 "Source Code" = "https://github.com/vinhdq842/soe-vinorm"
+
+[project.scripts]
+soe-vinorm = "soe_vinorm.cli:main"
 
 [dependency-groups]
 dev = [

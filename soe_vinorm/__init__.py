@@ -5,8 +5,6 @@ A Python library for converting Vietnamese text to its spoken form.
 """
 
 __version__ = "0.3.1"
-__author__ = "Vinh Dang"
-__email__ = "quangvinh0842@gmail.com"
 
 from .normalizer import (
     SoeNormalizer,

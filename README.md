@@ -1,6 +1,6 @@
 # Soe Vinorm - Vietnamese Text Normalization Toolkit
 
-Soe Vinorm is an effective and extensible toolkit for Vietnamese text normalization, designed for use in Text-to-Speech (TTS) and NLP pipelines. It detects and expands non-standard words (NSWs) such as numbers, dates, abbreviations, and more, converting them into their spoken forms. This project is based on the paper [Non-Standard Vietnamese Word Detection and Normalization for Text-to-Speech](https://arxiv.org/abs/2209.02971).
+Soe Vinorm is an effective Vietnamese text normalization toolkit designed for use in Text-to-Speech (TTS) and NLP pipelines. It detects and expands non-standard words (NSWs) such as numbers, dates, abbreviations, etc., converting them into their spoken forms. This project is based on the paper [Non-Standard Vietnamese Word Detection and Normalization for Text-to-Speech](https://arxiv.org/abs/2209.02971).
 
 ## Installation
 
@@ -30,6 +30,32 @@ uv pip install git+https://github.com/vinhdq842/soe-vinorm.git
 ```
 
 ## Usage
+
+### Command Line Interface
+
+After installation, you can use the `soe-vinorm` command directly from the terminal:
+
+```bash
+# Normalize text from a file
+soe-vinorm -i input.txt -o output.txt
+
+# Process with progress bar
+soe-vinorm -i input.txt -o output.txt --show-progress
+
+# Use parallel processing (4 workers)
+soe-vinorm -i input.txt -o output.txt --n-jobs 4 --show-progress
+
+# Normalization options
+soe-vinorm -i input.txt --no-expand-sequence --no-expand-urle
+
+# Read from stdin and write to stdout
+echo "Năm 2021" | soe-vinorm
+
+# Show help
+soe-vinorm --help
+```
+
+### Python API
 
 Basic usage
 
@@ -171,7 +197,7 @@ pytest tests
 
 ## Author
 
-- Vinh Dang (<quangvinh0842@gmail.com>)
+- Vinh Dang (<vinhdq842@gmail.com>)
 
 ## License
 
